@@ -27,8 +27,8 @@
 #else
 // absl::Mutex & absl::CondVar are significantly faster than the pthread
 // variants on platforms other than Android.
-#include "third_party/abseil-cpp/absl/base/thread_annotations.h"
-#include "third_party/abseil-cpp/absl/synchronization/mutex.h"
+#include "absl/base/thread_annotations.h"
+#include "absl/synchronization/mutex.h"
 #define LIBGAV1_THREADPOOL_USE_STD_MUTEX 0
 #endif
 
