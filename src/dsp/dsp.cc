@@ -82,6 +82,7 @@ void DspInit() {
     if ((cpu_features & kSSE4_1) != 0) {
       AverageBlendInit_SSE4_1();
       ConvolveInit_SSE4_1();
+      CdefInit_SSE4_1();
       DistanceWeightedBlendInit_SSE4_1();
       IntraEdgeInit_SSE4_1();
       IntraPredInit_SSE4_1();

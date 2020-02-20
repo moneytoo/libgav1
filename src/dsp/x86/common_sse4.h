@@ -189,6 +189,20 @@ inline __m128i MaskHighNBytes(int n) {
   return LoadUnaligned16(kMask + n);
 }
 
+inline uint64_t BSwap64(uint64_t x) {
+#if __has_builtin(__builtin_bswap64)
+  return __builtin_bswap64(x);
+#elif defined(_WIN32) || defined(_WIN64) || defined(_MSC_VER)
+  return (uint64_t)_byteswap_uint64(x);
+#else  // generic code for swapping 64-bit values (suggested by bdb@)
+#define LIBGAV1_SOFTWARE_BSWAP64
+  x = ((x & 0xffffffff00000000ull) >> 32) | ((x & 0x00000000ffffffffull) << 32);
+  x = ((x & 0xffff0000ffff0000ull) >> 16) | ((x & 0x0000ffff0000ffffull) << 16);
+  x = ((x & 0xff00ff00ff00ff00ull) >> 8) | ((x & 0x00ff00ff00ff00ffull) << 8);
+  return x;
+#endif  // __has_builtin(__builtin_bswap64)
+}
+
 }  // namespace dsp
 }  // namespace libgav1
 
