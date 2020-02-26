@@ -42,7 +42,7 @@ void LowerMvPrecision(const Tile::Block& block, MotionVector* const mvs) {
   if (block.tile.frame_header().allow_high_precision_mv) return;
   if (block.tile.frame_header().force_integer_mv != 0) {
     for (auto& mv : mvs->mv) {
-      const int value = (std::abs(mv) + 3) & ~7;
+      const int value = (std::abs(static_cast<int>(mv)) + 3) & ~7;
       const int sign = mv >> 15;
       mv = ApplySign(value, sign);
     }
