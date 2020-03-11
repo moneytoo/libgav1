@@ -31,9 +31,6 @@ struct MotionVector : public Allocable {
   static const int kRow = 0;
   static const int kColumn = 1;
 
-  MotionVector() = default;
-  MotionVector(const MotionVector& mv) = default;
-
   MotionVector& operator=(const MotionVector& rhs) {
     mv32 = rhs.mv32;
     return *this;
@@ -54,9 +51,6 @@ struct MotionVector : public Allocable {
 };
 
 union CandidateMotionVector {
-  CandidateMotionVector() = default;
-  CandidateMotionVector(const CandidateMotionVector& mv) = default;
-
   CandidateMotionVector& operator=(const CandidateMotionVector& rhs) {
     mv64 = rhs.mv64;
     return *this;

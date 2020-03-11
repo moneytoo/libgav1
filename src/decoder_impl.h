@@ -191,7 +191,7 @@ class DecoderImpl : public Allocable {
                             RefCountedBufferPtr* film_grain_frame);
 
   bool IsNewSequenceHeader(const ObuParser& obu);
-  bool IsFrameParallel() const { return frame_threads_ > 1; }
+  constexpr bool IsFrameParallel() const { return frame_threads_ > 1; }
 
   Queue<TemporalUnit> temporal_units_;
   DecoderState state_;
