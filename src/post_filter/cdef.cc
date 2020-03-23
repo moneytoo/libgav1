@@ -47,13 +47,13 @@ void CopyRowForCdef(const Pixel* src, int block_width, int unit_width,
     return;
   }
   for (int x = -kCdefBorder; x < 0; ++x) {
-    dst[x] = is_frame_left ? static_cast<uint16_t>(kCdefLargeValue) : src[x];
+    dst[x] = is_frame_left ? kCdefLargeValue : src[x];
   }
   for (int x = 0; x < block_width; ++x) {
     dst[x] = src[x];
   }
   for (int x = block_width; x < unit_width + kCdefBorder; ++x) {
-    dst[x] = is_frame_right ? static_cast<uint16_t>(kCdefLargeValue) : src[x];
+    dst[x] = is_frame_right ? kCdefLargeValue : src[x];
   }
 }
 
