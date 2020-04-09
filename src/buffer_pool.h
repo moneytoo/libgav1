@@ -19,6 +19,7 @@
 
 #include <array>
 #include <cassert>
+#include <climits>
 #include <condition_variable>  // NOLINT (unapproved c++11 header)
 #include <cstdint>
 #include <cstring>
