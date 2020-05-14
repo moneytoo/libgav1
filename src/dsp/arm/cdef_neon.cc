@@ -298,7 +298,7 @@ void LoadDirection4(const uint16_t* const src, const ptrdiff_t stride,
 }
 
 int16x8_t Constrain(const uint16x8_t pixel, const uint16x8_t reference,
-                    const int16x8_t threshold, const int16x8_t damping) {
+                    const uint16x8_t threshold, const int16x8_t damping) {
   // If reference > pixel, the difference will be negative, so covert to 0 or
   // -1.
   const uint16x8_t sign = vcgtq_u16(reference, pixel);
@@ -327,8 +327,8 @@ void DoCdef(const uint16_t* src, const ptrdiff_t src_stride, const int height,
   static_assert(enable_primary || enable_secondary, "");
   const uint16x8_t cdef_large_value_mask =
       vdupq_n_u16(static_cast<uint16_t>(~kCdefLargeValue));
-  const int16x8_t primary_threshold = vdupq_n_s16(primary_strength);
-  const int16x8_t secondary_threshold = vdupq_n_s16(secondary_strength);
+  const uint16x8_t primary_threshold = vdupq_n_u16(primary_strength);
+  const uint16x8_t secondary_threshold = vdupq_n_u16(secondary_strength);
 
   int16x8_t primary_damping_shift, secondary_damping_shift;
 
@@ -382,11 +382,11 @@ void DoCdef(const uint16_t* src, const ptrdiff_t src_stride, const int height,
       // 8 bits.  The upper 8 bits contain the "large" flag.  After the final
       // primary max has been calculated, zero out the upper 8 bits.  Use this
       // to find the "16 bit" max.
-      const uint8x16_t max_p01 = vmaxq_u8(vreinterpretq_u16_u8(primary_val[0]),
-                                          vreinterpretq_u16_u8(primary_val[1]));
-      const uint8x16_t max_p23 = vmaxq_u8(vreinterpretq_u16_u8(primary_val[2]),
-                                          vreinterpretq_u16_u8(primary_val[3]));
-      const uint16x8_t max_p = vreinterpretq_u8_u16(vmaxq_u8(max_p01, max_p23));
+      const uint8x16_t max_p01 = vmaxq_u8(vreinterpretq_u8_u16(primary_val[0]),
+                                          vreinterpretq_u8_u16(primary_val[1]));
+      const uint8x16_t max_p23 = vmaxq_u8(vreinterpretq_u8_u16(primary_val[2]),
+                                          vreinterpretq_u8_u16(primary_val[3]));
+      const uint16x8_t max_p = vreinterpretq_u16_u8(vmaxq_u8(max_p01, max_p23));
       max = vmaxq_u16(max, vandq_u16(max_p, cdef_large_value_mask));
 
       sum = Constrain(primary_val[0], pixel, primary_threshold,
@@ -429,18 +429,18 @@ void DoCdef(const uint16_t* src, const ptrdiff_t src_stride, const int height,
       min = vminq_u16(min, secondary_val[7]);
 
       const uint8x16_t max_s01 =
-          vmaxq_u8(vreinterpretq_u16_u8(secondary_val[0]),
-                   vreinterpretq_u16_u8(secondary_val[1]));
+          vmaxq_u8(vreinterpretq_u8_u16(secondary_val[0]),
+                   vreinterpretq_u8_u16(secondary_val[1]));
       const uint8x16_t max_s23 =
-          vmaxq_u8(vreinterpretq_u16_u8(secondary_val[2]),
-                   vreinterpretq_u16_u8(secondary_val[3]));
+          vmaxq_u8(vreinterpretq_u8_u16(secondary_val[2]),
+                   vreinterpretq_u8_u16(secondary_val[3]));
       const uint8x16_t max_s45 =
-          vmaxq_u8(vreinterpretq_u16_u8(secondary_val[4]),
-                   vreinterpretq_u16_u8(secondary_val[5]));
+          vmaxq_u8(vreinterpretq_u8_u16(secondary_val[4]),
+                   vreinterpretq_u8_u16(secondary_val[5]));
       const uint8x16_t max_s67 =
-          vmaxq_u8(vreinterpretq_u16_u8(secondary_val[6]),
-                   vreinterpretq_u16_u8(secondary_val[7]));
-      const uint16x8_t max_s = vreinterpretq_u8_u16(
+          vmaxq_u8(vreinterpretq_u8_u16(secondary_val[6]),
+                   vreinterpretq_u8_u16(secondary_val[7]));
+      const uint16x8_t max_s = vreinterpretq_u16_u8(
           vmaxq_u8(vmaxq_u8(max_s01, max_s23), vmaxq_u8(max_s45, max_s67)));
       max = vmaxq_u16(max, vandq_u16(max_s, cdef_large_value_mask));
 
