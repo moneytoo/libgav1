@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8405bb5_82762a15",
+        "filename": "src/utils/common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001562
+      },
+      "writtenOn": "2020-07-09T16:35:55Z",
+      "side": 1,
+      "message": "I believe I changed the type of |alignment| to uintptr_t because we are using the Align() template function (defined at line 45 above), which requires its two parameters to have the same time. Conceptually the alignment parameter of this function should be of the size_t type. For example, see https://en.cppreference.com/w/cpp/memory/align.\n\nPerhaps it would be better to change the type of |alignment| back to size_t and then add a static_cast\u003cuintptr_t\u003e to |alignment| at line 54.",
+      "range": {
+        "startLine": 52,
+        "startChar": 53,
+        "endLine": 52,
+        "endChar": 62
+      },
+      "revId": "0967347f242444de9d3419028816d2cb446fd877",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba",
+      "unresolved": false
+    }
+  ]
+}
