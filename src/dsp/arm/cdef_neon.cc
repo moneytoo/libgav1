@@ -265,6 +265,8 @@ LIBGAV1_ALWAYS_INLINE void AddPartial(const void* const source,
   // 05 15 25 35 45 55 65 75  00 00 00 00 00 00 00 00
   // 06 16 26 36 46 56 66 76  00 00 00 00 00 00 00 00
   // 07 17 27 37 47 57 67 77  00 00 00 00 00 00 00 00
+  // TODO(slavarnway): Initialize partial_lo to prevent errors in some
+  // compilers.
   partial_lo[2] = vsetq_lane_u16(SumVector(v_src[0]), partial_lo[2], 0);
   partial_lo[2] = vsetq_lane_u16(SumVector(v_src[1]), partial_lo[2], 1);
   partial_lo[2] = vsetq_lane_u16(SumVector(v_src[2]), partial_lo[2], 2);
