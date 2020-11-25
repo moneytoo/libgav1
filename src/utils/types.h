@@ -18,6 +18,7 @@
 #define LIBGAV1_SRC_UTILS_TYPES_H_
 
 #include <array>
+#include <cstddef>
 #include <cstdint>
 #include <memory>
 
