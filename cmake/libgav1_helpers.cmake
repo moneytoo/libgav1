@@ -94,10 +94,10 @@ macro(libgav1_create_dummy_source_file)
       "${dummy_source_dir}/libgav1_${cdsf_TARGET}_${cdsf_BASENAME}.cc")
   set(dummy_source_code
       "// Generated file. DO NOT EDIT!\n"
-      "// C++ source file created for target ${cdsf_TARGET}. \n"
-      "void libgav1_${cdsf_TARGET}_${cdsf_BASENAME}_dummy_function(void);\n"
+      "// C++ source file created for target ${cdsf_TARGET}.\n"
+      "void libgav1_${cdsf_TARGET}_${cdsf_BASENAME}_dummy_function(void)\;\n"
       "void libgav1_${cdsf_TARGET}_${cdsf_BASENAME}_dummy_function(void) {}\n")
-  file(WRITE "${dummy_source_file}" "${dummy_source_code}")
+  file(WRITE "${dummy_source_file}" ${dummy_source_code})
 
   target_sources(${cdsf_TARGET} PRIVATE ${dummy_source_file})
 
