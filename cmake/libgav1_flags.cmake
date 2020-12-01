@@ -205,7 +205,7 @@ macro(libgav1_test_exe_linker_flag)
 
   # Restore cached global exe linker flags.
   if(cached_CMAKE_EXE_LINKER_FLAGS)
-    set(CMAKE_EXE_LINKER_FLAGS cached_CMAKE_EXE_LINKER_FLAGS)
+    set(CMAKE_EXE_LINKER_FLAGS ${cached_CMAKE_EXE_LINKER_FLAGS})
   else()
     unset(CMAKE_EXE_LINKER_FLAGS)
   endif()
