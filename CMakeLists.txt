@@ -40,8 +40,8 @@ include("${libgav1_root}/cmake/libgav1_options.cmake")
 
 libgav1_option(NAME LIBGAV1_ENABLE_OPTIMIZATIONS HELPSTRING
                "Enables optimized code." VALUE ON)
-libgav1_option(NAME LIBGAV1_ENABLE_AVX2 HELPSTRING
-               "Enables avx2 optimizations." VALUE ON)
+libgav1_option(NAME LIBGAV1_ENABLE_AVX2 HELPSTRING "Enables avx2 optimizations."
+               VALUE ON)
 libgav1_option(NAME LIBGAV1_ENABLE_NEON HELPSTRING "Enables neon optimizations."
                VALUE ON)
 libgav1_option(NAME LIBGAV1_ENABLE_SSE4_1 HELPSTRING
