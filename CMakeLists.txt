@@ -110,8 +110,18 @@ if(NOT "${LIBGAV1_EXE_LINKER_FLAGS}" STREQUAL "")
   separate_arguments(LIBGAV1_EXE_LINKER_FLAGS)
 endif()
 
-add_subdirectory("${libgav1_root}/third_party/abseil-cpp"
-                 "${libgav1_abseil_build}" EXCLUDE_FROM_ALL)
+set(libgav1_abseil "${libgav1_root}/third_party/abseil-cpp")
+if(NOT EXISTS "${libgav1_abseil}")
+  message(
+    FATAL_ERROR
+      "Abseil not found. This dependency is required by the"
+      " examples and libgav1 when LIBGAV1_THREADPOOL_USE_STD_MUTEX is not"
+      " defined. To continue, download the Abseil repository to"
+      " third_party/abseil-cpp:\n  git \\\n    -C ${libgav1_root} \\\n"
+      "    clone \\\n"
+      "    https://github.com/abseil/abseil-cpp.git third_party/abseil-cpp")
+endif()
+add_subdirectory("${libgav1_abseil}" "${libgav1_abseil_build}" EXCLUDE_FROM_ALL)
 
 libgav1_reset_target_lists()
 libgav1_add_dsp_targets()
