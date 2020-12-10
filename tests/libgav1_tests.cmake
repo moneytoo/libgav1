@@ -35,7 +35,23 @@ if(NOT LIBGAV1_ENABLE_TESTS OR NOT EXISTS "${libgav1_googletest}")
   return()
 endif()
 
+list(APPEND libgav1_tests_block_utils_sources
+            "${libgav1_root}/tests/block_utils.h"
+            "${libgav1_root}/tests/block_utils.cc")
+
+list(APPEND libgav1_tests_utils_sources
+            "${libgav1_root}/tests/third_party/libvpx/acm_random.h"
+            "${libgav1_root}/tests/third_party/libvpx/md5_helper.h"
+            "${libgav1_root}/tests/third_party/libvpx/md5_utils.cc"
+            "${libgav1_root}/tests/third_party/libvpx/md5_utils.h"
+            "${libgav1_root}/tests/utils.h" "${libgav1_root}/tests/utils.cc")
+
+list(APPEND libgav1_tests_utils_test_sources
+            "${libgav1_root}/tests/utils_test.cc")
+
 list(APPEND libgav1_dsp_test_sources "${libgav1_source}/dsp/dsp_test.cc")
+list(APPEND libgav1_intrapred_test_sources
+            "${libgav1_source}/dsp/intrapred_test.cc")
 
 macro(libgav1_add_tests_targets)
   if(NOT LIBGAV1_ENABLE_TESTS)
@@ -88,6 +104,49 @@ macro(libgav1_add_tests_targets)
 
   libgav1_add_executable(TEST
                          NAME
+                         tests_utils_test
+                         SOURCES
+                         ${libgav1_tests_utils_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         OBJLIB_DEPS
+                         libgav1_dsp
+                         libgav1_tests_utils
+                         libgav1_utils
+                         LIB_DEPS
+                         absl::base
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_library(TEST
+                      NAME
+                      libgav1_tests_block_utils
+                      TYPE
+                      OBJECT
+                      SOURCES
+                      ${libgav1_tests_block_utils_sources}
+                      DEFINES
+                      ${libgav1_defines}
+                      INCLUDES
+                      ${libgav1_test_include_paths})
+
+  libgav1_add_library(TEST
+                      NAME
+                      libgav1_tests_utils
+                      TYPE
+                      OBJECT
+                      SOURCES
+                      ${libgav1_tests_utils_sources}
+                      DEFINES
+                      ${libgav1_defines}
+                      INCLUDES
+                      ${libgav1_test_include_paths})
+
+  libgav1_add_executable(TEST
+                         NAME
                          dsp_test
                          SOURCES
                          ${libgav1_dsp_test_sources}
@@ -101,6 +160,27 @@ macro(libgav1_add_tests_targets)
                          libgav1_utils
                          LIB_DEPS
                          absl::strings
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_executable(TEST
+                         NAME
+                         intrapred_test
+                         SOURCES
+                         ${libgav1_intrapred_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         OBJLIB_DEPS
+                         libgav1_decoder
+                         libgav1_dsp
+                         libgav1_tests_block_utils
+                         libgav1_tests_utils
+                         libgav1_utils
+                         LIB_DEPS
+                         absl::time
                          ${libgav1_common_test_absl_deps}
                          libgav1_gtest
                          libgav1_gtest_main)
