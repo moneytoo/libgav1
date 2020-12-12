@@ -178,13 +178,13 @@ void Init10bpp() {
 #ifndef LIBGAV1_Dsp10bpp_MaskBlend420
   dsp->mask_blend[2][0] = MaskBlend_C<10, uint16_t, false, 1, 1>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlendInterIntra444
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend444
   dsp->mask_blend[0][1] = MaskBlend_C<10, uint16_t, true, 0, 0>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlendInterIntra422
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend422
   dsp->mask_blend[1][1] = MaskBlend_C<10, uint16_t, true, 1, 0>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlendInterIntra420
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend420
   dsp->mask_blend[2][1] = MaskBlend_C<10, uint16_t, true, 1, 1>;
 #endif
   // These are only used with 8-bit.
