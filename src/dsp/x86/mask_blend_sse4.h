@@ -55,6 +55,30 @@ void MaskBlendInit_SSE4_1();
 #define LIBGAV1_Dsp8bpp_InterIntraMaskBlend8bpp420 LIBGAV1_CPU_SSE4_1
 #endif
 
+#ifndef LIBGAV1_Dsp10bpp_MaskBlend10bpp444
+#define LIBGAV1_Dsp10bpp_MaskBlend10bpp444 LIBGAV1_CPU_SSE4_1
+#endif
+
+#ifndef LIBGAV1_Dsp10bpp_MaskBlend10bpp422
+#define LIBGAV1_Dsp10bpp_MaskBlend10bpp422 LIBGAV1_CPU_SSE4_1
+#endif
+
+#ifndef LIBGAV1_Dsp10bpp_MaskBlend10bpp420
+#define LIBGAV1_Dsp10bpp_MaskBlend10bpp420 LIBGAV1_CPU_SSE4_1
+#endif
+
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp444
+#define LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp444 LIBGAV1_CPU_SSE4_1
+#endif
+
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp422
+#define LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp422 LIBGAV1_CPU_SSE4_1
+#endif
+
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp420
+#define LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp420 LIBGAV1_CPU_SSE4_1
+#endif
+
 #endif  // LIBGAV1_TARGETING_SSE4_1
 
 #endif  // LIBGAV1_SRC_DSP_X86_MASK_BLEND_SSE4_H_
