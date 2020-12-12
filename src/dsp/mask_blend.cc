@@ -169,22 +169,22 @@ void Init10bpp() {
   dsp->inter_intra_mask_blend_8bpp[2] = nullptr;
 #else  // !LIBGAV1_ENABLE_ALL_DSP_FUNCTIONS
   static_cast<void>(dsp);
-#ifndef LIBGAV1_Dsp10bpp_MaskBlend444
+#ifndef LIBGAV1_Dsp10bpp_MaskBlend10bpp444
   dsp->mask_blend[0][0] = MaskBlend_C<10, uint16_t, false, 0, 0>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlend422
+#ifndef LIBGAV1_Dsp10bpp_MaskBlend10bpp422
   dsp->mask_blend[1][0] = MaskBlend_C<10, uint16_t, false, 1, 0>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlend420
+#ifndef LIBGAV1_Dsp10bpp_MaskBlend10bpp420
   dsp->mask_blend[2][0] = MaskBlend_C<10, uint16_t, false, 1, 1>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlendInterIntra444
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp444
   dsp->mask_blend[0][1] = MaskBlend_C<10, uint16_t, true, 0, 0>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlendInterIntra422
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp422
   dsp->mask_blend[1][1] = MaskBlend_C<10, uint16_t, true, 1, 0>;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_MaskBlendInterIntra420
+#ifndef LIBGAV1_Dsp10bpp_InterIntraMaskBlend10bpp420
   dsp->mask_blend[2][1] = MaskBlend_C<10, uint16_t, true, 1, 1>;
 #endif
   // These are only used with 8-bit.

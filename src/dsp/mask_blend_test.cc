@@ -467,6 +467,11 @@ TEST_P(MaskBlendTest10bpp, DISABLED_Speed) {
 
 INSTANTIATE_TEST_SUITE_P(C, MaskBlendTest10bpp,
                          ::testing::ValuesIn(kMaskBlendTestParam));
+
+#if LIBGAV1_ENABLE_SSE4_1
+INSTANTIATE_TEST_SUITE_P(SSE41, MaskBlendTest10bpp,
+                         ::testing::ValuesIn(kMaskBlendTestParam));
+#endif
 #endif  // LIBGAV1_MAX_BITDEPTH >= 10
 
 }  // namespace
