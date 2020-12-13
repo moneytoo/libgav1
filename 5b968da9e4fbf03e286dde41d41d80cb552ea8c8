@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "381a13bc_ea7cffea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-13T17:32:24Z",
+      "side": 1,
+      "message": "Hi James,\nWe have added SSE4.1 optimization of MaskBlend_C() module for 10-bit path.\nPlease review the patch.\n\nDecode time reduction is negligible for this optimization. Scaling numbers are based on wall time and measured using MaskBlend module speed test framework of libaom code base.\n\nModule level scaling:\nBlock size   Scaling w.r.t. C[InterIntra enabled, disabled]\n 16x16         4.56x, 3.65x\n 16x32         4.53x, 3.59x\n 16x64         4.44x, 3.51x\n 16x8          4.43x, 3.57x\n  8x32         4.34x, 3.57x\n 32x16         4.27x, 3.30x\n  8x16         4.25x, 3.54x\n 32x32         4.13x, 3.21x\n 32x8          4.10x, 3.17x\n  4x16         4.08x, 3.24x\n 16x4          4.00x, 3.30x\n 64x32         3.99x, 3.03x\n 64x16         3.97x, 2.99x\n128x128        3.95x, 2.92x\n128x64         3.86x, 2.91x\n  8x8          3.77x, 3.38x\n 64x64         3.73x, 2.93x\n 64x128        3.60x, 2.92x\n 32x64         3.59x, 2.95x\n  4x8          3.45x, 2.92x\n  8x4          3.41x, 3.21x\n  4x4          3.21x, 3.13x\n\nThank you.",
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
