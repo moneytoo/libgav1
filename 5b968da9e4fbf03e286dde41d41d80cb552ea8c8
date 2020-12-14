@@ -113,6 +113,75 @@
       },
       "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74fb0dd5_8e82faea",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-14T22:27:20Z",
+      "side": 1,
+      "message": "You can use StoreHi8 here.",
+      "range": {
+        "startLine": 541,
+        "startChar": 2,
+        "endLine": 541,
+        "endChar": 10
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f4722ec_22fbf62f",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-14T22:27:20Z",
+      "side": 1,
+      "message": "StoreHi8",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 582,
+        "endChar": 10
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b562bdae_7b545dd9",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-14T22:27:20Z",
+      "side": 1,
+      "message": "Can use a decrement count loop here (other loops below as well). ie:\ny \u003d height;\ny -\u003d 8;\nwhile (y !\u003d 0);",
+      "range": {
+        "startLine": 721,
+        "startChar": 4,
+        "endLine": 722,
+        "endChar": 23
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
