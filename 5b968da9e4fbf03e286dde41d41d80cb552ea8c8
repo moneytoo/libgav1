@@ -35,6 +35,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b514f7de_10395bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "We have updated mask_blend_sse4.h for 10bpp changes.",
+      "parentUuid": "a96e2066_5835d0ea",
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8475798b_a053c975",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-14T22:04:30Z",
       "side": 1,
       "message": "add a newline after the innermost namespace (and before the closing }):\n\nhttps://google.github.io/styleguide/cppguide.html#Namespace_Formatting",
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52b7d23_9cd3d271",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8475798b_a053c975",
       "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
@@ -69,6 +105,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "893ead23_e67fa8b7",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0a06fee_a6dfe297",
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1378f846_d3fc60cc",
@@ -82,6 +136,30 @@
       "writtenOn": "2020-12-14T22:04:30Z",
       "side": 1,
       "message": "static isn\u0027t necessary in an anonymous namespace",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 448,
+        "endChar": 6
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d62b533_5e85cc29",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1378f846_d3fc60cc",
       "range": {
         "startLine": 448,
         "startChar": 0,
@@ -115,6 +193,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef9cfda_9228a6b7",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "320ac19f_f1cc2bd3",
+      "range": {
+        "startLine": 467,
+        "startChar": 1,
+        "endLine": 468,
+        "endChar": 13
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74fb0dd5_8e82faea",
@@ -128,6 +230,30 @@
       "writtenOn": "2020-12-14T22:27:20Z",
       "side": 1,
       "message": "You can use StoreHi8 here.",
+      "range": {
+        "startLine": 541,
+        "startChar": 2,
+        "endLine": 541,
+        "endChar": 10
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef655ac_8fd835ed",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74fb0dd5_8e82faea",
       "range": {
         "startLine": 541,
         "startChar": 2,
@@ -161,6 +287,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5d671c_9251b429",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f4722ec_22fbf62f",
+      "range": {
+        "startLine": 582,
+        "startChar": 2,
+        "endLine": 582,
+        "endChar": 10
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b562bdae_7b545dd9",
@@ -174,6 +324,30 @@
       "writtenOn": "2020-12-14T22:27:20Z",
       "side": 1,
       "message": "Can use a decrement count loop here (other loops below as well). ie:\ny \u003d height;\ny -\u003d 8;\nwhile (y !\u003d 0);",
+      "range": {
+        "startLine": 721,
+        "startChar": 4,
+        "endLine": 722,
+        "endChar": 23
+      },
+      "revId": "5b968da9e4fbf03e286dde41d41d80cb552ea8c8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ac4ff9_78561d5c",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-15T16:47:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b562bdae_7b545dd9",
       "range": {
         "startLine": 721,
         "startChar": 4,
