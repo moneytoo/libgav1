@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15e5e568_484040fc",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1374694
+      },
+      "writtenOn": "2020-12-16T06:55:43Z",
+      "side": 1,
+      "message": "Please refer to https://google.github.io/styleguide/cppguide.html#Casting\n\n *reinterpret_cast\u003cconst uint64_t*\u003e(mask + (mask_stride \u003c\u003c 1)),\n\nsame for the other casts",
+      "range": {
+        "startLine": 479,
+        "startChar": 7,
+        "endLine": 479,
+        "endChar": 18
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "907c0bb1_221d47a7",
         "filename": "src/dsp/x86/mask_blend_sse4.cc",
         "patchSetId": 10
