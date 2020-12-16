@@ -41,6 +41,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47672958_658c073e",
+        "filename": "src/dsp/mask_blend.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "6e0b7979_fb671ec9",
+      "range": {
+        "startLine": 172,
+        "startChar": 34,
+        "endLine": 172,
+        "endChar": 39
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf18b481_cb48d110",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-16T05:50:36Z",
       "side": 1,
       "message": "Use Bpp:\n\nhttps://google.github.io/styleguide/cppguide.html#General_Naming_Rules",
+      "range": {
+        "startLine": 437,
+        "startChar": 20,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa30e5bd_a4e03341",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf18b481_cb48d110",
       "range": {
         "startLine": 437,
         "startChar": 20,
@@ -87,6 +135,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10ed8e4f_5a50b4ef",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15e5e568_484040fc",
+      "range": {
+        "startLine": 479,
+        "startChar": 7,
+        "endLine": 479,
+        "endChar": 18
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "907c0bb1_221d47a7",
@@ -100,6 +172,24 @@
       "writtenOn": "2020-12-16T05:50:36Z",
       "side": 1,
       "message": "rather than a table I think you can match the template structure as done in the 8-bit; the code should be equivalent.",
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffd11895_0e7372d5",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Replaced table, similar to 8-bit template function. On removing function pointer table, we are seeing marginal increase in scaling.",
+      "parentUuid": "907c0bb1_221d47a7",
       "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
@@ -121,6 +211,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f9cfa0_19fb656b",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d10fbb_62a5a11d",
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55d0573b_1516326f",
@@ -134,6 +242,30 @@
       "writtenOn": "2020-12-16T05:50:36Z",
       "side": 1,
       "message": "this check shouldn\u0027t be necessary. if we were to add 12-bit then there would be a corresponding override if needed.",
+      "range": {
+        "startLine": 927,
+        "startChar": 25,
+        "endLine": 927,
+        "endChar": 30
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39e13523_0b3568e1",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d0573b_1516326f",
       "range": {
         "startLine": 927,
         "startChar": 25,

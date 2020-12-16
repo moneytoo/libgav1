@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d1ae53_4f4f3ac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-16T13:24:25Z",
+      "side": 1,
+      "message": "Hi James,\nAs per your suggestion we have updated the patchset 11. We are seeing marginal increase in scaling on removing GetMask function pointer table. Please review the patch.\n\nModule level scaling:\nBlock size   Scaling w.r.t. C[InterIntra enabled]\n  8x8        2.69x\n 8x16        3.32x\n 16x8        2.96x\n16x16        3.50x\n16x32        3.92x\n32x16        3.54x\n32x32        3.72x\n\nBlock size   Scaling w.r.t. C[InterIntra disabled]\n   8x8       2.36x\n   8x16      2.82x\n   16x8      2.94x\n  16x16      3.36x\n  16x32      3.69x\n  32x16      3.46x\n  32x32      3.59x\n  32x64      3.64x\n  64x32      3.62x\n  64x64      3.57x\n 64x128      3.59x\n 128x64      3.65x\n128x128      3.67x\n\nThank you.",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
