@@ -16,6 +16,109 @@
       "message": "Hi James,\nAs per your suggestion we have updated the patchset 10. After testing the patch with libgav1 test-bench that you shared today, we identified that InterIntra enabled logic needs to be handled at 32-bit precision level. Respective functions are modified in patchset 10. Please review the patch.\n\nRegenerated scaling numbers on ligav1 testbench.\n\nModule level scaling:\nBlock size   Scaling w.r.t. C[InterIntra enabled]\n  8x8        2.39x\n 8x16        2.84x\n 16x8        2.38x\n16x16        2.61x\n16x32        2.75x\n32x16        2.62x\n32x32        2.64x\n\nBlock size   Scaling w.r.t. C[InterIntra disabled]\n   8x8       2.28x\n   8x16      2.71x\n   16x8      2.71x\n  16x16      3.37x\n  16x32      3.53x\n  32x16      3.27x\n  32x32      3.36x\n  32x64      3.38x\n  64x32      3.37x\n  64x64      3.44x\n 64x128      3.45x\n 128x64      3.46x\n128x128      3.47x\n\nThank you.",
       "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0b7979_fb671ec9",
+        "filename": "src/dsp/mask_blend.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-16T05:50:36Z",
+      "side": 1,
+      "message": "this is redundant given the Dsp10bpp prefix.",
+      "range": {
+        "startLine": 172,
+        "startChar": 34,
+        "endLine": 172,
+        "endChar": 39
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf18b481_cb48d110",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-16T05:50:36Z",
+      "side": 1,
+      "message": "Use Bpp:\n\nhttps://google.github.io/styleguide/cppguide.html#General_Naming_Rules",
+      "range": {
+        "startLine": 437,
+        "startChar": 20,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "907c0bb1_221d47a7",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-16T05:50:36Z",
+      "side": 1,
+      "message": "rather than a table I think you can match the template structure as done in the 8-bit; the code should be equivalent.",
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d10fbb_62a5a11d",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-16T05:50:36Z",
+      "side": 1,
+      "message": "merge this with the line below and in general you can prefer pre-increment/decrement (--y)",
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d0573b_1516326f",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-16T05:50:36Z",
+      "side": 1,
+      "message": "this check shouldn\u0027t be necessary. if we were to add 12-bit then there would be a corresponding override if needed.",
+      "range": {
+        "startLine": 927,
+        "startChar": 25,
+        "endLine": 927,
+        "endChar": 30
+      },
+      "revId": "e917e8ca7d0ce6db47905dcee45c08c2ed7d13df",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
