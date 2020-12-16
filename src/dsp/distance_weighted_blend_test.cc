@@ -285,6 +285,11 @@ TEST_P(DistanceWeightedBlendTest10bpp, DISABLED_Speed) {
 
 INSTANTIATE_TEST_SUITE_P(C, DistanceWeightedBlendTest10bpp,
                          ::testing::ValuesIn(kTestParam));
+
+#if LIBGAV1_ENABLE_SSE4_1
+INSTANTIATE_TEST_SUITE_P(SSE41, DistanceWeightedBlendTest10bpp,
+                         ::testing::ValuesIn(kTestParam));
+#endif
 #endif  // LIBGAV1_MAX_BITDEPTH >= 10
 
 }  // namespace
