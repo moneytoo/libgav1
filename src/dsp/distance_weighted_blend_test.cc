@@ -273,17 +273,20 @@ const char* GetDistanceWeightedBlendDigest10bpp(const TestParam block_size) {
   }
 }
 
-using DistanceWeightedBlendTest10bppp = DistanceWeightedBlendTest<10, uint16_t>;
+using DistanceWeightedBlendTest10bpp = DistanceWeightedBlendTest<10, uint16_t>;
 
-TEST_P(DistanceWeightedBlendTest10bppp, Blending) {
+TEST_P(DistanceWeightedBlendTest10bpp, Blending) {
   Test(GetDistanceWeightedBlendDigest10bpp(GetParam()), 1);
 }
 
-TEST_P(DistanceWeightedBlendTest10bppp, DISABLED_Speed) {
+TEST_P(DistanceWeightedBlendTest10bpp, DISABLED_Speed) {
   Test(GetDistanceWeightedBlendDigest10bpp(GetParam()), kNumSpeedTests);
 }
 
-INSTANTIATE_TEST_SUITE_P(C, DistanceWeightedBlendTest10bppp,
+INSTANTIATE_TEST_SUITE_P(C, DistanceWeightedBlendTest10bpp,
+                         ::testing::ValuesIn(kTestParam));
+
+INSTANTIATE_TEST_SUITE_P(SSE41, DistanceWeightedBlendTest10bpp,
                          ::testing::ValuesIn(kTestParam));
 #endif  // LIBGAV1_MAX_BITDEPTH >= 10
 
