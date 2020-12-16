@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a895c893_657ef47b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-16T15:20:34Z",
+      "side": 1,
+      "message": "Hi James,\nWe have added an intrinsic optimization (SSE4.1) of WeightMask_C() module for 10-bit path.\nFor this optimization, decode time reduction observed is negligible. Block level scaling numbers are measured using libgav1 unit test.\n\nPlease check block level scaling of all blocks w.r.t C function below,\n\n Block       mask_is_inverse\n Size       false         true\n 8x8        8.09x\t  8.16x\n 8x16\t    8.26x\t  8.37x\n 8x32\t    8.22x\t  8.37x\n 16x8\t    8.02x\t  7.95x\n 16x16\t    8.00x\t  8.09x\n 16x32\t    8.23x\t  8.46x\n 16x64\t    8.49x\t  8.33x\n 32x8\t    5.24x\t  4.72x\n 32x16\t    5.47x\t  4.90x\n 32x32\t    5.65x\t  5.17x\n 32x64\t    5.72x\t  5.22x\n 64x16\t    5.11x\t  4.89x\n 64x32\t    5.15x\t  4.92x\n 64x64\t    5.15x\t  4.92x\n 64x128\t    4.86x\t  4.63x\n 128x64\t    4.51x\t  4.16x\n 128x128    4.55x         4.13x\n\nPlease review the patch.\nThank you.",
+      "revId": "738f23ed526fc4422e07bad2cf9d3ada532d0ef0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
