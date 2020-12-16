@@ -36,6 +36,10 @@ void DistanceWeightedBlendInit_SSE4_1();
 #define LIBGAV1_Dsp8bpp_DistanceWeightedBlend LIBGAV1_CPU_SSE4_1
 #endif
 
+#ifndef LIBGAV1_Dsp10bpp_DistanceWeightedBlend
+#define LIBGAV1_Dsp10bpp_DistanceWeightedBlend LIBGAV1_CPU_SSE4_1
+#endif
+
 #endif  // LIBGAV1_TARGETING_SSE4_1
 
 #endif  // LIBGAV1_SRC_DSP_X86_DISTANCE_WEIGHTED_BLEND_SSE4_H_
