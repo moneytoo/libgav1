@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4f7939_fedda026",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-17T18:19:38Z",
+      "side": 1,
+      "message": "Hi Scott,\nThanks for your comments.\nWe have updated patchset 6 with your suggestions. After adding WeightMask16_10bpp_SSE4(), scaling numbers of relevant block sizes are improved up to ~2x.\n\nPlease check the scaling numbers below,\n Block       mask_is_inverse\n Size        false      true\n 8x8\t      8.02x     8.12x\n 8x16\t      8.26x\t8.35x\n 8x32\t      8.22x\t8.27x\n 16x8\t     10.12x    10.71x\n 16x16\t     10.11x    11.18x\n 16x32\t     10.07x    11.12x\n 16x64\t     10.09x    11.07x\n 32x8\t      6.76x\t6.51x\n 32x16\t      6.73x\t6.46x\n 32x32\t      6.95x\t6.63x\n 32x64\t      6.96x\t7.02x\n 64x16\t      6.30x\t6.39x\n 64x32\t      6.33x\t6.45x\n 64x64\t      6.31x\t6.40x\n 64x128\t      5.91x\t5.89x\n 128x64\t      5.42x\t5.53x\n 128x128      5.43x\t5.48x\n\nPlease review the patch.\nThank you.",
+      "revId": "a487eaf13668d1cea7d0a7d71d20d8d213473f01",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

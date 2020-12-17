@@ -41,6 +41,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49475b5b_57c6719b",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-17T18:19:38Z",
+      "side": 1,
+      "message": "Suggestion considered",
+      "parentUuid": "c0a61699_0d0e5f3b",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 20
+      },
+      "revId": "4011acc508583ca4148279df5e40baf5c89ee71d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d66f442_6eb85429",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-17T13:15:41Z",
       "side": 1,
       "message": "This could be combined into one function (WeightMask16_10bpp_SSE4). You could have hi/lo variables for scaled_difference, then adjusted_difference would hold the packed hi/lo. Store the 16 byte mask.",
+      "range": {
+        "startLine": 537,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 75
+      },
+      "revId": "4011acc508583ca4148279df5e40baf5c89ee71d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e41e4fc_5df9f526",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-17T18:19:38Z",
+      "side": 1,
+      "message": "Suggestion considered.",
+      "parentUuid": "1d66f442_6eb85429",
       "range": {
         "startLine": 537,
         "startChar": 0,
