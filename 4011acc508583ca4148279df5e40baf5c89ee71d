@@ -16,6 +16,52 @@
       "message": "Hi James,\nThanks for your comments.\nPatchset 5 is ready for review.",
       "revId": "4011acc508583ca4148279df5e40baf5c89ee71d",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a61699_0d0e5f3b",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-17T13:15:41Z",
+      "side": 1,
+      "message": "Use decrement loop count instead.",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 499,
+        "endChar": 20
+      },
+      "revId": "4011acc508583ca4148279df5e40baf5c89ee71d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d66f442_6eb85429",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-17T13:15:41Z",
+      "side": 1,
+      "message": "This could be combined into one function (WeightMask16_10bpp_SSE4). You could have hi/lo variables for scaled_difference, then adjusted_difference would hold the packed hi/lo. Store the 16 byte mask.",
+      "range": {
+        "startLine": 537,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 75
+      },
+      "revId": "4011acc508583ca4148279df5e40baf5c89ee71d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
