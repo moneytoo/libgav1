@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7ff7e23_e09e4a68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-17T09:31:35Z",
+      "side": 1,
+      "message": "Hi all,\nAs per the suggestions, we have updated the patchset 12. Please review the patch.\n\nThank you.",
+      "revId": "8f03614e4d28b78ccee2be463036974da2a14cce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

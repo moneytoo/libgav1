@@ -35,6 +35,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d9838b_8cd1dde7",
+        "filename": "src/dsp/mask_blend.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-17T09:31:35Z",
+      "side": 1,
+      "message": "Ok, understood.",
+      "parentUuid": "d48d9dde_735f671d",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b261639a_31cc7c15",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-17T05:52:16Z",
       "side": 1,
       "message": "drop this else since the other branch returns:\n\nhttp://clang.llvm.org/extra/clang-tidy/checks/readability-else-after-return.html",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9602d7bd_7952c7c4",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-17T09:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b261639a_31cc7c15",
       "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
@@ -99,6 +135,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef3f7ca_fbac7329",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-17T09:31:35Z",
+      "side": 1,
+      "message": "I have replaced this statement with LoadLo8/LoadHi8,\n\"const __m128i mask_val_0 \u003d LoadHi8(LoadLo8(mask), mask + (mask_stride \u003c\u003c 1));\"",
+      "parentUuid": "c9d7f72b_e1ca9996",
+      "range": {
+        "startLine": 468,
+        "startChar": 11,
+        "endLine": 468,
+        "endChar": 44
+      },
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9414a7e_10ec4a7f",
@@ -116,6 +176,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ffa6f7_246dfe67",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-17T09:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9414a7e_10ec4a7f",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbbf2a96_9fe1bede",
@@ -129,6 +207,30 @@
       "writtenOn": "2020-12-16T15:25:56Z",
       "side": 1,
       "message": "The compiler may be doing this already, but you could use LoadHi8/LoadLo8 instead. ie:\n\nconst __m128i pred_val_1 \u003d LoadHi8(LoadLo8(pred_1), pred_1 + pred_stride_1);",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 518,
+        "endChar": 65
+      },
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc4b318_8f3022dd",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-17T09:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbbf2a96_9fe1bede",
       "range": {
         "startLine": 516,
         "startChar": 0,
