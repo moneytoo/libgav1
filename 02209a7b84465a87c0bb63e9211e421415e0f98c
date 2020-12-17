@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a0195e4_07f96caa",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T06:53:33Z",
+      "side": 1,
+      "message": "\u003e x86 supports unaligned loads, but sanitizers may still report an issue. without looking closely at the alignment of the mask and stride I\u0027d prefer this to be a memcpy() [1] which should produce the same code. Please check though.\n\u003e \n\u003e [1] https://chromium.googlesource.com/codecs/libgav1/+/refs/heads/master/src/dsp/x86/common_sse4.h#81\n\nactually I wasn\u0027t thinking about this one correctly when I made the comment, I think LoadLo8/LoadHi8 may work instead:\n\nhttps://chromium.googlesource.com/codecs/libgav1/+/refs/heads/master/src/dsp/x86/common_sse4.h#128",
+      "parentUuid": "c9d7f72b_e1ca9996",
+      "range": {
+        "startLine": 468,
+        "startChar": 11,
+        "endLine": 468,
+        "endChar": 44
+      },
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9414a7e_10ec4a7f",
         "filename": "src/dsp/x86/mask_blend_sse4.cc",
         "patchSetId": 11
