@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57ae8d26_32f5d45d",
+        "filename": "src/dsp/mask_blend.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T20:26:40Z",
+      "side": 1,
+      "message": "\u003e Ok, understood.\n\nSorry if it wasn\u0027t clear, I meant these should be reverted to their original form:\nLIBGAV1_Dsp10bpp_MaskBlendInterIntra444 rather than trying to match the 8bpp only specialization.",
+      "parentUuid": "69d9838b_8cd1dde7",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b261639a_31cc7c15",
         "filename": "src/dsp/x86/mask_blend_sse4.cc",
         "patchSetId": 11

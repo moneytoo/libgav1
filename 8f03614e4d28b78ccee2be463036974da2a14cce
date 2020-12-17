@@ -16,6 +16,23 @@
       "message": "Hi all,\nAs per the suggestions, we have updated the patchset 12. Please review the patch.\n\nThank you.",
       "revId": "8f03614e4d28b78ccee2be463036974da2a14cce",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ac8d31_2d407def",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T20:26:40Z",
+      "side": 1,
+      "message": "I think it would be a little more readable if this wrapped the entire high_bitdepth namespace.",
+      "revId": "8f03614e4d28b78ccee2be463036974da2a14cce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
