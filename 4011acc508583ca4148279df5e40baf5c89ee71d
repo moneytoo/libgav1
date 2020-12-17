@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c2cfe0_fa625c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-17T06:58:48Z",
+      "side": 1,
+      "message": "Hi James,\nThanks for your comments.\nPatchset 5 is ready for review.",
+      "revId": "4011acc508583ca4148279df5e40baf5c89ee71d",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

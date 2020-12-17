@@ -35,6 +35,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d34011c_32deba15",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-17T06:58:48Z",
+      "side": 1,
+      "message": "Suggestion considered",
+      "parentUuid": "91c3de3c_73bc6782",
+      "revId": "738f23ed526fc4422e07bad2cf9d3ada532d0ef0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb981662_24c350c1",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-17T05:56:22Z",
       "side": 1,
       "message": "I think this may be more readable wrapping namespace high_bitdepth",
+      "revId": "738f23ed526fc4422e07bad2cf9d3ada532d0ef0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e236d5fd_2d80ad21",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-17T06:58:48Z",
+      "side": 1,
+      "message": "Suggestion considered",
+      "parentUuid": "bb981662_24c350c1",
       "revId": "738f23ed526fc4422e07bad2cf9d3ada532d0ef0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
