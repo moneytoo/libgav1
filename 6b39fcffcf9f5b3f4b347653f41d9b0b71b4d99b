@@ -41,6 +41,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "628c12b1_477c22f7",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T07:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90968012_a52d2c3b",
+      "range": {
+        "startLine": 221,
+        "startChar": 14,
+        "endLine": 221,
+        "endChar": 19
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d9e3f27_cacbf0ce",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-17T05:38:34Z",
       "side": 1,
       "message": "...is a combination...?",
+      "range": {
+        "startLine": 222,
+        "startChar": 15,
+        "endLine": 222,
+        "endChar": 29
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "556a2512_6e6219c8",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T07:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d9e3f27_cacbf0ce",
       "range": {
         "startLine": 222,
         "startChar": 15,
@@ -87,6 +135,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffcb96fe_c702bf84",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T07:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d16590f_50c19559",
+      "range": {
+        "startLine": 225,
+        "startChar": 24,
+        "endLine": 225,
+        "endChar": 25
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1087124_12d700eb",
@@ -110,6 +182,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45fe5b41_b5a00478",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T07:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1087124_12d700eb",
+      "range": {
+        "startLine": 229,
+        "startChar": 38,
+        "endLine": 229,
+        "endChar": 44
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32a2433b_852cc7ed",
@@ -123,6 +219,24 @@
       "writtenOn": "2020-12-17T05:38:34Z",
       "side": 1,
       "message": "use _mm_setzero_si128()",
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f807ebf1_11b27d6f",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T07:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32a2433b_852cc7ed",
       "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
