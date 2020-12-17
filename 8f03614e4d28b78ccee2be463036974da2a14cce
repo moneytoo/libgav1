@@ -33,6 +33,23 @@
       "message": "I think it would be a little more readable if this wrapped the entire high_bitdepth namespace.",
       "revId": "8f03614e4d28b78ccee2be463036974da2a14cce",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1277555d_764d29c0",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T20:43:11Z",
+      "side": 1,
+      "message": "This will break the windows ABI [1]. x64 can only guarantee 16-byte alignment for 4 parameters, x86 3. Make the __m128i parameters const references in these cases.\n\n[1] https://docs.microsoft.com/en-us/cpp/cpp/argument-passing-and-naming-conventions?view\u003dmsvc-160\u0026viewFallbackFrom\u003dvs-2019",
+      "revId": "8f03614e4d28b78ccee2be463036974da2a14cce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
