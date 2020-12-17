@@ -16,6 +16,115 @@
       "message": "Hi James,\nWe have added SSE4.1 optimization of DistanceWeightedBlend_C() module for 10-bit path.\nPlease review the patch.\n\nFor this optimization, decode time reduction observed is ~0.2%. Block level scaling numbers are measured using libgav1 unit test.\n\nModule level scaling:\n\nBlock size   Scaling\n 4x4          5.50x\n 4x8          5.56x\n 4x16         5.04x\n 8x4          5.67x\n 8x8          5.63x\n 8x16         3.61x\n 8x32         3.76x\n 16x4         2.86x\n 16x8         3.02x\n 16x16        3.11x\n 16x32        3.34x\n 16x64        3.44x\n 32x8         2.98x\n 32x16        3.16x\n 32x32        3.24x\n 32x64        3.26x\n 32x128       3.28x\n 64x16        3.12x\n 62x32        3.12x\n 64x64        3.16x\n 64x128       3.16x\n 128x32       3.08x\n 128x64       3.10x\n 128x128      3.11x\n\nThank you.",
       "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90968012_a52d2c3b",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:38:34Z",
+      "side": 1,
+      "message": "I don\u0027t know that this adds much for readability and if it were to need to be changed the amount of edits would the same with rename as updating the constant",
+      "range": {
+        "startLine": 221,
+        "startChar": 14,
+        "endLine": 221,
+        "endChar": 19
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d9e3f27_cacbf0ce",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:38:34Z",
+      "side": 1,
+      "message": "...is a combination...?",
+      "range": {
+        "startLine": 222,
+        "startChar": 15,
+        "endLine": 222,
+        "endChar": 29
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d16590f_50c19559",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:38:34Z",
+      "side": 1,
+      "message": "these outer ()s can be removed here and in the next line",
+      "range": {
+        "startLine": 225,
+        "startChar": 24,
+        "endLine": 225,
+        "endChar": 25
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1087124_12d700eb",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:38:34Z",
+      "side": 1,
+      "message": "this _10bpp can probably be removed since we\u0027re in a high_bitdepth namespace and aren\u0027t supporting 12bpp currently. the same may be true for some of the other functions",
+      "range": {
+        "startLine": 229,
+        "startChar": 38,
+        "endLine": 229,
+        "endChar": 44
+      },
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a2433b_852cc7ed",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:38:34Z",
+      "side": 1,
+      "message": "use _mm_setzero_si128()",
+      "revId": "6b39fcffcf9f5b3f4b347653f41d9b0b71b4d99b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
