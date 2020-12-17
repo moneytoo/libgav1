@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee095bd7_3354cfde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T13:30:40Z",
+      "side": 1,
+      "message": "Hi Scott,\nCan you please check my replies.",
+      "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5cc7431_b5c2792d",
         "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
         "patchSetId": 4
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cd3be9b_d270dedd",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T13:30:40Z",
+      "side": 1,
+      "message": "pred0 is an unsigned 16-bit value.\nweight0 is an unsigned 4-bit value.\nSo max range of mult0 can be upto 20-bits. Thus we cannot use _mm_madd_epi16 here.",
+      "parentUuid": "c5cc7431_b5c2792d",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 44
+      },
+      "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3085702c_1dd21710",
         "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
         "patchSetId": 4
@@ -54,6 +95,30 @@
       "writtenOn": "2020-12-17T12:47:30Z",
       "side": 1,
       "message": "If you use _mm_packus_epi32 instead, I think the clip_low can be eliminated.",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 65
+      },
+      "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd54df2_76b5af6e",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-17T13:30:40Z",
+      "side": 1,
+      "message": "Here \u0027sum\u0027 can be negative.\nSo we cannot use \u0027_mm_packus_epi32\u0027 here.",
+      "parentUuid": "3085702c_1dd21710",
       "range": {
         "startLine": 252,
         "startChar": 0,
