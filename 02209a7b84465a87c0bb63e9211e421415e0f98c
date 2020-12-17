@@ -20,6 +20,80 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d48d9dde_735f671d",
+        "filename": "src/dsp/mask_blend.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:52:16Z",
+      "side": 1,
+      "message": "I would leave these as they since in 8bpp we have a special case. the goal is that the defines roughly match the function pointer",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b261639a_31cc7c15",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:52:16Z",
+      "side": 1,
+      "message": "drop this else since the other branch returns:\n\nhttp://clang.llvm.org/extra/clang-tidy/checks/readability-else-after-return.html",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d7f72b_e1ca9996",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:52:16Z",
+      "side": 1,
+      "message": "x86 supports unaligned loads, but sanitizers may still report an issue. without looking closely at the alignment of the mask and stride I\u0027d prefer this to be a memcpy() [1] which should produce the same code. Please check though.\n\n[1] https://chromium.googlesource.com/codecs/libgav1/+/refs/heads/master/src/dsp/x86/common_sse4.h#81",
+      "range": {
+        "startLine": 468,
+        "startChar": 11,
+        "endLine": 468,
+        "endChar": 44
+      },
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9414a7e_10ec4a7f",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-17T05:52:16Z",
+      "side": 1,
+      "message": "same comment here for removing the else:\n\nhttp://clang.llvm.org/extra/clang-tidy/checks/readability-else-after-return.html",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbbf2a96_9fe1bede",
         "filename": "src/dsp/x86/mask_blend_sse4.cc",
         "patchSetId": 11
