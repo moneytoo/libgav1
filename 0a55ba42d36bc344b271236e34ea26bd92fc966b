@@ -175,6 +175,30 @@
       },
       "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e0d8d9_6a1b9a06",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-18T07:03:35Z",
+      "side": 1,
+      "message": "We accept your suggestion. We incorrectly assumed that \u0027_mm_packus_epi32\u0027 can handle only unsigned 32-bit value. We included this change in patchset_5.",
+      "parentUuid": "dcd54df2_76b5af6e",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 65
+      },
+      "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
