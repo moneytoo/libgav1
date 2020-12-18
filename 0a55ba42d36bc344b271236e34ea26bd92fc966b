@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94cf3916_8ee89bf6",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-18T04:34:48Z",
+      "side": 1,
+      "message": "Theoretically max range of \u0027pred0\u0027 and \u0027pred1\u0027 is \u00270x9FF0\u0027. The same can be interpreted as below :\nkCompoundOffset \u003d (1 \u003c\u003c 14) + (1 \u003c\u003c 13)\n((1\u003c\u003c10)-1) \u003c\u003c 4) + kCompoundOffset \u003d 0x9FF0 (16-bit).\nhttps://chromium.googlesource.com/codecs/libgav1/+/refs/heads/master/src/dsp/distance_weighted_blend_test.cc#139\n\u0027_mm_madd_epi16\u0027 expects signed 16-bit values, where as pred0, pred1 are unsigned 16-bit values.",
+      "parentUuid": "e3615f35_a8718a79",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 44
+      },
+      "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3085702c_1dd21710",
         "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
         "patchSetId": 4
