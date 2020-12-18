@@ -18,6 +18,23 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b4dca3_5a0173d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-18T15:19:49Z",
+      "side": 1,
+      "message": "Hi James,\nWe have added an intrinsic optimization (SSE4.1) of AverageBlend_C() module for 10-bit path.\nFor this optimization, decode time reduction observed is 0.5%. Block level scaling numbers are measured using libgav1 unit test.\n\nBlock size   Scaling w.r.t. C\n\n 4x4         1.67x\n 4x8         3.01x\n 8x8         3.58x\n 8x16        4.27x\n 16x8        1.84x\n 16x16       1.96x\n 16x32       2.07x\n 32x16       1.74x\n 32x32       1.74x\n 32x64       1.74x\n 64x32       1.55x\n 64x64       1.56x\n 64x128      1.57x\n 128x64      1.48x\n 128x128     1.49x\n\nPlease review the patch.\nThank you.",
+      "revId": "3a4fa54e4e037acf8a9ed278369a30a253685669",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e538a3b9_3a44bc3e",
