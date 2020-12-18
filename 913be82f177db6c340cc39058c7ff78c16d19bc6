@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a075125_ad4ab69d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-18T14:27:37Z",
+      "side": 1,
+      "message": "Hi James,\nAs per the suggestions, we have updated the patchset 13. Please review the patch.\n\nThank you.",
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

@@ -71,6 +71,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cb93e45_a954bd1c",
+        "filename": "src/dsp/mask_blend.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-18T14:27:37Z",
+      "side": 1,
+      "message": "Ok, I have updated 10bpp InterIntraMaskBlend DSP macro name to LIBGAV1_Dsp10bpp_MaskBlendInterIntra444/422/420",
+      "parentUuid": "57ae8d26_32f5d45d",
+      "revId": "02209a7b84465a87c0bb63e9211e421415e0f98c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b261639a_31cc7c15",
