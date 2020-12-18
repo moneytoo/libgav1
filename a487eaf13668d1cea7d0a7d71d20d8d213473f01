@@ -36,6 +36,23 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc70f95_c0685031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-18T06:21:35Z",
+      "side": 1,
+      "message": "I noticed that in weight_mask_test.cc the range of predictors was incorrect. Try this version against your patch:\nhttps://chromium-review.googlesource.com/c/codecs/libgav1/+/2598045",
+      "revId": "a487eaf13668d1cea7d0a7d71d20d8d213473f01",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e24b452b_b5a45fd6",
