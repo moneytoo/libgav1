@@ -71,6 +71,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38a50fa_e211357e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-18T16:56:47Z",
+      "side": 1,
+      "message": "Thanks for notifying this issue to us. We have updated the code with correct precision. Please check.",
+      "parentUuid": "4214393c_4e9d2d28",
+      "revId": "a487eaf13668d1cea7d0a7d71d20d8d213473f01",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e24b452b_b5a45fd6",
@@ -84,6 +102,30 @@
       "writtenOn": "2020-12-17T18:47:30Z",
       "side": 1,
       "message": "I was thinking about this after my initial comments. It seems this function can be modified to work on row pairs. It would be very similar to the function below except instead of using StoreAligned16, you could use StoreLo8/StoreHi8. It would require a mask stride parameter. You could combine the templates and use a parameter to select between the two storage methods. The compiler should optimize out the stride when not being used. Thoughts?",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 1
+      },
+      "revId": "a487eaf13668d1cea7d0a7d71d20d8d213473f01",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "667d5198_1a819c6f",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-18T16:56:47Z",
+      "side": 1,
+      "message": "As per your suggestion, the function is modified to handle row pairs. We have also considered precision change recently happened in weight_mask_test.cc.",
+      "parentUuid": "e24b452b_b5a45fd6",
       "range": {
         "startLine": 459,
         "startChar": 0,

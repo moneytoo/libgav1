@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a98fbe_ee030eaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-18T16:56:47Z",
+      "side": 1,
+      "message": "Hi James, Scott,\nWe have updated the intrinsic optimization with correct precision as recently fixed in weight_mask_test.cc.\nOverall scaling has been reduced as intermediate precision is increased to 32-bit.\nPlease check the scaling numbers below,\n\n Block       mask_is_inverse\n Size        false      true\n 8x8         3.82x      4.17x\n 8x16\t     3.71x      3.99x\n 8x32\t     3.83x      4.14x\n 16x8\t     3.69x      4.09x\n 16x16\t     3.81x      4.23x\n 16x32\t     3.87x      4.30x\n 16x64\t     4.55x      4.99x\n 32x8\t     2.60x      2.58x\n 32x16\t     2.60x      2.57x\n 32x32\t     2.53x      2.54x\n 32x64\t     3.11x      3.07x\n 64x16\t     2.33x      2.37x\n 64x32\t     2.34x      2.38x\n 64x64\t     2.34x      2.41x\n 64x128\t     2.71x      2.78x\n 128x64\t     2.24x      2.28x\n 128x128     2.51x      2.47x\n \nPlease review the patch.\nThank you.",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
