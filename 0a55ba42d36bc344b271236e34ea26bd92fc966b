@@ -130,6 +130,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f96f459_88b789ed",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-18T12:17:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "94cf3916_8ee89bf6",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 44
+      },
+      "revId": "0a55ba42d36bc344b271236e34ea26bd92fc966b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3085702c_1dd21710",

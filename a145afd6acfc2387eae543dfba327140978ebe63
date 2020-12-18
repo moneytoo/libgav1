@@ -16,6 +16,29 @@
       "message": "Hi James, Scott,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.\n\nModule level scaling.\nBlock size  Scaling\n  4x4        5.84x\n  4x8        5.60x\n  4x16       5.36x\n  8x4        5.56x\n  8x8        5.26x\n  8x16       3.60x\n  8x32       3.34x\n  16x4       2.80x\n  16x8       2.98x\n  16x16      3.02x\n  16x32      3.13x\n  16x64      3.06x\n  32x8       2.86x\n  32x16      3.01x\n  32x32      3.07x\n  32x64      3.04x\n  32x128     3.02x\n  64x16      3.01x\n  62x32      3.04x\n  64x64      3.03x\n  64x128     3.02x\n  128x32     2.96x\n  128x64     2.98x\n  128x128    3.01x\n\nThank you.",
       "revId": "a145afd6acfc2387eae543dfba327140978ebe63",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a49ec01_0b9c7cce",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-18T12:17:11Z",
+      "side": 1,
+      "message": "Use do/while with decrementing count.",
+      "range": {
+        "startLine": 264,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 37
+      },
+      "revId": "a145afd6acfc2387eae543dfba327140978ebe63",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
