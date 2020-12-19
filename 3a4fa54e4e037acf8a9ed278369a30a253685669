@@ -82,6 +82,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfdd31e0_2ce91797",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T03:16:15Z",
+      "side": 1,
+      "message": "\u003e Done\n\nIt looks like you may have created a new change instead of amending this one:\nhttps://chromium-review.googlesource.com/c/codecs/libgav1/+/2596702\n\nchange the Change-Id in that one to I261da3cffbead611a023766c2695812bd01312d3 and then push it again to keep the review thread in one place. You can then abandon the other one.",
+      "parentUuid": "79347841_1fc02ebd",
+      "range": {
+        "startLine": 171,
+        "startChar": 20,
+        "endLine": 171,
+        "endChar": 70
+      },
+      "revId": "3a4fa54e4e037acf8a9ed278369a30a253685669",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebc5a1f2_2ffb01b2",
