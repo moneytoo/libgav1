@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a4b977_3f92581f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-19T07:40:47Z",
+      "side": 1,
+      "message": "Hi James,\nWe have submitted patchset 8 with your suggestions considered. For this patch, Block level scaling numbers are similar to patchset 7. Please review the patch.\n\nThank you.",
+      "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

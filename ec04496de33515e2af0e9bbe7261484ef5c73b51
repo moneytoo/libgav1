@@ -52,6 +52,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9345e073_440112ed",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-19T07:40:47Z",
+      "side": 1,
+      "message": "As you suggest 3 vectors are moved to WeightMask16_10bpp_SSE4()",
+      "parentUuid": "3008fb30_e3ec46b8",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "310e30e7_bd3c02af",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-12-19T04:06:58Z",
       "side": 1,
       "message": "this comment is redundant given the loads on the next line",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0273f74e_5acd9915",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-19T07:40:47Z",
+      "side": 1,
+      "message": "Suggestion considered.",
+      "parentUuid": "310e30e7_bd3c02af",
       "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
@@ -86,6 +122,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f43234f_95db2682",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-19T07:40:47Z",
+      "side": 1,
+      "message": "_mm_unpacklo_epi16() instruction can be replaced with _mm_cvtepu16_epi32(). But _mm_unpackhi_epi16() is also used in our logic below. _mm_unpackhi_epi16() may not be replaced with single _mm_cvtepu16_epi32() instruction.\n\nSo for consistency, we preferred to use _mm_unpacklo_epi16() than _mm_cvtepu16_epi32() here.",
+      "parentUuid": "bc6e0c66_b2186f4e",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93495045_9c22a52a",
@@ -99,6 +153,24 @@
       "writtenOn": "2020-12-19T04:06:58Z",
       "side": 1,
       "message": "the same here",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "266915c4_a194c399",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-19T07:40:47Z",
+      "side": 1,
+      "message": "Suggestion considered.",
+      "parentUuid": "93495045_9c22a52a",
       "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
