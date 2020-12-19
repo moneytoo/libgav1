@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a23ab680_70d345b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T19:18:26Z",
+      "side": 1,
+      "message": "this part is redundant given the function name",
+      "range": {
+        "startLine": 7,
+        "startChar": 43,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a2ca80_8151de44",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T19:18:26Z",
+      "side": 1,
+      "message": "this should be contained within #if LIBGAV1_MAX_BITDEPTH \u003e\u003d 10",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b1d5b95_70f42e6d",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T19:18:26Z",
+      "side": 1,
+      "message": "what this is offsetting isn\u0027t clear at this level. it might be better contained within the function",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39d0868_d93bf6c2",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T19:18:26Z",
+      "side": 1,
+      "message": "taking a look around 10bpp would match other instances.",
+      "range": {
+        "startLine": 225,
+        "startChar": 20,
+        "endLine": 225,
+        "endChar": 23
+      },
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b10417_605682bb",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T19:18:26Z",
+      "side": 1,
+      "message": "any difference with _mm_cvtepu16_epi32?",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b124e2_d622e107",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T19:18:26Z",
+      "side": 1,
+      "message": "this needs to be protected with a check on LIBGAV1_MAX_BITDEPTH \u003e\u003d 10 otherwise the assert will fail in Init10bpp; you can run dsp_test in a build configured with -DLIBGAV1_MAX_BITDEPTH\u003d8 to see this.",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
