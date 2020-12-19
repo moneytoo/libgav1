@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4857df7_633c47fc",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T23:15:52Z",
+      "side": 1,
+      "message": "\u003e _mm_unpacklo_epi16() instruction can be replaced with _mm_cvtepu16_epi32(). But _mm_unpackhi_epi16() is also used in our logic below. _mm_unpackhi_epi16() may not be replaced with single _mm_cvtepu16_epi32() instruction.\n\u003e \n\u003e So for consistency, we preferred to use _mm_unpacklo_epi16() than _mm_cvtepu16_epi32() here.\n\nConsistency is important, but we\u0027re also concerned with speed and instruction count. _mm_cvtepu16_epi32 will result in fewer instructions, timing being equal I\u0027d use it.\n\nfrom gcc 10.2.0:\n_mm_unpacklo_epi16\n     db08:   66 0f ef db             pxor   xmm3,xmm3           \n     db0c:   66 0f 6f 6e 10          movdqa xmm5,XMMWORD PTR [rs\n     db11:   66 0f 6f c8             movdqa xmm1,xmm0           \n     db15:   66 0f 6f d4             movdqa xmm2,xmm4           \n     db19:   66 0f 69 c3             punpckhwd xmm0,xmm3        \n     db1d:   66 0f 61 d3             punpcklwd xmm2,xmm3        \n     db21:   66 0f 69 e3             punpckhwd xmm4,xmm3        \n     db25:   66 0f 61 cb             punpcklwd xmm1,xmm3 \n\n_mm_cvtepu16_epi32\n     db08:   66 0f ef db             pxor   xmm3,xmm3\n     db0c:   66 0f 6f 6e 10          movdqa xmm5,XMMWORD PTR [rs\n     db11:   66 0f 38 33 d4          pmovzxwd xmm2,xmm4         \n     db16:   66 0f 38 33 c8          pmovzxwd xmm1,xmm0         \n     db1b:   66 0f 69 e3             punpckhwd xmm4,xmm3        \n     db1f:   66 0f 69 c3             punpckhwd xmm0,xmm3        \n\noverall the size of the object goes from 125080 to 122440.",
+      "parentUuid": "1f43234f_95db2682",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93495045_9c22a52a",
         "filename": "src/dsp/x86/weight_mask_sse4.cc",
         "patchSetId": 7

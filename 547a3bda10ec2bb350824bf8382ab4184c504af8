@@ -16,6 +16,29 @@
       "message": "Hi James,\nWe have submitted patchset 8 with your suggestions considered. For this patch, Block level scaling numbers are similar to patchset 7. Please review the patch.\n\nThank you.",
       "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d7b3e12_97b64ff1",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-19T23:15:52Z",
+      "side": 1,
+      "message": "\u0027Range\u0027 might be a little more correct, please add a period to the end of the comment too",
+      "range": {
+        "startLine": 465,
+        "startChar": 5,
+        "endLine": 465,
+        "endChar": 14
+      },
+      "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
