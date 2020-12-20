@@ -158,6 +158,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6647f0b_196c7c14",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-20T11:11:09Z",
+      "side": 1,
+      "message": "Thanks for your explanation with details.\nWe have replaced _mm_unpacklo_epi16() instruction with _mm_cvtepu16_epi32().",
+      "parentUuid": "a4857df7_633c47fc",
+      "revId": "ec04496de33515e2af0e9bbe7261484ef5c73b51",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93495045_9c22a52a",

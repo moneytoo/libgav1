@@ -87,6 +87,30 @@
       },
       "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785666d7_96f702b7",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1262226
+      },
+      "writtenOn": "2020-12-20T11:11:09Z",
+      "side": 1,
+      "message": "Corrected the comment as per your suggestion.\nAlso, verified the intrinsic optimization with patchset 4 of unit test",
+      "parentUuid": "f452275d_682adc98",
+      "range": {
+        "startLine": 465,
+        "startChar": 5,
+        "endLine": 465,
+        "endChar": 14
+      },
+      "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
