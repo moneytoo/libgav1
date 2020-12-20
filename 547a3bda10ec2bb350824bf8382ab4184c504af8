@@ -39,6 +39,30 @@
       },
       "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d1bc36_efb085af",
+        "filename": "src/dsp/x86/weight_mask_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-20T01:15:46Z",
+      "side": 1,
+      "message": "\u003e \u0027Range\u0027 might be a little more correct, please add a period to the end of the comment too\n\nI also realized I had a type, it should be 61532 not 61352. I\u0027ll update the test.",
+      "parentUuid": "1d7b3e12_97b64ff1",
+      "range": {
+        "startLine": 465,
+        "startChar": 5,
+        "endLine": 465,
+        "endChar": 14
+      },
+      "revId": "547a3bda10ec2bb350824bf8382ab4184c504af8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
