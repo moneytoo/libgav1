@@ -24,6 +24,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fd1884_6f61be25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a23ab680_70d345b7",
+      "range": {
+        "startLine": 7,
+        "startChar": 43,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96a2ca80_8151de44",
@@ -41,6 +65,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82085f2a_bdf3f448",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96a2ca80_8151de44",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b1d5b95_70f42e6d",
@@ -54,6 +96,24 @@
       "writtenOn": "2020-12-19T19:18:26Z",
       "side": 1,
       "message": "what this is offsetting isn\u0027t clear at this level. it might be better contained within the function",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f72bf5_57e7ee12",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b1d5b95_70f42e6d",
       "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
@@ -81,6 +141,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e53fa6_63715662",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d39d0868_d93bf6c2",
+      "range": {
+        "startLine": 225,
+        "startChar": 20,
+        "endLine": 225,
+        "endChar": 23
+      },
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02b10417_605682bb",
@@ -98,6 +182,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c041fd_a8295b8a",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "We have replaced _mm_unpacklo_epi16() instruction with _mm_cvtepu16_epi32().",
+      "parentUuid": "02b10417_605682bb",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13b124e2_d622e107",
@@ -111,6 +213,24 @@
       "writtenOn": "2020-12-19T19:18:26Z",
       "side": 1,
       "message": "this needs to be protected with a check on LIBGAV1_MAX_BITDEPTH \u003e\u003d 10 otherwise the assert will fail in Init10bpp; you can run dsp_test in a build configured with -DLIBGAV1_MAX_BITDEPTH\u003d8 to see this.",
+      "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad3271a8_17206d2c",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13b124e2_d622e107",
       "revId": "23f45fd09b10fb8f89aa125c506c207527261891",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }

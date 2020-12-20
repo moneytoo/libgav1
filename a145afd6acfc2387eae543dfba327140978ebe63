@@ -39,6 +39,30 @@
       },
       "revId": "a145afd6acfc2387eae543dfba327140978ebe63",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdada1c1_37b0cd00",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-20T12:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a49ec01_0b9c7cce",
+      "range": {
+        "startLine": 264,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 37
+      },
+      "revId": "a145afd6acfc2387eae543dfba327140978ebe63",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
