@@ -959,7 +959,147 @@ void Init8bpp() {
 }  // namespace
 }  // namespace low_bitdepth
 
-void IntraPredCflInit_SSE4_1() { low_bitdepth::Init8bpp(); }
+#if LIBGAV1_MAX_BITDEPTH >= 10
+namespace high_bitdepth {
+namespace {
+
+//------------------------------------------------------------------------------
+// CflIntraPredictor_SSE4_1
+
+inline __m128i CflPredictUnclipped(const __m128i* input, __m128i alpha_q12,
+                                   __m128i alpha_sign, __m128i dc_q0) {
+  __m128i ac_q3 = LoadUnaligned16(input);
+  __m128i ac_sign = _mm_sign_epi16(alpha_sign, ac_q3);
+  __m128i scaled_luma_q0 = _mm_mulhrs_epi16(_mm_abs_epi16(ac_q3), alpha_q12);
+  scaled_luma_q0 = _mm_sign_epi16(scaled_luma_q0, ac_sign);
+  return _mm_add_epi16(scaled_luma_q0, dc_q0);
+}
+
+inline __m128i clip_epi16(__m128i x, __m128i min, __m128i max) {
+  return _mm_max_epi16(_mm_min_epi16(x, max), min);
+}
+
+inline __m128i highbd_max_epi16(int bd) {
+  const __m128i neg_one = _mm_set1_epi16(-1);
+  // (1 << bd) - 1 => -(-1 << bd) -1 => -1 - (-1 << bd) => -1 ^ (-1 << bd)
+  return _mm_xor_si128(_mm_slli_epi16(neg_one, bd), neg_one);
+}
+
+template <int width, int height>
+void CflIntraPredictor_10bpp_SSE4_1(
+    void* const dest, ptrdiff_t stride,
+    const int16_t luma[kCflLumaBufferStride][kCflLumaBufferStride],
+    const int alpha) {
+  constexpr int kCflLumaBufferStrideLog2_16i = 5;
+  constexpr int kCflLumaBufferStrideLog2_128i = kCflLumaBufferStrideLog2_16i - 3;
+  constexpr int kRowIncr = 1 << kCflLumaBufferStrideLog2_128i;
+  auto* dst = static_cast<uint16_t*>(dest);
+  const __m128i alpha_sign = _mm_set1_epi16(alpha);
+  const __m128i alpha_q12 = _mm_slli_epi16(_mm_abs_epi16(alpha_sign), 9);
+  auto* row = reinterpret_cast<const __m128i*>(luma);
+  const __m128i* row_end = row + (height << kCflLumaBufferStrideLog2_128i);
+  const __m128i dc_val = _mm_set1_epi16(dst[0]);
+  const __m128i min = _mm_setzero_si128();
+  const __m128i max = highbd_max_epi16(10);
+
+  stride >>= 1;
+
+  do {
+    __m128i res = CflPredictUnclipped(row, alpha_q12, alpha_sign, dc_val);
+    res = clip_epi16(res, min, max);
+    if (width == 4) {
+      StoreLo8(dst, res);
+    } else {
+      StoreUnaligned16(dst, res);
+    }
+    if (width >= 16) {
+      const __m128i res_1 =
+          CflPredictUnclipped(row + 1, alpha_q12, alpha_sign, dc_val);
+      StoreUnaligned16(dst + 1, clip_epi16(res_1, min, max));
+    }
+    const __m128i res_2 =
+        CflPredictUnclipped(row + 2, alpha_q12, alpha_sign, dc_val);
+    StoreUnaligned16((dst + 16), clip_epi16(res_2, min, max));
+    const __m128i res_3 =
+        CflPredictUnclipped(row + 3, alpha_q12, alpha_sign, dc_val);
+    StoreUnaligned16((dst + 24), clip_epi16(res_3, min, max));
+
+    dst += stride;
+  } while ((row += kRowIncr) < row_end);
+}
+
+void Init10bpp() {
+  Dsp* const dsp = dsp_internal::GetWritableDspTable(kBitdepth10);
+  assert(dsp != nullptr);
+
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize4x4_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize4x4] =
+      CflIntraPredictor_10bpp_SSE4_1<4, 4>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize4x8_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize4x8] =
+      CflIntraPredictor_10bpp_SSE4_1<4, 8>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize4x16_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize4x16] =
+      CflIntraPredictor_10bpp_SSE4_1<4, 16>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize8x4_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize8x4] =
+      CflIntraPredictor_10bpp_SSE4_1<8, 4>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize8x8_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize8x8] =
+      CflIntraPredictor_10bpp_SSE4_1<8, 8>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize8x16_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize8x16] =
+      CflIntraPredictor_10bpp_SSE4_1<8, 16>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize8x32_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize8x32] =
+      CflIntraPredictor_10bpp_SSE4_1<8, 32>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize16x4_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize16x4] =
+      CflIntraPredictor_10bpp_SSE4_1<16, 4>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize16x8_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize16x8] =
+      CflIntraPredictor_10bpp_SSE4_1<16, 8>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize16x16_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize16x16] =
+      CflIntraPredictor_10bpp_SSE4_1<16, 16>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize16x32_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize16x32] =
+      CflIntraPredictor_10bpp_SSE4_1<16, 32>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize32x8_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize32x8] =
+      CflIntraPredictor_10bpp_SSE4_1<32, 8>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize32x16_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize32x16] =
+      CflIntraPredictor_10bpp_SSE4_1<32, 16>;
+#endif
+#if DSP_ENABLED_10BPP_SSE4_1(TransformSize32x32_CflIntraPredictor)
+  dsp->cfl_intra_predictors[kTransformSize32x32] =
+      CflIntraPredictor_10bpp_SSE4_1<32, 32>;
+#endif
+}
+
+}  // namespace
+}  // namespace high_bitdepth
+#endif  // LIBGAV1_MAX_BITDEPTH >= 10
+
+void IntraPredCflInit_SSE4_1() {
+  low_bitdepth::Init8bpp();
+#if LIBGAV1_MAX_BITDEPTH >= 10
+  high_bitdepth::Init10bpp();
+#endif  // LIBGAV1_MAX_BITDEPTH >= 10
+}
 
 }  // namespace dsp
 }  // namespace libgav1
