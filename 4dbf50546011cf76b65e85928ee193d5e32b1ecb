@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acd3ca5a_3700faa3",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-21T20:05:11Z",
+      "side": 1,
+      "message": "functions should be named with upper camelcase:\nhttps://google.github.io/styleguide/cppguide.html#Function_Names",
+      "range": {
+        "startLine": 978,
+        "startChar": 15,
+        "endLine": 978,
+        "endChar": 25
+      },
+      "revId": "4dbf50546011cf76b65e85928ee193d5e32b1ecb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28742bc8_15bb347b",
         "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
         "patchSetId": 2
@@ -14,6 +37,29 @@
       "writtenOn": "2020-12-21T19:57:34Z",
       "side": 1,
       "message": "make this:\n  constexpr int kCflLumaBufferStrideLog2_128i \u003d\n      kCflLumaBufferStrideLog2_16i - 3;\n\nto break the long line",
+      "revId": "4dbf50546011cf76b65e85928ee193d5e32b1ecb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3539f3a_4fa5d7d2",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-21T20:05:11Z",
+      "side": 1,
+      "message": "these ()s can be removed here and at line 1022",
+      "range": {
+        "startLine": 1025,
+        "startChar": 30,
+        "endLine": 1025,
+        "endChar": 31
+      },
       "revId": "4dbf50546011cf76b65e85928ee193d5e32b1ecb",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
