@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7013c9ba_7b6dd138",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-21T13:03:49Z",
+      "side": 1,
+      "message": "It looks like min in clip_epi16 is always zero. You may be able to use _mm_adds_epu16 here.",
+      "range": {
+        "startLine": 974,
+        "startChar": 9,
+        "endLine": 974,
+        "endChar": 22
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22142f7e_e66a9236",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-21T13:03:49Z",
+      "side": 1,
+      "message": "Just curious, how does this compare to _mm_set1_epi16((1 \u003c\u003c bd) - 1)?",
+      "range": {
+        "startLine": 982,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 61
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea192293_2186b83b",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-21T13:03:49Z",
+      "side": 1,
+      "message": "StoreLo8",
+      "range": {
+        "startLine": 1009,
+        "startChar": 6,
+        "endLine": 1009,
+        "endChar": 22
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54bf867_ec680d75",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-21T13:03:49Z",
+      "side": 1,
+      "message": "StoreUnaligned16",
+      "range": {
+        "startLine": 1011,
+        "startChar": 6,
+        "endLine": 1011,
+        "endChar": 22
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
