@@ -16,6 +16,23 @@
       "message": "Hi James,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.",
       "revId": "dae5428aca2e71f5fd00300d6112903956dd7a55",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c244af_30e8ab99",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:46:45Z",
+      "side": 1,
+      "message": "this should be \u003e\u003d 10",
+      "revId": "dae5428aca2e71f5fd00300d6112903956dd7a55",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
