@@ -58,6 +58,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe2ed6e_bbac3b49",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd9ab33c_1fdb71a4",
+      "range": {
+        "startLine": 437,
+        "startChar": 20,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4e4f7ef_6ffcdd7d",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-12-22T06:06:32Z",
       "side": 1,
       "message": "these outer ()s can be removed, here and in the next line",
+      "range": {
+        "startLine": 468,
+        "startChar": 31,
+        "endLine": 468,
+        "endChar": 32
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa0f211_11ed80fe",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4e4f7ef_6ffcdd7d",
       "range": {
         "startLine": 468,
         "startChar": 31,
@@ -104,6 +152,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23762dd5_463c389e",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27a77a8e_e4af5862",
+      "range": {
+        "startLine": 508,
+        "startChar": 32,
+        "endLine": 508,
+        "endChar": 74
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b747c1ab_3b92bca3",
@@ -127,6 +199,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "338d7159_708a36c1",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b747c1ab_3b92bca3",
+      "range": {
+        "startLine": 778,
+        "startChar": 26,
+        "endLine": 778,
+        "endChar": 34
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc015111_6f0bab0a",
@@ -140,6 +236,30 @@
       "writtenOn": "2020-12-22T06:06:32Z",
       "side": 1,
       "message": "prefer sizeof(variable) when possible, here and line 656:\nhttps://google.github.io/styleguide/cppguide.html#sizeof",
+      "range": {
+        "startLine": 851,
+        "startChar": 45,
+        "endLine": 851,
+        "endChar": 62
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a82c0355_dd36d193",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc015111_6f0bab0a",
       "range": {
         "startLine": 851,
         "startChar": 45,
