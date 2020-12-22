@@ -35,6 +35,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "984180e2_270391ac",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-22T05:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5112f7bb_9c5e47e5",
+      "revId": "1df821b524713859cfb770982cec29cd2facf1d9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca962c3_1f6a27d5",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-22T03:53:44Z",
       "side": 1,
       "message": "make this \u0027#endif  // LIBGAV1_MAX_BITDEPTH \u003e\u003d 10\u0027. it\u0027s not called out explicitly in the style guide, but for large blocks we prefer to add a comment for documentation purposes similar to the namespace and include guard comments:\n\nhttps://google.github.io/styleguide/cppguide.html#The__define_Guard",
+      "revId": "1df821b524713859cfb770982cec29cd2facf1d9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501196d4_b15f6694",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-22T05:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aca962c3_1f6a27d5",
       "revId": "1df821b524713859cfb770982cec29cd2facf1d9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
