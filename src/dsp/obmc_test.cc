@@ -338,6 +338,10 @@ TEST_P(ObmcBlendTest10bpp, DISABLED_Speed) {
 
 INSTANTIATE_TEST_SUITE_P(C, ObmcBlendTest10bpp,
                          ::testing::ValuesIn(kObmcTestParam));
+#if LIBGAV1_ENABLE_SSE4_1
+INSTANTIATE_TEST_SUITE_P(SSE41, ObmcBlendTest10bpp,
+                         ::testing::ValuesIn(kObmcTestParam));
+#endif
 #endif  // LIBGAV1_MAX_BITDEPTH >= 10
 
 }  // namespace
