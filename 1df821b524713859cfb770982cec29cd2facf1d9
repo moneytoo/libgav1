@@ -16,6 +16,40 @@
       "message": "Hi James,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.",
       "revId": "1df821b524713859cfb770982cec29cd2facf1d9",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5112f7bb_9c5e47e5",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T03:53:44Z",
+      "side": 1,
+      "message": "constexpr could still work here",
+      "revId": "1df821b524713859cfb770982cec29cd2facf1d9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca962c3_1f6a27d5",
+        "filename": "src/dsp/x86/distance_weighted_blend_sse4.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T03:53:44Z",
+      "side": 1,
+      "message": "make this \u0027#endif  // LIBGAV1_MAX_BITDEPTH \u003e\u003d 10\u0027. it\u0027s not called out explicitly in the style guide, but for large blocks we prefer to add a comment for documentation purposes similar to the namespace and include guard comments:\n\nhttps://google.github.io/styleguide/cppguide.html#The__define_Guard",
+      "revId": "1df821b524713859cfb770982cec29cd2facf1d9",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
