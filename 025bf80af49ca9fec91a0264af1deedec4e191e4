@@ -16,6 +16,23 @@
       "message": "Hi James,\nThanks for your suggestions.\nWe have updated patchset 9 with your review comments incorporated. Block level scaling numbers are marginally improved w.r.t patchset 8.\nPlease review.\n\n Block       mask_is_inverse\n Size        false      true\n 8x8         3.98x      4.39x\n 8x16        3.87x      4.28x\n 8x32        3.93x      4.33x\n 16x8        3.95x      4.38x\n 16x16       3.92x      4.33x\n 16x32       3.93x      4.34x\n 16x64       4.52x      4.99x\n 32x8        2.63x      2.58x\n 32x16       2.64x      2.60x\n 32x32       2.58x      2.55x\n 32x64       3.10x      3.04x\n 64x16       2.32x      2.38x\n 64x32       2.35x      2.39x\n 64x64       2.36x      2.44x\n 64x128      2.74x      2.78x\n 128x64      2.23x      2.29x\n 128x128     2.58x      2.57x\n",
       "revId": "025bf80af49ca9fec91a0264af1deedec4e191e4",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb037510_41fd83f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T03:31:20Z",
+      "side": 1,
+      "message": "Thanks for updating the change. I\u0027m going to rebase it so it\u0027s merged after the test is available [1].\n\n[1] https://chromium-review.googlesource.com/c/codecs/libgav1/+/2599705",
+      "revId": "025bf80af49ca9fec91a0264af1deedec4e191e4",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
