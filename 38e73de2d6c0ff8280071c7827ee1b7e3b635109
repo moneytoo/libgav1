@@ -16,6 +16,23 @@
       "message": "good catch!",
       "revId": "38e73de2d6c0ff8280071c7827ee1b7e3b635109",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82ed42c_3cc8cadc",
+        "filename": "src/dsp/average_blend.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T04:00:33Z",
+      "side": 0,
+      "message": "I extracted this fix to a separate change [1] in case we need to revert this one for any reason. You can rebase this change to pick it up.\n\n[1] https://chromium-review.googlesource.com/c/codecs/libgav1/+/2599708/1",
+      "revId": "38e73de2d6c0ff8280071c7827ee1b7e3b635109",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }

@@ -16,6 +16,57 @@
       "message": "Hi James,\nAs per the suggestion, we have updated the patchset 2. Please review the patch.\n\nThank you.",
       "revId": "b743d8d5e8d4a9c58daa9ff832e41265d674ea20",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a90fbed_b8489c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T04:00:33Z",
+      "side": 1,
+      "message": "r",
+      "revId": "b743d8d5e8d4a9c58daa9ff832e41265d674ea20",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d771ef69_fdd3d9e5",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T04:00:33Z",
+      "side": 1,
+      "message": "in most cases we end comments with a period.",
+      "revId": "b743d8d5e8d4a9c58daa9ff832e41265d674ea20",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b935195_fff7177b",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T04:00:33Z",
+      "side": 1,
+      "message": "this comment can be removed since it\u0027s redundant given the if and assert",
+      "revId": "b743d8d5e8d4a9c58daa9ff832e41265d674ea20",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
