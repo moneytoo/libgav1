@@ -16,6 +16,52 @@
       "message": "Hi James,\nAs per the suggestions, we have updated the patchset 3. Please review the patch.\n\nThank you.",
       "revId": "d8d8f5a6962b9f5e9992a0811e544f5da60dfd06",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f252618a_ddebbaee",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:54:14Z",
+      "side": 1,
+      "message": "sizeof(variable) is preferred:\n\nhttps://google.github.io/styleguide/cppguide.html#sizeof",
+      "range": {
+        "startLine": 185,
+        "startChar": 52,
+        "endLine": 185,
+        "endChar": 60
+      },
+      "revId": "d8d8f5a6962b9f5e9992a0811e544f5da60dfd06",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58f25a1_23bf35e4",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:54:14Z",
+      "side": 1,
+      "message": "this could be kBitdepth10",
+      "range": {
+        "startLine": 192,
+        "startChar": 43,
+        "endLine": 192,
+        "endChar": 58
+      },
+      "revId": "d8d8f5a6962b9f5e9992a0811e544f5da60dfd06",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }

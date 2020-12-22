@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aaafe05_6cb4c579",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T21:54:14Z",
+      "side": 1,
+      "message": "Just some minor cosmetics in the final patchset. Thanks for working through the review.",
+      "revId": "2f8abaab682cbb5090847da6f4c37c5622a85460",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
