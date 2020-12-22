@@ -16,6 +16,138 @@
       "message": "Hi James,\nAs per the suggestions, we have updated the patchset 13. Please review the patch.\n\nThank you.",
       "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c8b81b_627ffa03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T06:06:32Z",
+      "side": 1,
+      "message": "This one looks good, just a few cosmetics.",
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd9ab33c_1fdb71a4",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T06:06:32Z",
+      "side": 1,
+      "message": "make this bpp to match the other instances in this file.",
+      "range": {
+        "startLine": 437,
+        "startChar": 20,
+        "endLine": 437,
+        "endChar": 23
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e4f7ef_6ffcdd7d",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T06:06:32Z",
+      "side": 1,
+      "message": "these outer ()s can be removed, here and in the next line",
+      "range": {
+        "startLine": 468,
+        "startChar": 31,
+        "endLine": 468,
+        "endChar": 32
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a77a8e_e4af5862",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T06:06:32Z",
+      "side": 1,
+      "message": "Make these two the final parameters to match some of the other functions. For historical reasons the main dsp functions don\u0027t all follow this guidance, but we can be consistent in these internal functions. I would keep dst and dst_stride together though dst_stride is input-only because they\u0027re logically related.\n\nhttps://google.github.io/styleguide/cppguide.html#Inputs_and_Outputs",
+      "range": {
+        "startLine": 508,
+        "startChar": 32,
+        "endLine": 508,
+        "endChar": 74
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b747c1ab_3b92bca3",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T06:06:32Z",
+      "side": 1,
+      "message": "make this \u0027Blend\u0027 to match the other functions and rename them to MaskBlend... to match the function defines",
+      "range": {
+        "startLine": 778,
+        "startChar": 26,
+        "endLine": 778,
+        "endChar": 34
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc015111_6f0bab0a",
+        "filename": "src/dsp/x86/mask_blend_sse4.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-22T06:06:32Z",
+      "side": 1,
+      "message": "prefer sizeof(variable) when possible, here and line 656:\nhttps://google.github.io/styleguide/cppguide.html#sizeof",
+      "range": {
+        "startLine": 851,
+        "startChar": 45,
+        "endLine": 851,
+        "endChar": 62
+      },
+      "revId": "913be82f177db6c340cc39058c7ff78c16d19bc6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
