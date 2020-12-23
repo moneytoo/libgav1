@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe9e81cc_1db5911a",
+        "filename": "src/dsp/x86/obmc_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:31:57Z",
+      "side": 1,
+      "message": "this needs to be included in an anonymous namespace to avoid ODR issues:\n\nhttps://en.cppreference.com/w/cpp/language/definition",
+      "revId": "b11454d680ecc23dd8b34a4b1bb495efe1f54523",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "909516b8_39b6063f",
         "filename": "src/dsp/x86/obmc_sse4.cc",
         "patchSetId": 1
@@ -36,6 +53,29 @@
         "startChar": 0,
         "endLine": 348,
         "endChar": 78
+      },
+      "revId": "b11454d680ecc23dd8b34a4b1bb495efe1f54523",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10901d8_1b45671d",
+        "filename": "src/dsp/x86/obmc_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:31:57Z",
+      "side": 1,
+      "message": "we typically try to explicitly test values rather than allow them to be implicitly converted to booleans. use !\u003d 0 here and at line 385, 352.",
+      "range": {
+        "startLine": 435,
+        "startChar": 13,
+        "endLine": 435,
+        "endChar": 16
       },
       "revId": "b11454d680ecc23dd8b34a4b1bb495efe1f54523",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
