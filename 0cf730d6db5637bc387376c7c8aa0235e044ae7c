@@ -92,6 +92,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "569e10ba_0e5b54fe",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5588903a_a5de95b5",
+      "range": {
+        "startLine": 999,
+        "startChar": 46,
+        "endLine": 999,
+        "endChar": 69
+      },
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54c71f93_28128e9e",
@@ -105,6 +129,24 @@
       "writtenOn": "2020-12-23T20:46:20Z",
       "side": 1,
       "message": "it\u0027s cosmetic, but prefer \u003e\u003e\u003d in this context.",
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9115d0_325571f0",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54c71f93_28128e9e",
       "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
