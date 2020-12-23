@@ -16,6 +16,24 @@
       "message": "Don\u0027t forget to mark comments as done or resolved so reviewers know to take another look.",
       "revId": "eb9be41edcb0926baa2c643178e5309b874fe225",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae5be4ec_50e54727",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "James, Sure, The patchset is now ready for review. I have also marked all the comments as done/resolved.",
+      "parentUuid": "78c562bd_f369907c",
+      "revId": "eb9be41edcb0926baa2c643178e5309b874fe225",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }

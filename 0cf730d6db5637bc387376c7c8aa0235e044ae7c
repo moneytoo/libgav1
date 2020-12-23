@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d81e0fa_880b00b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "James,\nThis patch is now ready for your review.\nWe have added SSE4.1 intrinsic for 10 bit CflIntraPredictor function.\nDecode time reduction observed is negligible. Block level scaling numbers as measured using libgav1 unit test are as follows\n\n4x4\t1.92\n4x8\t2.79\n4x16\t2.70\n8x4\t2.76\n8x8\t4.52\n8x16\t4.70\n8x32\t5.87\n16x4\t4.48\n16x8\t4.63\n16x16\t5.65\n16x32\t7.02\n32x8\t4.97\n32x16\t5.93\n32x32\t6.67\n\t\nAverage\t4.62\n\t\n\nPlease review.\n",
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}

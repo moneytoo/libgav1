@@ -24,6 +24,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c68391b_456515d4",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acd3ca5a_3700faa3",
+      "range": {
+        "startLine": 978,
+        "startChar": 15,
+        "endLine": 978,
+        "endChar": 25
+      },
+      "revId": "4dbf50546011cf76b65e85928ee193d5e32b1ecb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28742bc8_15bb347b",
@@ -41,6 +65,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0422539_4a685d77",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28742bc8_15bb347b",
+      "revId": "4dbf50546011cf76b65e85928ee193d5e32b1ecb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3539f3a_4fa5d7d2",
@@ -54,6 +96,30 @@
       "writtenOn": "2020-12-21T20:05:11Z",
       "side": 1,
       "message": "these ()s can be removed here and at line 1022",
+      "range": {
+        "startLine": 1025,
+        "startChar": 30,
+        "endLine": 1025,
+        "endChar": 31
+      },
+      "revId": "4dbf50546011cf76b65e85928ee193d5e32b1ecb",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9157510b_9bb6ac5d",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3539f3a_4fa5d7d2",
       "range": {
         "startLine": 1025,
         "startChar": 30,

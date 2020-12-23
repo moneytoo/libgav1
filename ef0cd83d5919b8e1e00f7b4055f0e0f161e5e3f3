@@ -24,6 +24,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7c2e9d_5b4db118",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "Scott, the variable scaled_luma_q0 is a signed 16 bit number. We cannot use a unsigned saturation instruction here.",
+      "parentUuid": "7013c9ba_7b6dd138",
+      "range": {
+        "startLine": 974,
+        "startChar": 9,
+        "endLine": 974,
+        "endChar": 22
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22142f7e_e66a9236",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-21T13:03:49Z",
       "side": 1,
       "message": "Just curious, how does this compare to _mm_set1_epi16((1 \u003c\u003c bd) - 1)?",
+      "range": {
+        "startLine": 982,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 61
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21d69ddf_fc10661c",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "We have removed this function. Since CflIntraPredictor_10bpp_SSE4_1 is specific to 10 bit, we have now used kBitdepth10 to derive the max value.",
+      "parentUuid": "22142f7e_e66a9236",
       "range": {
         "startLine": 982,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c657fa_77c8e3e3",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea192293_2186b83b",
+      "range": {
+        "startLine": 1009,
+        "startChar": 6,
+        "endLine": 1009,
+        "endChar": 22
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b54bf867_ec680d75",
@@ -83,6 +155,30 @@
       "writtenOn": "2020-12-21T13:03:49Z",
       "side": 1,
       "message": "StoreUnaligned16",
+      "range": {
+        "startLine": 1011,
+        "startChar": 6,
+        "endLine": 1011,
+        "endChar": 22
+      },
+      "revId": "ef0cd83d5919b8e1e00f7b4055f0e0f161e5e3f3",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d3c7c3_6be4f43b",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1477473
+      },
+      "writtenOn": "2020-12-23T10:24:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b54bf867_ec680d75",
       "range": {
         "startLine": 1011,
         "startChar": 6,
