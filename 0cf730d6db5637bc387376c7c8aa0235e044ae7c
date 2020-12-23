@@ -33,6 +33,80 @@
       "message": "James,\nThis patch is now ready for your review.\nWe have added SSE4.1 intrinsic for 10 bit CflIntraPredictor function.\nDecode time reduction observed is negligible. Block level scaling numbers as measured using libgav1 unit tests are as follows\n\n4x4               1.92\n4x8               2.79\n4x16              2.7\n8x4               2.76\n8x8               4.52\n8x16              4.7\n8x32              5.87\n16x4              4.48\n16x8              4.63\n16x16             5.65\n16x32             7.02\n32x8              4.97\n32x16             5.93\n32x32             6.67\n\nAverage           4.6\n\nPlease review.",
       "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1a106d0_ff573e1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:46:20Z",
+      "side": 1,
+      "message": "just a couple of cosmetics, I\u0027ll post an updated patch",
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7c26ca_bd33f101",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:46:20Z",
+      "side": 1,
+      "message": "these 2 can be marked const, but it\u0027s consistent with the existing code so we\u0027ll leave it for now.",
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5588903a_a5de95b5",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:46:20Z",
+      "side": 1,
+      "message": "this comment is somewhat redundant with the use of kBitdepth10, it can be removed",
+      "range": {
+        "startLine": 999,
+        "startChar": 46,
+        "endLine": 999,
+        "endChar": 69
+      },
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c71f93_28128e9e",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2020-12-23T20:46:20Z",
+      "side": 1,
+      "message": "it\u0027s cosmetic, but prefer \u003e\u003e\u003d in this context.",
+      "revId": "0cf730d6db5637bc387376c7c8aa0235e044ae7c",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
