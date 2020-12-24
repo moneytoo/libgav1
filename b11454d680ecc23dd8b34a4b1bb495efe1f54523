@@ -35,6 +35,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "516c07aa_d1e291e7",
+        "filename": "src/dsp/x86/obmc_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-24T14:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe9e81cc_1db5911a",
+      "revId": "b11454d680ecc23dd8b34a4b1bb495efe1f54523",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "909516b8_39b6063f",
@@ -58,6 +76,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "636ece65_a178834a",
+        "filename": "src/dsp/x86/obmc_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-24T14:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "909516b8_39b6063f",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 78
+      },
+      "revId": "b11454d680ecc23dd8b34a4b1bb495efe1f54523",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a10901d8_1b45671d",
@@ -71,6 +113,30 @@
       "writtenOn": "2020-12-23T20:31:57Z",
       "side": 1,
       "message": "we typically try to explicitly test values rather than allow them to be implicitly converted to booleans. use !\u003d 0 here and at line 385, 352.",
+      "range": {
+        "startLine": 435,
+        "startChar": 13,
+        "endLine": 435,
+        "endChar": 16
+      },
+      "revId": "b11454d680ecc23dd8b34a4b1bb495efe1f54523",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db14768a_a4ef10ce",
+        "filename": "src/dsp/x86/obmc_sse4.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-24T14:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a10901d8_1b45671d",
       "range": {
         "startLine": 435,
         "startChar": 13,
