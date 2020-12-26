@@ -1116,7 +1116,7 @@ void CflSubsamplerTest<bitdepth, Pixel,
   const int height = GetLumaHeight(block_height_, subsampling_type);
   const ptrdiff_t stride = kMaxBlockSize * sizeof(Pixel);
   Memset(intra_pred_mem_.ref_src, (1 << bitdepth) - 1,
-         sizeof(intra_pred_mem_.ref_src));
+         sizeof(intra_pred_mem_.ref_src) / sizeof(Pixel));
   int16_t luma_base[kCflLumaBufferStride][kCflLumaBufferStride] = {};
   int16_t luma_cur[kCflLumaBufferStride][kCflLumaBufferStride] = {};
   base_cfl_subsampler_(luma_base, width, height, intra_pred_mem_.ref_src,
@@ -2610,6 +2610,10 @@ INSTANTIATE_TEST_SUITE_P(C, CflSubsamplerTest10bpp420,
 INSTANTIATE_TEST_SUITE_P(SSE41, IntraPredTest10bpp,
                          ::testing::ValuesIn(kTransformSizes));
 INSTANTIATE_TEST_SUITE_P(SSE41, CflIntraPredTest10bpp,
+                         ::testing::ValuesIn(kTransformSizesSmallerThan32x32));
+INSTANTIATE_TEST_SUITE_P(SSE41, CflSubsamplerTest10bpp444,
+                         ::testing::ValuesIn(kTransformSizesSmallerThan32x32));
+INSTANTIATE_TEST_SUITE_P(SSE41, CflSubsamplerTest10bpp420,
                          ::testing::ValuesIn(kTransformSizesSmallerThan32x32));
 #endif  // LIBGAV1_ENABLE_SSE4_1
 #if LIBGAV1_ENABLE_NEON
