@@ -1802,7 +1802,7 @@ const char* GetCflSubsamplerDigest8bpp(TransformSize tx_size,
   }
 }
 
-TEST_P(CflSubsamplerTest8bpp444, DISABLED_Speed) {
+TEST_P(CflSubsamplerTest8bpp444, Speed) {
   const auto num_runs =
       static_cast<int>(2.0e9 / (block_width_ * block_height_));
   TestSpeed(GetCflSubsamplerDigest8bpp(tx_size_, SubsamplingType()), num_runs);
@@ -2486,7 +2486,7 @@ const char* GetCflSubsamplerDigest10bpp(TransformSize tx_size,
   }
 }
 
-TEST_P(CflSubsamplerTest10bpp444, DISABLED_Speed) {
+TEST_P(CflSubsamplerTest10bpp444, Speed) {
   const auto num_runs =
       static_cast<int>(2.0e9 / (block_width_ * block_height_));
   TestSpeed(GetCflSubsamplerDigest10bpp(tx_size_, SubsamplingType()), num_runs);
@@ -2514,7 +2514,7 @@ TEST_P(CflSubsamplerTest10bpp422, Overflow) { TestSaturatedValues(); }
 
 TEST_P(CflSubsamplerTest10bpp422, Random) { TestRandomValues(); }
 
-TEST_P(CflSubsamplerTest10bpp420, DISABLED_Speed) {
+TEST_P(CflSubsamplerTest10bpp420, Speed) {
   const auto num_runs =
       static_cast<int>(2.0e9 / (block_width_ * block_height_));
   TestSpeed(GetCflSubsamplerDigest10bpp(tx_size_, SubsamplingType()), num_runs);
@@ -2610,6 +2610,10 @@ INSTANTIATE_TEST_SUITE_P(C, CflSubsamplerTest10bpp420,
 INSTANTIATE_TEST_SUITE_P(SSE41, IntraPredTest10bpp,
                          ::testing::ValuesIn(kTransformSizes));
 INSTANTIATE_TEST_SUITE_P(SSE41, CflIntraPredTest10bpp,
+                         ::testing::ValuesIn(kTransformSizesSmallerThan32x32));
+INSTANTIATE_TEST_SUITE_P(SSE41, CflSubsamplerTest10bpp444,
+                         ::testing::ValuesIn(kTransformSizesSmallerThan32x32));
+INSTANTIATE_TEST_SUITE_P(SSE41, CflSubsamplerTest10bpp420,
                          ::testing::ValuesIn(kTransformSizesSmallerThan32x32));
 #endif  // LIBGAV1_ENABLE_SSE4_1
 #if LIBGAV1_ENABLE_NEON
