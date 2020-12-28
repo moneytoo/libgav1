@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3dd3f0_0de9cbc6",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "I\u0027m thinking this can be deleted from this loop.",
+      "range": {
+        "startLine": 1047,
+        "startChar": 0,
+        "endLine": 1049,
+        "endChar": 37
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8717ccc_bd26c924",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "After this add, shift sum left by 3.",
+      "range": {
+        "startLine": 1064,
+        "startChar": 2,
+        "endLine": 1064,
+        "endChar": 51
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb28e45_2975e6d1",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "In this loop, you could re-read the src, shift left, sub averages, and store.\n\nMy thinking is it would eliminate a store in the first loop. Thoughts?",
+      "range": {
+        "startLine": 1071,
+        "startChar": 0,
+        "endLine": 1075,
+        "endChar": 21
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca44bb39_f9bdfa04",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "const int /*max_luma_width*/, const int /*max_luma_height*/",
+      "range": {
+        "startLine": 1081,
+        "startChar": 4,
+        "endLine": 1081,
+        "endChar": 56
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105674aa_43bc4f21",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "Delete.",
+      "range": {
+        "startLine": 1083,
+        "startChar": 0,
+        "endLine": 1084,
+        "endChar": 24
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44fc0ff4_797e4722",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 1170,
+        "startChar": 0,
+        "endLine": 1173,
+        "endChar": 24
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09026f56_ed41dc5c",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-28T13:27:43Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 1249,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 24
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
