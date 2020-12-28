@@ -38,6 +38,9 @@ void ObmcInit_SSE4_1();
 #ifndef LIBGAV1_Dsp8bpp_ObmcHorizontal
 #define LIBGAV1_Dsp8bpp_ObmcHorizontal LIBGAV1_CPU_SSE4_1
 #endif
+#ifndef LIBGAV1_Dsp10bpp_ObmcVertical
+#define LIBGAV1_Dsp10bpp_ObmcVertical LIBGAV1_CPU_SSE4_1
+#endif
 #ifndef LIBGAV1_Dsp10bpp_ObmcHorizontal
 #define LIBGAV1_Dsp10bpp_ObmcHorizontal LIBGAV1_CPU_SSE4_1
 #endif
