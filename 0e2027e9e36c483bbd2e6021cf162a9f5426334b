@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aae9460_749cf36a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-28T12:58:38Z",
+      "side": 1,
+      "message": "Hi James,\nWe have added SSE4.1 intrinsic optimization of CflSubsampler420 and CflSubsampler444 for 10-bit path. Please review the patch.\nFor this optimization, decode time reduction is negligible. Block level scaling numbers are measured using libgav1 unit test.\nModule level scaling:\nBlock_Size\tSubsampling_420\tSubsampling_444\n4x4\t\t3.27\t\t\t2.61\n4x8\t\t3.28\t\t\t4.43\n4x16\t\t3.92\t\t\t4.69\n8x4\t\t4.61\t\t\t4.31\n8x8\t\t5.29\t\t\t5.82\n8x16\t\t5.87\t\t\t6.80\n8x32\t\t5.07\t\t\t7.49\n16x4\t\t5.90\t\t\t6.14\n16x8\t\t5.10\t\t\t9.13\n16x16\t\t4.95\t\t\t9.23\n16x32\t\t3.85\t\t\t9.21\n32x8\t\t7.42\t\t\t12.76\n32x16\t\t8.38\t\t\t12.97\n32x32\t\t8.33\t\t\t14.08\n",
+      "revId": "0e2027e9e36c483bbd2e6021cf162a9f5426334b",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
