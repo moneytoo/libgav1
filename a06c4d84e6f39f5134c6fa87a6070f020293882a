@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3fb61f_76bf03b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476426
+      },
+      "writtenOn": "2020-12-29T05:23:30Z",
+      "side": 1,
+      "message": "Hi all,\nWe have added an intrinsic optimization (SSE4.1) of OverlapBlendVertical_C() module for 10-bit path.\nFor this optimization, decode time reduction observed is 0.17%. Block level scaling numbers are measured using libgav1 unit test.\n\nModule level scaling:\nBlock_size   Scaling w.r.t. C\n  2x2        1.17x\n  2x4        1.47x\n  4x2        1.42x\n  4x4        1.84x\n  4x8        2.31x\n  8x4        2.63x\n  8x8        2.91x\n 8x16        3.63x\n 16x8        3.53x\n16x16        3.97x\n16x32        4.52x\n32x16        5.25x\n32x32        5.28x\n\nPlease review the patch.\nThank you.",
+      "revId": "a06c4d84e6f39f5134c6fa87a6070f020293882a",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
