@@ -142,6 +142,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d1b89c3_41314bcc",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-29T14:02:51Z",
+      "side": 1,
+      "message": "Any difference in performance?",
+      "parentUuid": "76861aaa_efee295c",
+      "range": {
+        "startLine": 1071,
+        "startChar": 0,
+        "endLine": 1075,
+        "endChar": 21
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca44bb39_f9bdfa04",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "As there is an assert associated with the variables, we preferred the following format:\n  static_cast\u003cvoid\u003e(max_luma_width);\n  static_cast\u003cvoid\u003e(max_luma_height);",
       "parentUuid": "ca44bb39_f9bdfa04",
+      "range": {
+        "startLine": 1081,
+        "startChar": 4,
+        "endLine": 1081,
+        "endChar": 56
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2423e4_fe55f01a",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-29T14:02:51Z",
+      "side": 1,
+      "message": "Right.  I missed the asserts.",
+      "parentUuid": "b31cbf98_045a6ad9",
       "range": {
         "startLine": 1081,
         "startChar": 4,
