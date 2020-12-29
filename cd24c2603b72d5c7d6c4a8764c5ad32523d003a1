@@ -16,6 +16,52 @@
       "message": "Hi Scott,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.",
       "revId": "cd24c2603b72d5c7d6c4a8764c5ad32523d003a1",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6694b668_b3db8955",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-29T16:51:05Z",
+      "side": 1,
+      "message": "Since CflSubsampler444_WxH_SSE4_1 works for only 16 and 32, this can be removed along with and update to the shift.",
+      "range": {
+        "startLine": 1209,
+        "startChar": 2,
+        "endLine": 1209,
+        "endChar": 31
+      },
+      "revId": "cd24c2603b72d5c7d6c4a8764c5ad32523d003a1",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccfa93e3_4781cf9c",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-29T16:51:05Z",
+      "side": 1,
+      "message": "block_width_log2 + block_height_log2 - 3",
+      "range": {
+        "startLine": 1212,
+        "startChar": 38,
+        "endLine": 1212,
+        "endChar": 74
+      },
+      "revId": "cd24c2603b72d5c7d6c4a8764c5ad32523d003a1",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }

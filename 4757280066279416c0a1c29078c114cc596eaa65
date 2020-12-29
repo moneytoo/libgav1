@@ -190,6 +190,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d9642f_9708c8d4",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1000882
+      },
+      "writtenOn": "2020-12-29T16:51:05Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "d71738e0_abf7e069",
+      "range": {
+        "startLine": 1071,
+        "startChar": 0,
+        "endLine": 1075,
+        "endChar": 21
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca44bb39_f9bdfa04",
