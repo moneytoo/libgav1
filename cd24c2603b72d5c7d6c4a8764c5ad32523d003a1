@@ -41,6 +41,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71c9363_6e0e4f1a",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-30T03:46:28Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. We did similar optimization in \u0027CflSubsampler444_4xH_SSE4_1\u0027 as well.",
+      "parentUuid": "6694b668_b3db8955",
+      "range": {
+        "startLine": 1209,
+        "startChar": 2,
+        "endLine": 1209,
+        "endChar": 31
+      },
+      "revId": "cd24c2603b72d5c7d6c4a8764c5ad32523d003a1",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccfa93e3_4781cf9c",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-29T16:51:05Z",
       "side": 1,
       "message": "block_width_log2 + block_height_log2 - 3",
+      "range": {
+        "startLine": 1212,
+        "startChar": 38,
+        "endLine": 1212,
+        "endChar": 74
+      },
+      "revId": "cd24c2603b72d5c7d6c4a8764c5ad32523d003a1",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27408a0_78a13991",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2020-12-30T03:46:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccfa93e3_4781cf9c",
       "range": {
         "startLine": 1212,
         "startChar": 38,
