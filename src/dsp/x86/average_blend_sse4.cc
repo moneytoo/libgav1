@@ -148,15 +148,20 @@ namespace {
 constexpr int kInterPostRoundBitPlusOne = 5;
 
 template <const int width, const int offset>
-inline void AverageBlendRow(const uint16_t* pred_0, const uint16_t* pred_1,
-                            uint16_t* dst, const ptrdiff_t dest_stride,
-                            const __m128i compound_offset,
-                            const __m128i round_offset, const __m128i max) {
+inline void AverageBlendRow(const uint16_t* prediction_0,
+                            const uint16_t* prediction_1,
+                            const __m128i& compound_offset,
+                            const __m128i& round_offset, const __m128i& max,
+                            const __m128i& zero, uint16_t* dst,
+                            const ptrdiff_t dest_stride) {
   // pred_0/1 max range is 16b.
-  const __m128i pred_00 = _mm_cvtepu16_epi32(LoadLo8(pred_0 + offset));
-  const __m128i pred_01 = _mm_cvtepu16_epi32(LoadLo8(pred_0 + offset + 4));
-  const __m128i pred_10 = _mm_cvtepu16_epi32(LoadLo8(pred_1 + offset));
-  const __m128i pred_11 = _mm_cvtepu16_epi32(LoadLo8(pred_1 + offset + 4));
+  const __m128i pred_0 = LoadUnaligned16(prediction_0 + offset);
+  const __m128i pred_1 = LoadUnaligned16(prediction_1 + offset);
+  const __m128i pred_00 = _mm_unpacklo_epi16(pred_0, zero);
+  const __m128i pred_01 = _mm_unpackhi_epi16(pred_0, zero);
+  const __m128i pred_10 = _mm_unpacklo_epi16(pred_1, zero);
+  const __m128i pred_11 = _mm_unpackhi_epi16(pred_1, zero);
+
   const __m128i pred_add_0 = _mm_add_epi32(pred_00, pred_10);
   const __m128i pred_add_1 = _mm_add_epi32(pred_01, pred_11);
   const __m128i compound_offset_0 = _mm_sub_epi32(pred_add_0, compound_offset);
@@ -190,6 +195,7 @@ void AverageBlend10bpp_SSE4_1(const void* prediction_0,
   const __m128i round_offset =
       _mm_set1_epi32((1 << kInterPostRoundBitPlusOne) >> 1);
   const __m128i max = _mm_set1_epi16((1 << kBitdepth10) - 1);
+  const __m128i zero = _mm_setzero_si128();
   int y = height;
 
   if (width == 4) {
@@ -197,8 +203,8 @@ void AverageBlend10bpp_SSE4_1(const void* prediction_0,
     const ptrdiff_t width2 = width << 1;
     do {
       // row0,1
-      AverageBlendRow<4, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
+      AverageBlendRow<4, 0>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
       dst += dest_stride2;
       pred_0 += width2;
       pred_1 += width2;
@@ -207,41 +213,42 @@ void AverageBlend10bpp_SSE4_1(const void* prediction_0,
     return;
   }
   if (width == 8) {
+    const ptrdiff_t dest_stride2 = dest_stride << 1;
+    const ptrdiff_t width2 = width << 1;
     do {
       // row0.
-      AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      dst += dest_stride;
-      pred_0 += width;
-      pred_1 += width;
+      AverageBlendRow<8, 0>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
       // row1.
-      AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      dst += dest_stride;
-      pred_0 += width;
-      pred_1 += width;
+      AverageBlendRow<8, 0>(pred_0 + width, pred_1 + width, compound_offset,
+                            round_offset, max, zero, dst + dest_stride,
+                            dest_stride);
+      dst += dest_stride2;
+      pred_0 += width2;
+      pred_1 += width2;
       y -= 2;
     } while (y != 0);
     return;
   }
   if (width == 16) {
+    const ptrdiff_t dest_stride2 = dest_stride << 1;
+    const ptrdiff_t width2 = width << 1;
     do {
       // row0.
-      AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      AverageBlendRow<8, 8>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      dst += dest_stride;
-      pred_0 += width;
-      pred_1 += width;
+      AverageBlendRow<8, 0>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
+      AverageBlendRow<8, 8>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
       // row1.
-      AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      AverageBlendRow<8, 8>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      dst += dest_stride;
-      pred_0 += width;
-      pred_1 += width;
+      AverageBlendRow<8, 0>(pred_0 + width, pred_1 + width, compound_offset,
+                            round_offset, max, zero, dst + dest_stride,
+                            dest_stride);
+      AverageBlendRow<8, 8>(pred_0 + width, pred_1 + width, compound_offset,
+                            round_offset, max, zero, dst + dest_stride,
+                            dest_stride);
+      dst += dest_stride2;
+      pred_0 += width2;
+      pred_1 += width2;
       y -= 2;
     } while (y != 0);
     return;
@@ -249,15 +256,15 @@ void AverageBlend10bpp_SSE4_1(const void* prediction_0,
   if (width == 32) {
     do {
       // pred [0 - 15].
-      AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      AverageBlendRow<8, 8>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
+      AverageBlendRow<8, 0>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
+      AverageBlendRow<8, 8>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
       // pred [16 - 31].
-      AverageBlendRow<8, 16>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
-      AverageBlendRow<8, 24>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
+      AverageBlendRow<8, 16>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
+      AverageBlendRow<8, 24>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
       dst += dest_stride;
       pred_0 += width;
       pred_1 += width;
@@ -267,23 +274,23 @@ void AverageBlend10bpp_SSE4_1(const void* prediction_0,
   if (width == 64) {
     do {
       // pred [0 - 31].
-      AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      AverageBlendRow<8, 8>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-      AverageBlendRow<8, 16>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
-      AverageBlendRow<8, 24>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
+      AverageBlendRow<8, 0>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
+      AverageBlendRow<8, 8>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
+      AverageBlendRow<8, 16>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
+      AverageBlendRow<8, 24>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
       // pred [31 - 63].
-      AverageBlendRow<8, 32>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
-      AverageBlendRow<8, 40>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
-      AverageBlendRow<8, 48>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
-      AverageBlendRow<8, 56>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                             round_offset, max);
+      AverageBlendRow<8, 32>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
+      AverageBlendRow<8, 40>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
+      AverageBlendRow<8, 48>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
+      AverageBlendRow<8, 56>(pred_0, pred_1, compound_offset, round_offset, max,
+                             zero, dst, dest_stride);
       dst += dest_stride;
       pred_0 += width;
       pred_1 += width;
@@ -293,42 +300,42 @@ void AverageBlend10bpp_SSE4_1(const void* prediction_0,
   assert(width == 128);
   do {
     // pred [0 - 31].
-    AverageBlendRow<8, 0>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                          round_offset, max);
-    AverageBlendRow<8, 8>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                          round_offset, max);
-    AverageBlendRow<8, 16>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 24>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
+    AverageBlendRow<8, 0>(pred_0, pred_1, compound_offset, round_offset, max,
+                          zero, dst, dest_stride);
+    AverageBlendRow<8, 8>(pred_0, pred_1, compound_offset, round_offset, max,
+                          zero, dst, dest_stride);
+    AverageBlendRow<8, 16>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 24>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
     // pred [31 - 63].
-    AverageBlendRow<8, 32>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 40>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 48>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 56>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
+    AverageBlendRow<8, 32>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 40>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 48>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 56>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
 
     // pred [64 - 95].
-    AverageBlendRow<8, 64>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 72>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 80>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 88>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
+    AverageBlendRow<8, 64>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 72>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 80>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 88>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
     // pred [96 - 127].
-    AverageBlendRow<8, 96>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                           round_offset, max);
-    AverageBlendRow<8, 104>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-    AverageBlendRow<8, 112>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
-    AverageBlendRow<8, 120>(pred_0, pred_1, dst, dest_stride, compound_offset,
-                            round_offset, max);
+    AverageBlendRow<8, 96>(pred_0, pred_1, compound_offset, round_offset, max,
+                           zero, dst, dest_stride);
+    AverageBlendRow<8, 104>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
+    AverageBlendRow<8, 112>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
+    AverageBlendRow<8, 120>(pred_0, pred_1, compound_offset, round_offset, max,
+                            zero, dst, dest_stride);
     dst += dest_stride;
     pred_0 += width;
     pred_1 += width;
