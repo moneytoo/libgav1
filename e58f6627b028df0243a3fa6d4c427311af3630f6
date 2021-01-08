@@ -16,6 +16,23 @@
       "message": "Hi James,\nWe have added speed enhancement change for AverageBlend10bpp_SSE4_1. For this optimization, decode time reduction is 0.16%. Block level scaling numbers are measured using libgav1 unit test.\n\nModule level scaling:\nBlock size  Scaling w.r.t. C [without and with enhancement change]\n    4x4     1.67x, 1.85x\n     4x8    3.00x, 4.09x\n     8x8    3.58x, 5.08x\n    8x16    4.26x, 6.58x\n    16x8    1.84x, 2.84x\n   16x16    1.95x, 3.23x\n   16x32    2.06x, 3.55x\n   32x16    1.73x, 2.96x\n   32x32    1.73x, 3.04x\n   32x64    1.74x, 3.09x\n   64x32    1.57x, 2.78x\n   64x64    1.57x, 2.80x\n  64x128    1.57x, 2.79x\n  128x64    1.48x, 2.62x\n 128x128    1.48x, 2.63x\n\nPlease review the patch.\nThank you.",
       "revId": "e58f6627b028df0243a3fa6d4c427311af3630f6",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a167b6d6_727aed8b",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-08T18:52:17Z",
+      "side": 1,
+      "message": "even though it\u0027s mismatched elsewhere with _mm_cvtepu16_epi32() we\u0027ve seen better assembly generated [1]. what\u0027s the difference here?\n\n[1] https://chromium-review.googlesource.com/c/codecs/libgav1/+/2594624/7..11/src/dsp/x86/weight_mask_sse4.cc#b470",
+      "revId": "e58f6627b028df0243a3fa6d4c427311af3630f6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
