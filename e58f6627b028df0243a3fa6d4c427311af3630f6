@@ -51,6 +51,24 @@
       "parentUuid": "a167b6d6_727aed8b",
       "revId": "e58f6627b028df0243a3fa6d4c427311af3630f6",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a766fc_69a49817",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-08T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3c6565d_4afa43d9",
+      "revId": "e58f6627b028df0243a3fa6d4c427311af3630f6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
