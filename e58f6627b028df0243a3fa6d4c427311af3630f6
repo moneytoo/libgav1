@@ -33,6 +33,24 @@
       "message": "even though it\u0027s mismatched elsewhere with _mm_cvtepu16_epi32() we\u0027ve seen better assembly generated [1]. what\u0027s the difference here?\n\n[1] https://chromium-review.googlesource.com/c/codecs/libgav1/+/2594624/7..11/src/dsp/x86/weight_mask_sse4.cc#b470",
       "revId": "e58f6627b028df0243a3fa6d4c427311af3630f6",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c6565d_4afa43d9",
+        "filename": "src/dsp/x86/average_blend_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-08T19:42:47Z",
+      "side": 1,
+      "message": "\u003e even though it\u0027s mismatched elsewhere with _mm_cvtepu16_epi32() we\u0027ve seen better assembly generated [1]. what\u0027s the difference here?\n\u003e \n\u003e [1] https://chromium-review.googlesource.com/c/codecs/libgav1/+/2594624/7..11/src/dsp/x86/weight_mask_sse4.cc#b470\n\nThe size is better here as well. The numbers look neutral to mildly positive. I\u0027ll update this change.",
+      "parentUuid": "a167b6d6_727aed8b",
+      "revId": "e58f6627b028df0243a3fa6d4c427311af3630f6",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
