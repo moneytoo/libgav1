@@ -16,6 +16,74 @@
       "message": "Hi James,\nWe have submitted a new patchset.\nUpdated Module level scaling:\n\nBlock_Size Subsampling_420 Subsampling_444\n\n 4x4\t\t2.61\t\t2.05\n 4x8\t\t4.14\t\t2.20\n4x16\t\t5.56\t\t2.95\n 8x4\t\t4.38\t\t3.35\n 8x8\t\t5.82\t\t3.38\n8x16\t\t6.80\t\t4.78\n8x32\t\t7.49\t\t5.64\n16x4\t\t6.14\t\t4.58\n16x8\t\t8.73\t\t5.29\n16x16\t\t9.73\t\t5.82\n16x32\t\t10.46\t\t6.16\n32x8\t\t12.31\t\t7.06\n32x16\t\t13.56\t\t7.66\n32x32\t\t14.72\t\t7.98",
       "revId": "9aff2317d5e9d41b654934b05fd91903e1f7eac8",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1169ff_31a9e7ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-26T03:08:55Z",
+      "side": 1,
+      "message": "Scott, can you make another pass on this one?",
+      "revId": "9aff2317d5e9d41b654934b05fd91903e1f7eac8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1852c0_38d99498",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-26T03:08:55Z",
+      "side": 1,
+      "message": "this doesn\u0027t need to be duplicated you can just move the helpers to an anonymous namespace at the dsp level; the same goes for LastRowSamples()",
+      "revId": "9aff2317d5e9d41b654934b05fd91903e1f7eac8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ee7aed_b02168a6",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1247,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-26T03:08:55Z",
+      "side": 1,
+      "message": "this comment should be made into a static_assert",
+      "revId": "9aff2317d5e9d41b654934b05fd91903e1f7eac8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0a22a4_849e6381",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-26T03:08:55Z",
+      "side": 1,
+      "message": "we always use {}s on multiline statements in this project",
+      "revId": "9aff2317d5e9d41b654934b05fd91903e1f7eac8",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
