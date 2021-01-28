@@ -35,6 +35,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bd2921b_fa67fc59",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-01-28T09:58:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ba5514a_fb880243",
+      "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "133a28de_1e3589d6",
@@ -58,6 +76,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2de65afc_8c5ef125",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-01-28T09:58:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "133a28de_1e3589d6",
+      "range": {
+        "startLine": 1048,
+        "startChar": 3,
+        "endLine": 1048,
+        "endChar": 33
+      },
+      "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a7ec2d0_50de12c4",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-01-28T06:14:31Z",
       "side": 1,
       "message": "this condition can be removed:\nhttps://chromium-review.googlesource.com/c/codecs/libgav1/+/2654965",
+      "range": {
+        "startLine": 1125,
+        "startChar": 40,
+        "endLine": 1125,
+        "endChar": 70
+      },
+      "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b0dc82_4fe34ced",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-01-28T09:58:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a7ec2d0_50de12c4",
       "range": {
         "startLine": 1125,
         "startChar": 40,
