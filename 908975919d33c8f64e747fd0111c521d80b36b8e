@@ -16,6 +16,69 @@
       "message": "Hi James,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.",
       "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba5514a_fb880243",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-28T06:14:31Z",
+      "side": 1,
+      "message": "you don\u0027t need to add another namespace level. the anonymous namespace will make the functions local. In general we try not to nest too deeply:\n\nhttps://google.github.io/styleguide/cppguide.html#Namespace_Names\nhttps://abseil.io/tips/130",
+      "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "133a28de_1e3589d6",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-28T06:14:31Z",
+      "side": 1,
+      "message": "let\u0027s remove this unused parameter:\nhttps://chromium-review.googlesource.com/c/codecs/libgav1/+/2654504",
+      "range": {
+        "startLine": 1048,
+        "startChar": 3,
+        "endLine": 1048,
+        "endChar": 33
+      },
+      "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7ec2d0_50de12c4",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-28T06:14:31Z",
+      "side": 1,
+      "message": "this condition can be removed:\nhttps://chromium-review.googlesource.com/c/codecs/libgav1/+/2654965",
+      "range": {
+        "startLine": 1125,
+        "startChar": 40,
+        "endLine": 1125,
+        "endChar": 70
+      },
+      "revId": "908975919d33c8f64e747fd0111c521d80b36b8e",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
