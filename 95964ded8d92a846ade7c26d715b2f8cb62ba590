@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29c964a_4421dffe",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-30T00:45:11Z",
+      "side": 1,
+      "message": "this should just be \u0027// namespace\u0027:\n\nhttps://google.github.io/styleguide/cppguide.html#Internal_Linkage",
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21fb2c3f_13d4905c",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-30T00:45:11Z",
+      "side": 1,
+      "message": "this should be 32.",
+      "range": {
+        "startLine": 1568,
+        "startChar": 49,
+        "endLine": 1568,
+        "endChar": 51
+      },
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2885d43e_ef5369e0",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-30T00:45:11Z",
+      "side": 1,
+      "message": "this could be aligned with the comment in the 8-bit function.",
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffcadee_2eaa9f08",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1617,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-30T00:45:11Z",
+      "side": 1,
+      "message": "does this seem to be faster that the summation in the loop like the 8-bit code?",
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec73abf_655b9a60",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-01-30T00:45:11Z",
+      "side": 1,
+      "message": "here and in the other _mm_slli_epi32() calls the extra ()s can be removed and likely the calculation reduced with an update to the comment if you decide to keep this structure.",
+      "range": {
+        "startLine": 1623,
+        "startChar": 48,
+        "endLine": 1623,
+        "endChar": 49
+      },
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
