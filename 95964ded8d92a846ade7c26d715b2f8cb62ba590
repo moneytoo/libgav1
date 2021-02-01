@@ -18,6 +18,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9721202_b8176821",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-01T10:54:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f29c964a_4421dffe",
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21fb2c3f_13d4905c",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-01-30T00:45:11Z",
       "side": 1,
       "message": "this should be 32.",
+      "range": {
+        "startLine": 1568,
+        "startChar": 49,
+        "endLine": 1568,
+        "endChar": 51
+      },
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "674f9e69_b75a5d15",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-01T10:54:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21fb2c3f_13d4905c",
       "range": {
         "startLine": 1568,
         "startChar": 49,
@@ -58,6 +100,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a15e5207_2adc3df1",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-01T10:54:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2885d43e_ef5369e0",
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cffcadee_2eaa9f08",
@@ -71,6 +131,24 @@
       "writtenOn": "2021-01-30T00:45:11Z",
       "side": 1,
       "message": "does this seem to be faster that the summation in the loop like the 8-bit code?",
+      "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8ff719_62c8a5f5",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 1617,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-01T10:54:07Z",
+      "side": 1,
+      "message": "We analyzed the object dump for both the optimizations and observed that \u0027summation inside loop (as in case of 8-bit)\u0027 generates less instructions compared to switch-case. So, we changed it accordingly. For this patch performance difference is negligible.",
+      "parentUuid": "cffcadee_2eaa9f08",
       "revId": "95964ded8d92a846ade7c26d715b2f8cb62ba590",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },

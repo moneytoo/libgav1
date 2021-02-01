@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23161b78_907ed32f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-01T10:54:07Z",
+      "side": 1,
+      "message": "Hi James,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.",
+      "revId": "f9c5c2a6c0b1ca41125a5e40f2dca452d47fd574",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
