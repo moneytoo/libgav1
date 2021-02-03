@@ -33,6 +33,24 @@
       "message": "we have the registers, but in this case samples are [0, 1023], so 2^10 * 2^5 will fit in 15, no?",
       "revId": "f9c5c2a6c0b1ca41125a5e40f2dca452d47fd574",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a7211d8_ea4d2265",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-03T06:27:38Z",
+      "side": 1,
+      "message": "Yes. Thanks for the suggestion. There is an improvement in scaling numbers for 8x8, 8x16 and 8x32 block-sizes.",
+      "parentUuid": "0e15ea28_772a3eff",
+      "revId": "f9c5c2a6c0b1ca41125a5e40f2dca452d47fd574",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
