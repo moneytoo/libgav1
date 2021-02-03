@@ -16,6 +16,41 @@
       "message": "Hi James,\nWe have submitted a new patchset.\nUpdated Module level scaling:\n\nBlock_Size Subsampling_420 Subsampling_444\n\n 4x4\t\t2.61\t\t2.05\n 4x8\t\t4.14\t\t2.15\n4x16\t\t5.56\t\t2.93\n 8x4\t\t4.38\t\t3.17\n 8x8\t\t5.82\t\t4.55\n8x16\t\t6.80\t\t5.81\n8x32\t\t7.49\t\t6.18\n16x4\t\t6.14\t\t4.30\n16x8\t\t8.73\t\t5.29\n16x16\t\t9.73\t\t5.82\n16x32\t\t10.46\t\t6.16\n32x8\t\t12.31\t\t7.02\n32x16\t\t13.56\t\t7.66\n32x32\t\t14.72\t\t7.48",
       "revId": "58e0b89ed38f5db2462c4e68b1253dd0c8ae93ce",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9518729a_ac3d79d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-03T23:55:22Z",
+      "side": 1,
+      "message": "\u003e Hi James,\n\u003e We have submitted a new patchset.\n\u003e Updated Module level scaling:\n\u003e \n\u003e Block_Size Subsampling_420 Subsampling_444\n\u003e \n\u003e  4x4\t\t2.61\t\t2.05\n\u003e  4x8\t\t4.14\t\t2.15\n\u003e 4x16\t\t5.56\t\t2.93\n\u003e  8x4\t\t4.38\t\t3.17\n\u003e  8x8\t\t5.82\t\t4.55\n\u003e 8x16\t\t6.80\t\t5.81\n\u003e 8x32\t\t7.49\t\t6.18\n\u003e 16x4\t\t6.14\t\t4.30\n\u003e 16x8\t\t8.73\t\t5.29\n\u003e 16x16\t\t9.73\t\t5.82\n\u003e 16x32\t\t10.46\t\t6.16\n\u003e 32x8\t\t12.31\t\t7.02\n\u003e 32x16\t\t13.56\t\t7.66\n\u003e 32x32\t\t14.72\t\t7.48\n\nThanks for the updated info and working through the review. I just have one more suggestion, after taking a look into that could you update the commit message to reflect this new scaling?",
+      "parentUuid": "36dbc032_6ce802e0",
+      "revId": "58e0b89ed38f5db2462c4e68b1253dd0c8ae93ce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe39f08_899542fc",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-03T23:55:22Z",
+      "side": 1,
+      "message": "I wonder if this could be merged into a pair of LoadHi/LoadLo:\n\nhttps://chromium.googlesource.com/codecs/libgav1/+/refs/heads/master/src/dsp/x86/obmc_sse4.cc#370",
+      "revId": "58e0b89ed38f5db2462c4e68b1253dd0c8ae93ce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
