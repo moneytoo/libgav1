@@ -16,6 +16,23 @@
       "message": "Hi James,\nWe have submitted a new patchset by taking your suggestions into account. Please review the same.",
       "revId": "f9c5c2a6c0b1ca41125a5e40f2dca452d47fd574",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e15ea28_772a3eff",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-03T03:32:59Z",
+      "side": 1,
+      "message": "we have the registers, but in this case samples are [0, 1023], so 2^10 * 2^5 will fit in 15, no?",
+      "revId": "f9c5c2a6c0b1ca41125a5e40f2dca452d47fd574",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
