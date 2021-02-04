@@ -36,6 +36,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8698ab22_530057fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-04T04:56:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9518729a_ac3d79d6",
+      "revId": "58e0b89ed38f5db2462c4e68b1253dd0c8ae93ce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fe39f08_899542fc",
@@ -49,6 +67,24 @@
       "writtenOn": "2021-02-03T23:55:22Z",
       "side": 1,
       "message": "I wonder if this could be merged into a pair of LoadHi/LoadLo:\n\nhttps://chromium.googlesource.com/codecs/libgav1/+/refs/heads/master/src/dsp/x86/obmc_sse4.cc#370",
+      "revId": "58e0b89ed38f5db2462c4e68b1253dd0c8ae93ce",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc3a37f_eabcde09",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1476205
+      },
+      "writtenOn": "2021-02-04T04:56:13Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.",
+      "parentUuid": "2fe39f08_899542fc",
       "revId": "58e0b89ed38f5db2462c4e68b1253dd0c8ae93ce",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
