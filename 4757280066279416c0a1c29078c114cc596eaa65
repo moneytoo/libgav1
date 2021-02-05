@@ -285,6 +285,78 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b469d94_090e5487",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-05T03:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d2423e4_fe55f01a",
+      "range": {
+        "startLine": 1081,
+        "startChar": 4,
+        "endLine": 1081,
+        "endChar": 56
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef244f8_a1a85916",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-05T03:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d2423e4_fe55f01a",
+      "range": {
+        "startLine": 1081,
+        "startChar": 4,
+        "endLine": 1081,
+        "endChar": 56
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "338ba27e_46c50fe0",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-05T03:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d2423e4_fe55f01a",
+      "range": {
+        "startLine": 1081,
+        "startChar": 4,
+        "endLine": 1081,
+        "endChar": 56
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "105674aa_43bc4f21",
@@ -298,6 +370,30 @@
       "writtenOn": "2020-12-28T13:27:43Z",
       "side": 1,
       "message": "Delete.",
+      "range": {
+        "startLine": 1083,
+        "startChar": 0,
+        "endLine": 1084,
+        "endChar": 24
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fac60a7_d877e237",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-05T03:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105674aa_43bc4f21",
       "range": {
         "startLine": 1083,
         "startChar": 0,
@@ -331,6 +427,30 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58161c82_24cd50b1",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-05T03:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44fc0ff4_797e4722",
+      "range": {
+        "startLine": 1170,
+        "startChar": 0,
+        "endLine": 1173,
+        "endChar": 24
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09026f56_ed41dc5c",
@@ -344,6 +464,30 @@
       "writtenOn": "2020-12-28T13:27:43Z",
       "side": 1,
       "message": "Same as above.",
+      "range": {
+        "startLine": 1249,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 24
+      },
+      "revId": "4757280066279416c0a1c29078c114cc596eaa65",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c8a7de_25cdecae",
+        "filename": "src/dsp/x86/intrapred_cfl_sse4.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2021-02-05T03:42:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09026f56_ed41dc5c",
       "range": {
         "startLine": 1249,
         "startChar": 0,
