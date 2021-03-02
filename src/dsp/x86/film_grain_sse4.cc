@@ -48,6 +48,10 @@ inline __m128i LoadSource(const uint8_t* src) {
   return _mm_cvtepu8_epi16(LoadLo8(src));
 }
 
+inline __m128i LoadSourceMsan(const uint8_t* src, const int valid_range) {
+  return _mm_cvtepu8_epi16(LoadLo8Msan(src, 8 - valid_range));
+}
+
 // Store 8 values to dest, narrowing to uint8_t from int16_t intermediate value.
 inline void StoreUnsigned(uint8_t* dest, const __m128i data) {
   StoreLo8(dest, _mm_packus_epi16(data, data));
@@ -79,6 +83,19 @@ inline __m128i GetAverageLuma(const uint8_t* const luma, int subsampling_x) {
   return _mm_cvtepu8_epi16(LoadLo8(luma));
 }
 
+inline __m128i GetAverageLumaMsan(const uint8_t* const luma, int subsampling_x,
+                                  int valid_range) {
+  if (subsampling_x != 0) {
+    const __m128i src = LoadUnaligned16Msan(luma, 16 - valid_range);
+
+    return RightShiftWithRounding_U16(
+        _mm_hadd_epi16(_mm_cvtepu8_epi16(src),
+                       _mm_unpackhi_epi8(src, _mm_setzero_si128())),
+        1);
+  }
+  return _mm_cvtepu8_epi16(LoadLo8Msan(luma, 8 - valid_range));
+}
+
 #if LIBGAV1_MAX_BITDEPTH >= 10
 // For BlendNoiseWithImageChromaWithCfl, only |subsampling_x| is needed.
 inline __m128i GetAverageLuma(const uint16_t* const luma, int subsampling_x) {
@@ -87,6 +104,18 @@ inline __m128i GetAverageLuma(const uint16_t* const luma, int subsampling_x) {
         _mm_hadd_epi16(LoadUnaligned16(luma), LoadUnaligned16(luma + 8)), 1);
   }
   return LoadUnaligned16(luma);
+}
+
+inline __m128i GetAverageLumaMsan(const uint16_t* const luma, int subsampling_x,
+                                  int valid_range) {
+  if (subsampling_x != 0) {
+    return RightShiftWithRounding_U16(
+        _mm_hadd_epi16(
+            LoadUnaligned16Msan(luma, 16 - valid_range * sizeof(*luma)),
+            LoadUnaligned16Msan(luma + 8, 32 - valid_range * sizeof(*luma))),
+        1);
+  }
+  return LoadUnaligned16Msan(luma, 16 - valid_range * sizeof(*luma));
 }
 #endif  // LIBGAV1_MAX_BITDEPTH >= 10
 
@@ -245,14 +274,19 @@ LIBGAV1_ALWAYS_INLINE void BlendChromaPlaneWithCfl_SSE4_1(
     // This section only runs if width % (8 << sub_x) != 0. It should never run
     // on 720p and above.
     if (x < chroma_width) {
-      // Prevent arbitrary indices from entering GetScalingFactors.
-      memset(luma_buffer, 0, sizeof(luma_buffer));
+      // Prevent huge indices from entering GetScalingFactors due to
+      // uninitialized values. This is not a problem in 8bpp because the table
+      // is made larger than 255 values.
+      if (bitdepth > 8) {
+        memset(luma_buffer, 0, sizeof(luma_buffer));
+      }
       const int luma_x = x << subsampling_x;
       const int valid_range = width - luma_x;
       assert(valid_range < 16);
       memcpy(luma_buffer, &in_y_row[luma_x], valid_range * sizeof(in_y_row[0]));
       luma_buffer[valid_range] = in_y_row[width - 1];
-      const __m128i average_luma = GetAverageLuma(luma_buffer, subsampling_x);
+      const __m128i average_luma =
+          GetAverageLumaMsan(luma_buffer, subsampling_x, valid_range + 1);
       StoreUnsigned(average_luma_buffer, average_luma);
 
       const __m128i blended =
@@ -300,13 +334,12 @@ namespace low_bitdepth {
 namespace {
 
 // |offset| is 32x4 packed to add with the result of _mm_madd_epi16.
-inline __m128i BlendChromaValsNoCfl(
-    const uint8_t scaling_lut[kScalingLookupTableSize],
-    const uint8_t* chroma_cursor, const int8_t* noise_image_cursor,
-    const __m128i& average_luma, const __m128i& scaling_shift,
-    const __m128i& offset, const __m128i& weights) {
+inline __m128i BlendChromaValsNoCfl8bpp(
+    const uint8_t scaling_lut[kScalingLookupTableSize], const __m128i& orig,
+    const int8_t* noise_image_cursor, const __m128i& average_luma,
+    const __m128i& scaling_shift, const __m128i& offset,
+    const __m128i& weights) {
   uint8_t merged_buffer[8];
-  const __m128i orig = LoadSource(chroma_cursor);
   const __m128i combined_lo =
       _mm_madd_epi16(_mm_unpacklo_epi16(average_luma, orig), weights);
   const __m128i combined_hi =
@@ -356,37 +389,36 @@ LIBGAV1_ALWAYS_INLINE void BlendChromaPlane8bpp_SSE4_1(
       const int luma_x = x << subsampling_x;
       const __m128i average_luma =
           GetAverageLuma(&in_y_row[luma_x], subsampling_x);
-      const __m128i blended = BlendChromaValsNoCfl(
-          scaling_lut, &in_chroma_row[x], &(noise_image[y + start_height][x]),
+      const __m128i orig_chroma = LoadSource(&in_chroma_row[x]);
+      const __m128i blended = BlendChromaValsNoCfl8bpp(
+          scaling_lut, orig_chroma, &(noise_image[y + start_height][x]),
           average_luma, derived_scaling_shift, offset, multipliers);
       StoreUnsigned(&out_chroma_row[x], Clip3(blended, floor, ceiling));
     }
 
     if (x < chroma_width) {
-      // Prevent arbitrary indices from entering GetScalingFactors.
-      memset(luma_buffer, 0, sizeof(luma_buffer));
-      // TODO(b/174615556): Refactor BlendChromaValsNoCfl to accept pre-loaded
-      // vector inputs so we can mask the chroma values here for msan.
-      // Prevent uninitialized-value-error.
-      uint8_t chroma_buffer[8];
-#if LIBGAV1_MSAN
-      memset(chroma_buffer, 0, sizeof(chroma_buffer));
-#endif  // LIBGAV1_MSAN
       // Begin right edge iteration. Same as the normal iterations, but the
       // |average_luma| computation requires a duplicated luma value at the
       // end.
       const int luma_x = x << subsampling_x;
       const int valid_range = width - luma_x;
       assert(valid_range < 16);
+      // There is no need to pre-initialize this buffer, because merged values
+      // used as indices are saturated in the 8bpp case. Uninitialized values
+      // are written outside the frame.
       memcpy(luma_buffer, &in_y_row[luma_x], valid_range * sizeof(in_y_row[0]));
       luma_buffer[valid_range] = in_y_row[width - 1];
       const int valid_range_chroma = chroma_width - x;
+      uint8_t chroma_buffer[8];
       memcpy(chroma_buffer, &in_chroma_row[x],
              valid_range_chroma * sizeof(in_chroma_row[0]));
 
-      const __m128i average_luma = GetAverageLuma(luma_buffer, subsampling_x);
-      const __m128i blended = BlendChromaValsNoCfl(
-          scaling_lut, chroma_buffer, &(noise_image[y + start_height][x]),
+      const __m128i average_luma =
+          GetAverageLumaMsan(luma_buffer, subsampling_x, valid_range + 1);
+      const __m128i orig_chroma =
+          LoadSourceMsan(chroma_buffer, valid_range_chroma);
+      const __m128i blended = BlendChromaValsNoCfl8bpp(
+          scaling_lut, orig_chroma, &(noise_image[y + start_height][x]),
           average_luma, derived_scaling_shift, offset, multipliers);
       StoreUnsigned(&out_chroma_row[x], Clip3(blended, floor, ceiling));
       // End of right edge iteration.
