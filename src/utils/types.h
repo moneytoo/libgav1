@@ -559,5 +559,14 @@ struct PartitionTreeNode {
   BlockSize block_size = kBlockInvalid;
 };
 
+// Structure used for storing the transform parameters in a superblock.
+struct TransformParameters {
+  TransformParameters() = default;
+  TransformParameters(TransformType type, int non_zero_coeff_count)
+      : type(type), non_zero_coeff_count(non_zero_coeff_count) {}
+  TransformType type;
+  int non_zero_coeff_count;
+};
+
 }  // namespace libgav1
 #endif  // LIBGAV1_SRC_UTILS_TYPES_H_

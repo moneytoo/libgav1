@@ -129,7 +129,7 @@ std::unique_ptr<ResidualBuffer> ResidualBufferPool::Get() {
 }
 
 void ResidualBufferPool::Release(std::unique_ptr<ResidualBuffer> buffer) {
-  buffer->transform_parameters()->Reset();
+  buffer->transform_parameters()->Clear();
   buffer->partition_tree_order()->Clear();
   std::lock_guard<std::mutex> lock(mutex_);
   buffers_.Push(std::move(buffer));
