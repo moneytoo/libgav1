@@ -34,7 +34,7 @@ bool BlockParametersHolder::Reset(int rows4x4, int columns4x4) {
 BlockParameters* BlockParametersHolder::Get(int row4x4, int column4x4,
                                             BlockSize block_size) {
   const size_t index = index_.fetch_add(1, std::memory_order_relaxed);
-  if (index >= block_parameters_.Size()) return nullptr;
+  if (index >= block_parameters_.size()) return nullptr;
   auto& bp = block_parameters_.get()[index];
   if (bp == nullptr) {
     bp.reset(new (std::nothrow) BlockParameters);
