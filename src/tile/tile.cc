@@ -1887,6 +1887,7 @@ bool Tile::AssignInterMv(const Block& block, bool is_compound) {
   GetClampParameters(block, min, max);
   BlockParameters& bp = *block.bp;
   const PredictionParameters& prediction_parameters = *bp.prediction_parameters;
+  bp.mv.mv64 = 0;
   if (is_compound) {
     for (int i = 0; i < 2; ++i) {
       const PredictionMode mode = GetSinglePredictionMode(i, bp.y_mode);
@@ -1949,6 +1950,7 @@ bool Tile::AssignIntraMv(const Block& block) {
   BlockParameters& bp = *block.bp;
   const PredictionParameters& prediction_parameters = *bp.prediction_parameters;
   const MotionVector& ref_mv_0 = prediction_parameters.reference_mv(0);
+  bp.mv.mv64 = 0;
   ReadMotionVector(block, 0);
   if (ref_mv_0.mv32 == 0) {
     const MotionVector& ref_mv_1 = prediction_parameters.reference_mv(1);
