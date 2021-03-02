@@ -2137,7 +2137,8 @@ bool Tile::ProcessBlock(int row4x4, int column4x4, BlockSize block_size,
   }
 
   if (split_parse_and_decode_) {
-    // Push block ordering info to the queue.
+    // Push block ordering info to the queue. DecodeBlock() will use this queue
+    // to decode the blocks in the correct order.
     const int sb_row_index = SuperBlockRowIndex(row4x4);
     const int sb_column_index = SuperBlockColumnIndex(column4x4);
     residual_buffer_threaded_[sb_row_index][sb_column_index]

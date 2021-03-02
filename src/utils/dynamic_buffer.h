@@ -46,7 +46,7 @@ class DynamicBuffer {
     return true;
   }
 
-  size_t Size() const { return size_; }
+  size_t size() const { return size_; }
 
  private:
   std::unique_ptr<T[]> buffer_;

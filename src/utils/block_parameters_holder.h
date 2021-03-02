@@ -63,6 +63,10 @@ class BlockParametersHolder {
   int columns4x4() const { return columns4x4_; }
 
  private:
+  // Needs access to FillCache for testing Cdef.
+  template <int bitdepth, typename Pixel>
+  friend class PostFilterApplyCdefTest;
+
   void FillCache(int row4x4, int column4x4, BlockSize block_size,
                  BlockParameters* bp);
 
@@ -81,10 +85,6 @@ class BlockParametersHolder {
   // FillCache() and used by Find() to perform look ups using exactly one look
   // up (instead of traversing the entire tree).
   Array2D<BlockParameters*> block_parameters_cache_;
-
-  // Needs access to FillCache for testing Cdef.
-  template <int bitdepth, typename Pixel>
-  friend class PostFilterApplyCdefTest;
 };
 
 }  // namespace libgav1
