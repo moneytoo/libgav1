@@ -169,29 +169,6 @@ struct PredictionParameters : public Allocable {
 // for each field. The ranges of some fields are documented to justify why
 // their types are large enough.
 struct BlockParameters : public Allocable {
-  void Reset() {
-    size = kBlock4x4;
-    skip = false;
-    skip_mode = false;
-    is_inter = false;
-    is_explicit_compound_type = false;  // comp_group_idx in the spec.
-    is_compound_type_average = false;   // compound_idx in the spec.
-    is_global_mv_block = false;
-    use_predicted_segment_id =
-        false;       // only valid with temporal update enabled.
-    segment_id = 0;  // segment_id is in the range [0, 7].
-    y_mode = kPredictionModeDc;
-    uv_mode = kPredictionModeDc;
-    transform_size = kTransformSize4x4;
-    uv_transform_size = kTransformSize4x4;
-    memset(interpolation_filter, 0, sizeof(interpolation_filter));
-    memset(reference_frame, 0, sizeof(reference_frame));
-    memset(deblock_filter_level, 0, sizeof(deblock_filter_level));
-    mv.mv64 = 0;
-    memset(&palette_mode_info, 0, sizeof(palette_mode_info));
-    prediction_parameters = nullptr;
-  }
-
   BlockSize size;
   bool skip;
   // True means that this block will use some default settings (that

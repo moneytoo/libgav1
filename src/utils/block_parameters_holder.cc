@@ -37,10 +37,8 @@ BlockParameters* BlockParametersHolder::Get(int row4x4, int column4x4,
   if (index >= block_parameters_.Size()) return nullptr;
   auto& bp = block_parameters_.get()[index];
   if (bp == nullptr) {
-    bp.reset(new (std::nothrow) BlockParameters());
+    bp.reset(new (std::nothrow) BlockParameters);
     if (bp == nullptr) return nullptr;
-  } else {
-    bp->Reset();
   }
   FillCache(row4x4, column4x4, block_size, bp.get());
   return bp.get();
