@@ -1629,11 +1629,12 @@ bool Tile::TransformBlock(const Block& block, Plane plane, int base_x,
     const int sb_row_index = SuperBlockRowIndex(block.row4x4);
     const int sb_column_index = SuperBlockColumnIndex(block.column4x4);
     if (mode == kProcessingModeDecodeOnly) {
-      TransformParameterQueue& tx_params =
+      Queue<TransformParameters>& tx_params =
           *residual_buffer_threaded_[sb_row_index][sb_column_index]
                ->transform_parameters();
       ReconstructBlock(block, plane, start_x, start_y, tx_size,
-                       tx_params.Type(), tx_params.NonZeroCoeffCount());
+                       tx_params.Front().type,
+                       tx_params.Front().non_zero_coeff_count);
       tx_params.Pop();
     } else {
       TransformType tx_type;
@@ -1656,7 +1657,7 @@ bool Tile::TransformBlock(const Block& block, Plane plane, int base_x,
         assert(mode == kProcessingModeParseOnly);
         residual_buffer_threaded_[sb_row_index][sb_column_index]
             ->transform_parameters()
-            ->Push(non_zero_coeff_count, tx_type);
+            ->Push(TransformParameters(tx_type, non_zero_coeff_count));
       }
     }
   }
