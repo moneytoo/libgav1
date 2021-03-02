@@ -36,7 +36,6 @@
 #include "src/utils/common.h"
 #include "src/utils/constants.h"
 #include "src/utils/logging.h"
-#include "src/utils/parameter_tree.h"
 #include "src/utils/raw_bit_reader.h"
 #include "src/utils/segmentation.h"
 #include "src/utils/threadpool.h"
@@ -1282,8 +1281,7 @@ StatusCode DecoderImpl::DecodeTiles(
   // without having to check for boundary conditions.
   if (!frame_scratch_buffer->block_parameters_holder.Reset(
           frame_header.rows4x4 + kMaxBlockHeight4x4,
-          frame_header.columns4x4 + kMaxBlockWidth4x4,
-          sequence_header.use_128x128_superblock)) {
+          frame_header.columns4x4 + kMaxBlockWidth4x4)) {
     return kStatusOutOfMemory;
   }
   const dsp::Dsp* const dsp =

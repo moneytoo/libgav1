@@ -27,6 +27,7 @@
 #include "src/utils/compiler_attributes.h"
 #include "src/utils/constants.h"
 #include "src/utils/memory.h"
+#include "src/utils/queue.h"
 #include "src/utils/types.h"
 
 namespace libgav1 {
@@ -104,7 +105,8 @@ class ResidualBuffer : public Allocable {
     if (buffer != nullptr) {
       buffer->buffer_ = MakeAlignedUniquePtr<uint8_t>(32, buffer_size);
       if (buffer->buffer_ == nullptr ||
-          !buffer->transform_parameters_.Init(queue_size)) {
+          !buffer->transform_parameters_.Init(queue_size) ||
+          !buffer->partition_tree_order_.Init(queue_size)) {
         buffer = nullptr;
       }
     }
@@ -121,6 +123,11 @@ class ResidualBuffer : public Allocable {
   TransformParameterQueue* transform_parameters() {
     return &transform_parameters_;
   }
+  // Queue used to store the block ordering in the partition tree of the
+  // superblocks.
+  Queue<PartitionTreeNode>* partition_tree_order() {
+    return &partition_tree_order_;
+  }
 
  private:
   friend class ResidualBufferStack;
@@ -129,6 +136,7 @@ class ResidualBuffer : public Allocable {
 
   AlignedUniquePtr<uint8_t> buffer_;
   TransformParameterQueue transform_parameters_;
+  Queue<PartitionTreeNode> partition_tree_order_;
   // Used by ResidualBufferStack to form a chain of ResidualBuffers.
   ResidualBuffer* next_ = nullptr;
 };
