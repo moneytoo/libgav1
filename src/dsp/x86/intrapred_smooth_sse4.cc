@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/dsp/intrapred.h"
+#include "src/dsp/intrapred_smooth.h"
 #include "src/utils/cpu.h"
 
 #if LIBGAV1_TARGETING_SSE4_1

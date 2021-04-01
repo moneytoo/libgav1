@@ -26,6 +26,7 @@
 #include "src/dsp/intrapred_cfl.h"
 #include "src/dsp/intrapred_directional.h"
 #include "src/dsp/intrapred_filter.h"
+#include "src/dsp/intrapred_smooth.h"
 #include "src/dsp/inverse_transform.h"
 #include "src/dsp/loop_filter.h"
 #include "src/dsp/loop_restoration.h"
@@ -52,6 +53,7 @@ void DspInit_C() {
   dsp::IntraPredDirectionalInit_C();
   dsp::IntraPredFilterInit_C();
   dsp::IntraPredInit_C();
+  dsp::IntraPredSmoothInit_C();
   dsp::InverseTransformInit_C();
   dsp::LoopFilterInit_C();
   dsp::LoopRestorationInit_C();

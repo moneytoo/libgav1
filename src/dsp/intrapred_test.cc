@@ -27,6 +27,7 @@
 #include "gtest/gtest.h"
 #include "src/dsp/constants.h"
 #include "src/dsp/dsp.h"
+#include "src/dsp/intrapred_smooth.h"
 #include "src/utils/common.h"
 #include "src/utils/constants.h"
 #include "src/utils/cpu.h"
@@ -138,6 +139,7 @@ class IntraPredTest : public IntraPredTestBase<bitdepth, Pixel> {
   void SetUp() override {
     IntraPredTestBase<bitdepth, Pixel>::SetUp();
     IntraPredInit_C();
+    IntraPredSmoothInit_C();
 
     const Dsp* const dsp = GetDspTable(bitdepth);
     ASSERT_NE(dsp, nullptr);

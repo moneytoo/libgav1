@@ -47,12 +47,6 @@ struct IntraPredFuncs_C {
                          const void* left_column);
   static void Paeth(void* dest, ptrdiff_t stride, const void* top_row,
                     const void* left_column);
-  static void Smooth(void* dest, ptrdiff_t stride, const void* top_row,
-                     const void* left_column);
-  static void SmoothVertical(void* dest, ptrdiff_t stride, const void* top_row,
-                             const void* left_column);
-  static void SmoothHorizontal(void* dest, ptrdiff_t stride,
-                               const void* top_row, const void* left_column);
 };
 
 // Intra-predictors that require bitdepth.
@@ -225,110 +219,6 @@ void IntraPredFuncs_C<block_width, block_height, Pixel>::Paeth(
   }
 }
 
-constexpr uint8_t kSmoothWeights[] = {
-    // block dimension = 4
-    255, 149, 85, 64,
-    // block dimension = 8
-    255, 197, 146, 105, 73, 50, 37, 32,
-    // block dimension = 16
-    255, 225, 196, 170, 145, 123, 102, 84, 68, 54, 43, 33, 26, 20, 17, 16,
-    // block dimension = 32
-    255, 240, 225, 210, 196, 182, 169, 157, 145, 133, 122, 111, 101, 92, 83, 74,
-    66, 59, 52, 45, 39, 34, 29, 25, 21, 17, 14, 12, 10, 9, 8, 8,
-    // block dimension = 64
-    255, 248, 240, 233, 225, 218, 210, 203, 196, 189, 182, 176, 169, 163, 156,
-    150, 144, 138, 133, 127, 121, 116, 111, 106, 101, 96, 91, 86, 82, 77, 73,
-    69, 65, 61, 57, 54, 50, 47, 44, 41, 38, 35, 32, 29, 27, 25, 22, 20, 18, 16,
-    15, 13, 12, 10, 9, 8, 7, 6, 6, 5, 5, 4, 4, 4};
-
-// IntraPredFuncs_C::Smooth
-template <int block_width, int block_height, typename Pixel>
-void IntraPredFuncs_C<block_width, block_height, Pixel>::Smooth(
-    void* const dest, ptrdiff_t stride, const void* const top_row,
-    const void* const left_column) {
-  const auto* const top = static_cast<const Pixel*>(top_row);
-  const auto* const left = static_cast<const Pixel*>(left_column);
-  const Pixel top_right = top[block_width - 1];
-  const Pixel bottom_left = left[block_height - 1];
-  static_assert(
-      block_width >= 4 && block_height >= 4,
-      "Weights for smooth predictor undefined for block width/height < 4");
-  const uint8_t* const weights_x = kSmoothWeights + block_width - 4;
-  const uint8_t* const weights_y = kSmoothWeights + block_height - 4;
-  const uint16_t scale_value = (1 << kSmoothWeightScale);
-  auto* dst = static_cast<Pixel*>(dest);
-  stride /= sizeof(Pixel);
-
-  for (int y = 0; y < block_height; ++y) {
-    for (int x = 0; x < block_width; ++x) {
-      assert(scale_value >= weights_y[y] && scale_value >= weights_x[x]);
-      uint32_t pred = weights_y[y] * top[x];
-      pred += weights_x[x] * left[y];
-      pred += static_cast<uint8_t>(scale_value - weights_y[y]) * bottom_left;
-      pred += static_cast<uint8_t>(scale_value - weights_x[x]) * top_right;
-      // The maximum value of pred with the rounder is 2^9 * (2^bitdepth - 1)
-      // + 256. With the descale there's no need for saturation.
-      dst[x] = static_cast<Pixel>(
-          RightShiftWithRounding(pred, kSmoothWeightScale + 1));
-    }
-    dst += stride;
-  }
-}
-
-// IntraPredFuncs_C::SmoothVertical
-template <int block_width, int block_height, typename Pixel>
-void IntraPredFuncs_C<block_width, block_height, Pixel>::SmoothVertical(
-    void* const dest, ptrdiff_t stride, const void* const top_row,
-    const void* const left_column) {
-  const auto* const top = static_cast<const Pixel*>(top_row);
-  const auto* const left = static_cast<const Pixel*>(left_column);
-  const Pixel bottom_left = left[block_height - 1];
-  static_assert(block_height >= 4,
-                "Weights for smooth predictor undefined for block height < 4");
-  const uint8_t* const weights_y = kSmoothWeights + block_height - 4;
-  const uint16_t scale_value = (1 << kSmoothWeightScale);
-  auto* dst = static_cast<Pixel*>(dest);
-  stride /= sizeof(Pixel);
-
-  for (int y = 0; y < block_height; ++y) {
-    for (int x = 0; x < block_width; ++x) {
-      assert(scale_value >= weights_y[y]);
-      uint32_t pred = weights_y[y] * top[x];
-      pred += static_cast<uint8_t>(scale_value - weights_y[y]) * bottom_left;
-      dst[x] =
-          static_cast<Pixel>(RightShiftWithRounding(pred, kSmoothWeightScale));
-    }
-    dst += stride;
-  }
-}
-
-// IntraPredFuncs_C::SmoothHorizontal
-template <int block_width, int block_height, typename Pixel>
-void IntraPredFuncs_C<block_width, block_height, Pixel>::SmoothHorizontal(
-    void* const dest, ptrdiff_t stride, const void* const top_row,
-    const void* const left_column) {
-  const auto* const top = static_cast<const Pixel*>(top_row);
-  const auto* const left = static_cast<const Pixel*>(left_column);
-  const Pixel top_right = top[block_width - 1];
-  static_assert(block_width >= 4,
-                "Weights for smooth predictor undefined for block width < 4");
-  const uint8_t* const weights_x = kSmoothWeights + block_width - 4;
-  const uint16_t scale_value = (1 << kSmoothWeightScale);
-  auto* dst = static_cast<Pixel*>(dest);
-  stride /= sizeof(Pixel);
-
-  for (int y = 0; y < block_height; ++y) {
-    for (int x = 0; x < block_width; ++x) {
-      assert(scale_value >= weights_x[x]);
-      uint32_t pred = weights_x[x] * left[y];
-      pred += static_cast<uint8_t>(scale_value - weights_x[x]) * top_right;
-      dst[x] =
-          static_cast<Pixel>(RightShiftWithRounding(pred, kSmoothWeightScale));
-    }
-    dst += stride;
-  }
-}
-
 //------------------------------------------------------------------------------
 // IntraPredBppFuncs_C
 template <int fill, typename Pixel>
@@ -424,15 +314,7 @@ using Defs8bpp = IntraPredBppDefs<8, uint8_t>;
   dsp->intra_predictors[kTransformSize##W##x##H][kIntraPredictorHorizontal] = \
       DEFS::_##W##x##H::Horizontal;                                           \
   dsp->intra_predictors[kTransformSize##W##x##H][kIntraPredictorPaeth] =      \
-      DEFS::_##W##x##H::Paeth;                                                \
-  dsp->intra_predictors[kTransformSize##W##x##H][kIntraPredictorSmooth] =     \
-      DEFS::_##W##x##H::Smooth;                                               \
-  dsp->intra_predictors[kTransformSize##W##x##H]                              \
-                       [kIntraPredictorSmoothVertical] =                      \
-      DEFS::_##W##x##H::SmoothVertical;                                       \
-  dsp->intra_predictors[kTransformSize##W##x##H]                              \
-                       [kIntraPredictorSmoothHorizontal] =                    \
-      DEFS::_##W##x##H::SmoothHorizontal
+      DEFS::_##W##x##H::Paeth;
 
 #define INIT_INTRAPREDICTORS(DEFS, DEFSBPP)        \
   INIT_INTRAPREDICTORS_WxH(DEFS, DEFSBPP, 4, 4);   \
@@ -488,19 +370,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize4x4][kIntraPredictorPaeth] =
       Defs::_4x4::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x4_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize4x4][kIntraPredictorSmooth] =
-      Defs::_4x4::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x4_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize4x4][kIntraPredictorSmoothVertical] =
-      Defs::_4x4::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x4_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize4x4][kIntraPredictorSmoothHorizontal] =
-      Defs::_4x4::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize4x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize4x8][kIntraPredictorDcFill] =
       Defs8bpp::_4x8::DcFill;
@@ -528,19 +397,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize4x8][kIntraPredictorPaeth] =
       Defs::_4x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize4x8][kIntraPredictorSmooth] =
-      Defs::_4x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize4x8][kIntraPredictorSmoothVertical] =
-      Defs::_4x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize4x8][kIntraPredictorSmoothHorizontal] =
-      Defs::_4x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize4x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize4x16][kIntraPredictorDcFill] =
       Defs8bpp::_4x16::DcFill;
@@ -569,19 +425,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize4x16][kIntraPredictorPaeth] =
       Defs::_4x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize4x16][kIntraPredictorSmooth] =
-      Defs::_4x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize4x16][kIntraPredictorSmoothVertical] =
-      Defs::_4x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize4x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize4x16][kIntraPredictorSmoothHorizontal] =
-      Defs::_4x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize8x4_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x4][kIntraPredictorDcFill] =
       Defs8bpp::_8x4::DcFill;
@@ -609,19 +452,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize8x4][kIntraPredictorPaeth] =
       Defs::_8x4::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x4_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x4][kIntraPredictorSmooth] =
-      Defs::_8x4::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x4_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x4][kIntraPredictorSmoothVertical] =
-      Defs::_8x4::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x4_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x4][kIntraPredictorSmoothHorizontal] =
-      Defs::_8x4::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize8x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x8][kIntraPredictorDcFill] =
       Defs8bpp::_8x8::DcFill;
@@ -649,19 +479,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize8x8][kIntraPredictorPaeth] =
       Defs::_8x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x8][kIntraPredictorSmooth] =
-      Defs::_8x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x8][kIntraPredictorSmoothVertical] =
-      Defs::_8x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x8][kIntraPredictorSmoothHorizontal] =
-      Defs::_8x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize8x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x16][kIntraPredictorDcFill] =
       Defs8bpp::_8x16::DcFill;
@@ -690,19 +507,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize8x16][kIntraPredictorPaeth] =
       Defs::_8x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x16][kIntraPredictorSmooth] =
-      Defs::_8x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x16][kIntraPredictorSmoothVertical] =
-      Defs::_8x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x16][kIntraPredictorSmoothHorizontal] =
-      Defs::_8x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize8x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x32][kIntraPredictorDcFill] =
       Defs8bpp::_8x32::DcFill;
@@ -731,19 +535,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize8x32][kIntraPredictorPaeth] =
       Defs::_8x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x32][kIntraPredictorSmooth] =
-      Defs::_8x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x32][kIntraPredictorSmoothVertical] =
-      Defs::_8x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize8x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x32][kIntraPredictorSmoothHorizontal] =
-      Defs::_8x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize16x4_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x4][kIntraPredictorDcFill] =
       Defs8bpp::_16x4::DcFill;
@@ -772,19 +563,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize16x4][kIntraPredictorPaeth] =
       Defs::_16x4::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x4_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x4][kIntraPredictorSmooth] =
-      Defs::_16x4::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x4_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x4][kIntraPredictorSmoothVertical] =
-      Defs::_16x4::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x4_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x4][kIntraPredictorSmoothHorizontal] =
-      Defs::_16x4::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize16x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x8][kIntraPredictorDcFill] =
       Defs8bpp::_16x8::DcFill;
@@ -813,19 +591,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize16x8][kIntraPredictorPaeth] =
       Defs::_16x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x8][kIntraPredictorSmooth] =
-      Defs::_16x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x8][kIntraPredictorSmoothVertical] =
-      Defs::_16x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x8][kIntraPredictorSmoothHorizontal] =
-      Defs::_16x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize16x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x16][kIntraPredictorDcFill] =
       Defs8bpp::_16x16::DcFill;
@@ -854,19 +619,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize16x16][kIntraPredictorPaeth] =
       Defs::_16x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x16][kIntraPredictorSmooth] =
-      Defs::_16x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x16][kIntraPredictorSmoothVertical] =
-      Defs::_16x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x16][kIntraPredictorSmoothHorizontal] =
-      Defs::_16x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize16x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x32][kIntraPredictorDcFill] =
       Defs8bpp::_16x32::DcFill;
@@ -895,19 +647,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize16x32][kIntraPredictorPaeth] =
       Defs::_16x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x32][kIntraPredictorSmooth] =
-      Defs::_16x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x32][kIntraPredictorSmoothVertical] =
-      Defs::_16x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x32][kIntraPredictorSmoothHorizontal] =
-      Defs::_16x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize16x64_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x64][kIntraPredictorDcFill] =
       Defs8bpp::_16x64::DcFill;
@@ -936,19 +675,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize16x64][kIntraPredictorPaeth] =
       Defs::_16x64::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x64_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x64][kIntraPredictorSmooth] =
-      Defs::_16x64::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x64_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x64][kIntraPredictorSmoothVertical] =
-      Defs::_16x64::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize16x64_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x64][kIntraPredictorSmoothHorizontal] =
-      Defs::_16x64::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize32x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x8][kIntraPredictorDcFill] =
       Defs8bpp::_32x8::DcFill;
@@ -977,19 +703,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize32x8][kIntraPredictorPaeth] =
       Defs::_32x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x8][kIntraPredictorSmooth] =
-      Defs::_32x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x8][kIntraPredictorSmoothVertical] =
-      Defs::_32x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x8][kIntraPredictorSmoothHorizontal] =
-      Defs::_32x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize32x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x16][kIntraPredictorDcFill] =
       Defs8bpp::_32x16::DcFill;
@@ -1018,19 +731,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize32x16][kIntraPredictorPaeth] =
       Defs::_32x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x16][kIntraPredictorSmooth] =
-      Defs::_32x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x16][kIntraPredictorSmoothVertical] =
-      Defs::_32x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x16][kIntraPredictorSmoothHorizontal] =
-      Defs::_32x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize32x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x32][kIntraPredictorDcFill] =
       Defs8bpp::_32x32::DcFill;
@@ -1059,19 +759,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize32x32][kIntraPredictorPaeth] =
       Defs::_32x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x32][kIntraPredictorSmooth] =
-      Defs::_32x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x32][kIntraPredictorSmoothVertical] =
-      Defs::_32x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x32][kIntraPredictorSmoothHorizontal] =
-      Defs::_32x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize32x64_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x64][kIntraPredictorDcFill] =
       Defs8bpp::_32x64::DcFill;
@@ -1100,19 +787,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize32x64][kIntraPredictorPaeth] =
       Defs::_32x64::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x64_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x64][kIntraPredictorSmooth] =
-      Defs::_32x64::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x64_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x64][kIntraPredictorSmoothVertical] =
-      Defs::_32x64::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize32x64_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x64][kIntraPredictorSmoothHorizontal] =
-      Defs::_32x64::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize64x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize64x16][kIntraPredictorDcFill] =
       Defs8bpp::_64x16::DcFill;
@@ -1141,19 +815,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize64x16][kIntraPredictorPaeth] =
       Defs::_64x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize64x16][kIntraPredictorSmooth] =
-      Defs::_64x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize64x16][kIntraPredictorSmoothVertical] =
-      Defs::_64x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize64x16][kIntraPredictorSmoothHorizontal] =
-      Defs::_64x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize64x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize64x32][kIntraPredictorDcFill] =
       Defs8bpp::_64x32::DcFill;
@@ -1182,19 +843,6 @@ void Init8bpp() {
   dsp->intra_predictors[kTransformSize64x32][kIntraPredictorPaeth] =
       Defs::_64x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize64x32][kIntraPredictorSmooth] =
-      Defs::_64x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize64x32][kIntraPredictorSmoothVertical] =
-      Defs::_64x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize64x32][kIntraPredictorSmoothHorizontal] =
-      Defs::_64x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp8bpp_TransformSize64x64_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize64x64][kIntraPredictorDcFill] =
       Defs8bpp::_64x64::DcFill;
@@ -1222,18 +870,6 @@ void Init8bpp() {
 #ifndef LIBGAV1_Dsp8bpp_TransformSize64x64_IntraPredictorPaeth
   dsp->intra_predictors[kTransformSize64x64][kIntraPredictorPaeth] =
       Defs::_64x64::Paeth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x64_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize64x64][kIntraPredictorSmooth] =
-      Defs::_64x64::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x64_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize64x64][kIntraPredictorSmoothVertical] =
-      Defs::_64x64::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp8bpp_TransformSize64x64_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize64x64][kIntraPredictorSmoothHorizontal] =
-      Defs::_64x64::SmoothHorizontal;
 #endif
 #endif  // LIBGAV1_ENABLE_ALL_DSP_FUNCTIONS
 }  // NOLINT(readability/fn_size)
@@ -1276,19 +912,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize4x4][kIntraPredictorPaeth] =
       DefsHbd::_4x4::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x4_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize4x4][kIntraPredictorSmooth] =
-      DefsHbd::_4x4::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x4_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize4x4][kIntraPredictorSmoothVertical] =
-      DefsHbd::_4x4::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x4_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize4x4][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_4x4::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize4x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize4x8][kIntraPredictorDcFill] =
       Defs10bpp::_4x8::DcFill;
@@ -1317,19 +940,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize4x8][kIntraPredictorPaeth] =
       DefsHbd::_4x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize4x8][kIntraPredictorSmooth] =
-      DefsHbd::_4x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize4x8][kIntraPredictorSmoothVertical] =
-      DefsHbd::_4x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize4x8][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_4x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize4x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize4x16][kIntraPredictorDcFill] =
       Defs10bpp::_4x16::DcFill;
@@ -1358,19 +968,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize4x16][kIntraPredictorPaeth] =
       DefsHbd::_4x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize4x16][kIntraPredictorSmooth] =
-      DefsHbd::_4x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize4x16][kIntraPredictorSmoothVertical] =
-      DefsHbd::_4x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize4x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize4x16][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_4x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize8x4_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x4][kIntraPredictorDcFill] =
       Defs10bpp::_8x4::DcFill;
@@ -1399,19 +996,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize8x4][kIntraPredictorPaeth] =
       DefsHbd::_8x4::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x4_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x4][kIntraPredictorSmooth] =
-      DefsHbd::_8x4::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x4_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x4][kIntraPredictorSmoothVertical] =
-      DefsHbd::_8x4::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x4_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x4][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_8x4::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize8x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x8][kIntraPredictorDcFill] =
       Defs10bpp::_8x8::DcFill;
@@ -1440,19 +1024,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize8x8][kIntraPredictorPaeth] =
       DefsHbd::_8x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x8][kIntraPredictorSmooth] =
-      DefsHbd::_8x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x8][kIntraPredictorSmoothVertical] =
-      DefsHbd::_8x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x8][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_8x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize8x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x16][kIntraPredictorDcFill] =
       Defs10bpp::_8x16::DcFill;
@@ -1481,19 +1052,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize8x16][kIntraPredictorPaeth] =
       DefsHbd::_8x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x16][kIntraPredictorSmooth] =
-      DefsHbd::_8x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x16][kIntraPredictorSmoothVertical] =
-      DefsHbd::_8x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x16][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_8x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize8x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize8x32][kIntraPredictorDcFill] =
       Defs10bpp::_8x32::DcFill;
@@ -1522,19 +1080,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize8x32][kIntraPredictorPaeth] =
       DefsHbd::_8x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize8x32][kIntraPredictorSmooth] =
-      DefsHbd::_8x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize8x32][kIntraPredictorSmoothVertical] =
-      DefsHbd::_8x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize8x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize8x32][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_8x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize16x4_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x4][kIntraPredictorDcFill] =
       Defs10bpp::_16x4::DcFill;
@@ -1563,19 +1108,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize16x4][kIntraPredictorPaeth] =
       DefsHbd::_16x4::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x4_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x4][kIntraPredictorSmooth] =
-      DefsHbd::_16x4::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x4_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x4][kIntraPredictorSmoothVertical] =
-      DefsHbd::_16x4::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x4_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x4][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_16x4::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize16x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x8][kIntraPredictorDcFill] =
       Defs10bpp::_16x8::DcFill;
@@ -1604,19 +1136,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize16x8][kIntraPredictorPaeth] =
       DefsHbd::_16x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x8][kIntraPredictorSmooth] =
-      DefsHbd::_16x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x8][kIntraPredictorSmoothVertical] =
-      DefsHbd::_16x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x8][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_16x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize16x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x16][kIntraPredictorDcFill] =
       Defs10bpp::_16x16::DcFill;
@@ -1645,19 +1164,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize16x16][kIntraPredictorPaeth] =
       DefsHbd::_16x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x16][kIntraPredictorSmooth] =
-      DefsHbd::_16x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x16][kIntraPredictorSmoothVertical] =
-      DefsHbd::_16x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x16][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_16x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize16x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x32][kIntraPredictorDcFill] =
       Defs10bpp::_16x32::DcFill;
@@ -1686,19 +1192,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize16x32][kIntraPredictorPaeth] =
       DefsHbd::_16x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x32][kIntraPredictorSmooth] =
-      DefsHbd::_16x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x32][kIntraPredictorSmoothVertical] =
-      DefsHbd::_16x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x32][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_16x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize16x64_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize16x64][kIntraPredictorDcFill] =
       Defs10bpp::_16x64::DcFill;
@@ -1727,19 +1220,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize16x64][kIntraPredictorPaeth] =
       DefsHbd::_16x64::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x64_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize16x64][kIntraPredictorSmooth] =
-      DefsHbd::_16x64::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x64_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize16x64][kIntraPredictorSmoothVertical] =
-      DefsHbd::_16x64::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize16x64_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize16x64][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_16x64::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize32x8_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x8][kIntraPredictorDcFill] =
       Defs10bpp::_32x8::DcFill;
@@ -1768,19 +1248,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize32x8][kIntraPredictorPaeth] =
       DefsHbd::_32x8::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x8_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x8][kIntraPredictorSmooth] =
-      DefsHbd::_32x8::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x8_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x8][kIntraPredictorSmoothVertical] =
-      DefsHbd::_32x8::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x8_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x8][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_32x8::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize32x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x16][kIntraPredictorDcFill] =
       Defs10bpp::_32x16::DcFill;
@@ -1809,19 +1276,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize32x16][kIntraPredictorPaeth] =
       DefsHbd::_32x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x16][kIntraPredictorSmooth] =
-      DefsHbd::_32x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x16][kIntraPredictorSmoothVertical] =
-      DefsHbd::_32x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x16][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_32x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize32x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x32][kIntraPredictorDcFill] =
       Defs10bpp::_32x32::DcFill;
@@ -1850,19 +1304,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize32x32][kIntraPredictorPaeth] =
       DefsHbd::_32x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x32][kIntraPredictorSmooth] =
-      DefsHbd::_32x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x32][kIntraPredictorSmoothVertical] =
-      DefsHbd::_32x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x32][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_32x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize32x64_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize32x64][kIntraPredictorDcFill] =
       Defs10bpp::_32x64::DcFill;
@@ -1891,19 +1332,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize32x64][kIntraPredictorPaeth] =
       DefsHbd::_32x64::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x64_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize32x64][kIntraPredictorSmooth] =
-      DefsHbd::_32x64::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x64_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize32x64][kIntraPredictorSmoothVertical] =
-      DefsHbd::_32x64::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize32x64_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize32x64][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_32x64::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize64x16_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize64x16][kIntraPredictorDcFill] =
       Defs10bpp::_64x16::DcFill;
@@ -1932,19 +1360,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize64x16][kIntraPredictorPaeth] =
       DefsHbd::_64x16::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x16_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize64x16][kIntraPredictorSmooth] =
-      DefsHbd::_64x16::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x16_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize64x16][kIntraPredictorSmoothVertical] =
-      DefsHbd::_64x16::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x16_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize64x16][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_64x16::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize64x32_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize64x32][kIntraPredictorDcFill] =
       Defs10bpp::_64x32::DcFill;
@@ -1973,19 +1388,6 @@ void Init10bpp() {
   dsp->intra_predictors[kTransformSize64x32][kIntraPredictorPaeth] =
       DefsHbd::_64x32::Paeth;
 #endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x32_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize64x32][kIntraPredictorSmooth] =
-      DefsHbd::_64x32::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x32_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize64x32][kIntraPredictorSmoothVertical] =
-      DefsHbd::_64x32::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x32_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize64x32][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_64x32::SmoothHorizontal;
-#endif
-
 #ifndef LIBGAV1_Dsp10bpp_TransformSize64x64_IntraPredictorDcFill
   dsp->intra_predictors[kTransformSize64x64][kIntraPredictorDcFill] =
       Defs10bpp::_64x64::DcFill;
@@ -2013,18 +1415,6 @@ void Init10bpp() {
 #ifndef LIBGAV1_Dsp10bpp_TransformSize64x64_IntraPredictorPaeth
   dsp->intra_predictors[kTransformSize64x64][kIntraPredictorPaeth] =
       DefsHbd::_64x64::Paeth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x64_IntraPredictorSmooth
-  dsp->intra_predictors[kTransformSize64x64][kIntraPredictorSmooth] =
-      DefsHbd::_64x64::Smooth;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x64_IntraPredictorSmoothVertical
-  dsp->intra_predictors[kTransformSize64x64][kIntraPredictorSmoothVertical] =
-      DefsHbd::_64x64::SmoothVertical;
-#endif
-#ifndef LIBGAV1_Dsp10bpp_TransformSize64x64_IntraPredictorSmoothHorizontal
-  dsp->intra_predictors[kTransformSize64x64][kIntraPredictorSmoothHorizontal] =
-      DefsHbd::_64x64::SmoothHorizontal;
 #endif
 #endif  // LIBGAV1_ENABLE_ALL_DSP_FUNCTIONS
 }  // NOLINT(readability/fn_size)
