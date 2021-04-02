@@ -87,6 +87,8 @@ list(APPEND libgav1_intrapred_filter_test_sources
             "${libgav1_source}/dsp/intrapred_filter_test.cc")
 list(APPEND libgav1_intrapred_test_sources
             "${libgav1_source}/dsp/intrapred_test.cc")
+list(APPEND libgav1_inverse_transform_test_sources
+            "${libgav1_source}/dsp/inverse_transform_test.cc")
 list(APPEND libgav1_mask_blend_test_sources
             "${libgav1_source}/dsp/mask_blend_test.cc")
 list(APPEND libgav1_weight_mask_test_sources
@@ -388,6 +390,28 @@ macro(libgav1_add_tests_targets)
                          ${libgav1_test_include_paths}
                          OBJLIB_DEPS
                          libgav1_decoder
+                         libgav1_tests_utils
+                         libgav1_dsp
+                         libgav1_utils
+                         LIB_DEPS
+                         absl::strings
+                         absl::time
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_executable(TEST
+                         NAME
+                         inverse_transform_test
+                         SOURCES
+                         ${libgav1_inverse_transform_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         OBJLIB_DEPS
+                         libgav1_decoder
+                         libgav1_tests_block_utils
                          libgav1_tests_utils
                          libgav1_dsp
                          libgav1_utils
