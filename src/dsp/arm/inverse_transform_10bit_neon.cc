@@ -1054,6 +1054,192 @@ LIBGAV1_ALWAYS_INLINE bool Adst4DcOnlyColumn(void* dest, int adjusted_tx_height,
   return true;
 }
 
+template <ButterflyRotationFunc butterfly_rotation>
+LIBGAV1_ALWAYS_INLINE void Adst8_NEON(void* dest, int32_t step, bool is_row,
+                                      int row_shift) {
+  auto* const dst = static_cast<int32_t*>(dest);
+  const int32_t range = is_row ? kBitdepth10 + 7 : 15;
+  const int32x4_t min = vdupq_n_s32(-(1 << range));
+  const int32x4_t max = vdupq_n_s32((1 << range) - 1);
+  int32x4_t s[8], x[8];
+
+  if (is_row) {
+    LoadSrc<4>(dst, step, 0, &x[0]);
+    LoadSrc<4>(dst, step, 4, &x[4]);
+    Transpose4x4(&x[0], &x[0]);
+    Transpose4x4(&x[4], &x[4]);
+  } else {
+    LoadSrc<8>(dst, step, 0, &x[0]);
+  }
+
+  // stage 1.
+  s[0] = x[7];
+  s[1] = x[0];
+  s[2] = x[5];
+  s[3] = x[2];
+  s[4] = x[3];
+  s[5] = x[4];
+  s[6] = x[1];
+  s[7] = x[6];
+
+  // stage 2.
+  butterfly_rotation(&s[0], &s[1], 60 - 0, true);
+  butterfly_rotation(&s[2], &s[3], 60 - 16, true);
+  butterfly_rotation(&s[4], &s[5], 60 - 32, true);
+  butterfly_rotation(&s[6], &s[7], 60 - 48, true);
+
+  // stage 3.
+  HadamardRotation(&s[0], &s[4], false, &min, &max);
+  HadamardRotation(&s[1], &s[5], false, &min, &max);
+  HadamardRotation(&s[2], &s[6], false, &min, &max);
+  HadamardRotation(&s[3], &s[7], false, &min, &max);
+
+  // stage 4.
+  butterfly_rotation(&s[4], &s[5], 48 - 0, true);
+  butterfly_rotation(&s[7], &s[6], 48 - 32, true);
+
+  // stage 5.
+  HadamardRotation(&s[0], &s[2], false, &min, &max);
+  HadamardRotation(&s[4], &s[6], false, &min, &max);
+  HadamardRotation(&s[1], &s[3], false, &min, &max);
+  HadamardRotation(&s[5], &s[7], false, &min, &max);
+
+  // stage 6.
+  butterfly_rotation(&s[2], &s[3], 32, true);
+  butterfly_rotation(&s[6], &s[7], 32, true);
+
+  // stage 7.
+  x[0] = s[0];
+  x[1] = vqnegq_s32(s[4]);
+  x[2] = s[6];
+  x[3] = vqnegq_s32(s[2]);
+  x[4] = s[3];
+  x[5] = vqnegq_s32(s[7]);
+  x[6] = s[5];
+  x[7] = vqnegq_s32(s[1]);
+
+  if (is_row) {
+    const int32x4_t v_row_shift = vdupq_n_s32(-row_shift);
+    for (int i = 0; i < 8; ++i) {
+      x[i] = vmovl_s16(vqmovn_s32(vqrshlq_s32(x[i], v_row_shift)));
+    }
+    Transpose4x4(&x[0], &x[0]);
+    Transpose4x4(&x[4], &x[4]);
+    StoreDst<4>(dst, step, 0, &x[0]);
+    StoreDst<4>(dst, step, 4, &x[4]);
+  } else {
+    StoreDst<8>(dst, step, 0, &x[0]);
+  }
+}
+
+LIBGAV1_ALWAYS_INLINE bool Adst8DcOnly(void* dest, int adjusted_tx_height,
+                                       bool should_round, int row_shift) {
+  if (adjusted_tx_height > 1) return false;
+
+  auto* dst = static_cast<int32_t*>(dest);
+  int32x4_t s[8];
+
+  const int32x4_t v_src = vdupq_n_s32(dst[0]);
+  const uint32x4_t v_mask = vdupq_n_u32(should_round ? 0xffffffff : 0);
+  const int32x4_t v_src_round =
+      vqrdmulhq_n_s32(v_src, kTransformRowMultiplier << (31 - 12));
+  // stage 1.
+  s[1] = vbslq_s32(v_mask, v_src_round, v_src);
+
+  // stage 2.
+  ButterflyRotation_FirstIsZero(&s[0], &s[1], 60, true);
+
+  // stage 3.
+  s[4] = s[0];
+  s[5] = s[1];
+
+  // stage 4.
+  ButterflyRotation_4(&s[4], &s[5], 48, true);
+
+  // stage 5.
+  s[2] = s[0];
+  s[3] = s[1];
+  s[6] = s[4];
+  s[7] = s[5];
+
+  // stage 6.
+  ButterflyRotation_4(&s[2], &s[3], 32, true);
+  ButterflyRotation_4(&s[6], &s[7], 32, true);
+
+  // stage 7.
+  int32x4_t x[8];
+  x[0] = s[0];
+  x[1] = vqnegq_s32(s[4]);
+  x[2] = s[6];
+  x[3] = vqnegq_s32(s[2]);
+  x[4] = s[3];
+  x[5] = vqnegq_s32(s[7]);
+  x[6] = s[5];
+  x[7] = vqnegq_s32(s[1]);
+
+  for (int i = 0; i < 8; ++i) {
+    // vqrshlq_s32 will shift right if shift value is negative.
+    x[i] = vmovl_s16(vqmovn_s32(vqrshlq_s32(x[i], vdupq_n_s32(-row_shift))));
+    vst1q_lane_s32(&dst[i], x[i], 0);
+  }
+
+  return true;
+}
+
+LIBGAV1_ALWAYS_INLINE bool Adst8DcOnlyColumn(void* dest, int adjusted_tx_height,
+                                             int width) {
+  if (adjusted_tx_height > 1) return false;
+
+  auto* dst = static_cast<int32_t*>(dest);
+  int32x4_t s[8];
+
+  int i = 0;
+  do {
+    const int32x4_t v_src = vld1q_s32(dst);
+    // stage 1.
+    s[1] = v_src;
+
+    // stage 2.
+    ButterflyRotation_FirstIsZero(&s[0], &s[1], 60, true);
+
+    // stage 3.
+    s[4] = s[0];
+    s[5] = s[1];
+
+    // stage 4.
+    ButterflyRotation_4(&s[4], &s[5], 48, true);
+
+    // stage 5.
+    s[2] = s[0];
+    s[3] = s[1];
+    s[6] = s[4];
+    s[7] = s[5];
+
+    // stage 6.
+    ButterflyRotation_4(&s[2], &s[3], 32, true);
+    ButterflyRotation_4(&s[6], &s[7], 32, true);
+
+    // stage 7.
+    int32x4_t x[8];
+    x[0] = s[0];
+    x[1] = vqnegq_s32(s[4]);
+    x[2] = s[6];
+    x[3] = vqnegq_s32(s[2]);
+    x[4] = s[3];
+    x[5] = vqnegq_s32(s[7]);
+    x[6] = s[5];
+    x[7] = vqnegq_s32(s[1]);
+
+    for (int j = 0; j < 8; ++j) {
+      vst1q_s32(&dst[j * width], x[j]);
+    }
+    i += 4;
+    dst += 4;
+  } while (i < width);
+
+  return true;
+}
+
 //------------------------------------------------------------------------------
 // row/column transform loops
 
@@ -1500,6 +1686,60 @@ void Adst4TransformLoopColumn_NEON(TransformType tx_type, TransformSize tx_size,
                                                       tx_width, src, tx_type);
 }
 
+void Adst8TransformLoopRow_NEON(TransformType /*tx_type*/,
+                                TransformSize tx_size, int adjusted_tx_height,
+                                void* src_buffer, int /*start_x*/,
+                                int /*start_y*/, void* /*dst_frame*/) {
+  auto* src = static_cast<int32_t*>(src_buffer);
+  const bool should_round = kShouldRound[tx_size];
+  const uint8_t row_shift = kTransformRowShift[tx_size];
+
+  if (Adst8DcOnly(src, adjusted_tx_height, should_round, row_shift)) {
+    return;
+  }
+
+  if (should_round) {
+    ApplyRounding<8>(src, adjusted_tx_height);
+  }
+
+  // Process 4 1d adst8 rows in parallel per iteration.
+  assert(adjusted_tx_height % 4 == 0);
+  int i = adjusted_tx_height;
+  auto* data = src;
+  do {
+    Adst8_NEON<ButterflyRotation_4>(data, /*step=*/8,
+                                    /*transpose=*/true, row_shift);
+    data += 32;
+    i -= 4;
+  } while (i != 0);
+}
+
+void Adst8TransformLoopColumn_NEON(TransformType tx_type, TransformSize tx_size,
+                                   int adjusted_tx_height, void* src_buffer,
+                                   int start_x, int start_y, void* dst_frame) {
+  auto* src = static_cast<int32_t*>(src_buffer);
+  const int tx_width = kTransformWidth[tx_size];
+
+  if (kTransformFlipColumnsMask.Contains(tx_type)) {
+    FlipColumns<8>(src, tx_width);
+  }
+
+  if (!Adst8DcOnlyColumn(src, adjusted_tx_height, tx_width)) {
+    // Process 4 1d adst8 columns in parallel per iteration.
+    int i = tx_width;
+    auto* data = src;
+    do {
+      Adst8_NEON<ButterflyRotation_4>(data, tx_width, /*transpose=*/false,
+                                      /*row_shift=*/0);
+      data += 4;
+      i -= 4;
+    } while (i != 0);
+  }
+  auto& frame = *static_cast<Array2DView<uint16_t>*>(dst_frame);
+  StoreToFrameWithRound<8, /*enable_flip_rows=*/true>(frame, start_x, start_y,
+                                                      tx_width, src, tx_type);
+}
+
 //------------------------------------------------------------------------------
 
 void Init10bpp() {
@@ -1532,6 +1772,10 @@ void Init10bpp() {
       Adst4TransformLoopRow_NEON;
   dsp->inverse_transforms[k1DTransformAdst][k1DTransformSize4][kColumn] =
       Adst4TransformLoopColumn_NEON;
+  dsp->inverse_transforms[k1DTransformAdst][k1DTransformSize8][kRow] =
+      Adst8TransformLoopRow_NEON;
+  dsp->inverse_transforms[k1DTransformAdst][k1DTransformSize8][kColumn] =
+      Adst8TransformLoopColumn_NEON;
 }
 
 }  // namespace
