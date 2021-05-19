@@ -776,6 +776,9 @@ class ConvolveTest
       }
     } else if (absl::StartsWith(test_case, "NEON/")) {
       ConvolveInit_NEON();
+#if LIBGAV1_MAX_BITDEPTH >= 10
+      ConvolveInit10bpp_NEON();
+#endif
     } else {
       FAIL() << "Unrecognized architecture prefix in test case name: "
              << test_case;
@@ -1366,6 +1369,14 @@ INSTANTIATE_TEST_SUITE_P(C, ConvolveTest10bpp,
                          testing::Combine(testing::ValuesIn(kConvolveParam),
                                           testing::ValuesIn(kConvolveTypeParam),
                                           testing::Bool()));
+
+#if LIBGAV1_ENABLE_NEON
+INSTANTIATE_TEST_SUITE_P(NEON, ConvolveTest10bpp,
+                         testing::Combine(testing::ValuesIn(kConvolveParam),
+                                          testing::ValuesIn(kConvolveTypeParam),
+                                          testing::Bool()));
+#endif  // LIBGAV1_ENABLE_NEON
+
 #endif  // LIBGAV1_MAX_BITDEPTH >= 10
 
 }  // namespace
