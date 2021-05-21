@@ -226,8 +226,8 @@ void Tile::IntraPrediction(const Block& block, Plane plane, int x, int y,
                            bool has_left, bool has_top, bool has_top_right,
                            bool has_bottom_left, PredictionMode mode,
                            TransformSize tx_size) {
-  const int width = 1 << kTransformWidthLog2[tx_size];
-  const int height = 1 << kTransformHeightLog2[tx_size];
+  const int width = kTransformWidth[tx_size];
+  const int height = kTransformHeight[tx_size];
   const int x_shift = subsampling_x_[plane];
   const int y_shift = subsampling_y_[plane];
   const int max_x = (MultiplyBy4(frame_header_.columns4x4) >> x_shift) - 1;
