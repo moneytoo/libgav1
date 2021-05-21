@@ -574,8 +574,9 @@ using DistanceWeightedBlendFunc = void (*)(const void* prediction_0,
 // |mask_stride| is corresponding stride.
 // |width|, |height| are the same for both input blocks.
 // If it's inter_intra (or wedge_inter_intra), the valid range of block size is
-// [8x8, 32x32]. Otherwise (including difference weighted prediction and
-// compound average prediction), the valid range is [8x8, 128x128].
+// [8x8, 32x32], no 4:1/1:4 blocks (Section 5.11.28). Otherwise (including
+// difference weighted prediction and compound average prediction), the valid
+// range is [8x8, 128x128].
 // If there's subsampling, the corresponding width and height are halved for
 // chroma planes.
 // |is_inter_intra| stands for the prediction mode. If it is true, one of the
