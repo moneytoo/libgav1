@@ -48,33 +48,17 @@ inline void WriteObmcLine4(uint8_t* LIBGAV1_RESTRICT const pred,
   StoreLo4(pred, result);
 }
 
-template <bool from_left>
-inline void OverlapBlend2xH_NEON(uint8_t* LIBGAV1_RESTRICT pred,
-                                 const ptrdiff_t prediction_stride,
-                                 const int height,
-                                 const uint8_t* LIBGAV1_RESTRICT obmc_pred,
-                                 const ptrdiff_t obmc_prediction_stride) {
+inline void OverlapBlendFromLeft2xH_NEON(
+    uint8_t* LIBGAV1_RESTRICT pred, const ptrdiff_t prediction_stride,
+    const int height, const uint8_t* LIBGAV1_RESTRICT obmc_pred,
+    const ptrdiff_t obmc_prediction_stride) {
   const uint8x8_t mask_inverter = vdup_n_u8(64);
-  uint8x8_t pred_mask;
-  uint8x8_t obmc_pred_mask;
-  int compute_height;
-  const int mask_offset = height - 2;
-  if (from_left) {
-    pred_mask = Load2(kObmcMask);
-    obmc_pred_mask = vsub_u8(mask_inverter, pred_mask);
-    compute_height = height;
-  } else {
-    // Weights for the last line are all 64, which is a no-op.
-    compute_height = height - 1;
-  }
+  const uint8x8_t pred_mask = Load2(kObmcMask);
+  const uint8x8_t obmc_pred_mask = vsub_u8(mask_inverter, pred_mask);
   uint8x8_t pred_val = vdup_n_u8(0);
   uint8x8_t obmc_pred_val = vdup_n_u8(0);
   int y = 0;
   do {
-    if (!from_left) {
-      pred_mask = vdup_n_u8(kObmcMask[mask_offset + y]);
-      obmc_pred_mask = vsub_u8(mask_inverter, pred_mask);
-    }
     pred_val = Load2<0>(pred, pred_val);
     const uint16x8_t weighted_pred = vmull_u8(pred_mask, pred_val);
     obmc_pred_val = Load2<0>(obmc_pred, obmc_pred_val);
@@ -84,7 +68,7 @@ inline void OverlapBlend2xH_NEON(uint8_t* LIBGAV1_RESTRICT pred,
 
     pred += prediction_stride;
     obmc_pred += obmc_prediction_stride;
-  } while (++y != compute_height);
+  } while (++y != height);
 }
 
 inline void OverlapBlendFromLeft4xH_NEON(
@@ -138,10 +122,12 @@ void OverlapBlendFromLeft_NEON(
     const ptrdiff_t obmc_prediction_stride) {
   auto* pred = static_cast<uint8_t*>(prediction);
   const auto* obmc_pred = static_cast<const uint8_t*>(obmc_prediction);
+  assert(width >= 2);
+  assert(height >= 4);
 
   if (width == 2) {
-    OverlapBlend2xH_NEON<true>(pred, prediction_stride, height, obmc_pred,
-                               obmc_prediction_stride);
+    OverlapBlendFromLeft2xH_NEON(pred, prediction_stride, height, obmc_pred,
+                                 obmc_prediction_stride);
     return;
   }
   if (width == 4) {
@@ -301,12 +287,9 @@ void OverlapBlendFromTop_NEON(
     const ptrdiff_t obmc_prediction_stride) {
   auto* pred = static_cast<uint8_t*>(prediction);
   const auto* obmc_pred = static_cast<const uint8_t*>(obmc_prediction);
+  assert(width >= 4);
+  assert(height >= 2);
 
-  if (width == 2) {
-    OverlapBlend2xH_NEON<false>(pred, prediction_stride, height, obmc_pred,
-                                obmc_prediction_stride);
-    return;
-  }
   if (width == 4) {
     OverlapBlendFromTop4xH_NEON(pred, prediction_stride, height, obmc_pred,
                                 obmc_prediction_stride);

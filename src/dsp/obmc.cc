@@ -40,6 +40,8 @@ void OverlapBlendVertical_C(void* LIBGAV1_RESTRICT const prediction,
   const auto* obmc_pred = static_cast<const Pixel*>(obmc_prediction);
   const ptrdiff_t obmc_pred_stride = obmc_prediction_stride / sizeof(Pixel);
   const uint8_t* const mask = kObmcMask + height - 2;
+  assert(width >= 4);
+  assert(height >= 2);
 
   for (int y = 0; y < height; ++y) {
     const uint8_t mask_value = mask[y];
@@ -64,6 +66,9 @@ void OverlapBlendHorizontal_C(
   const auto* obmc_pred = static_cast<const Pixel*>(obmc_prediction);
   const ptrdiff_t obmc_pred_stride = obmc_prediction_stride / sizeof(Pixel);
   const uint8_t* const mask = kObmcMask + width - 2;
+  assert(width >= 2);
+  assert(height >= 4);
+
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
       const uint8_t mask_value = mask[x];

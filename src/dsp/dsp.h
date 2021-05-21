@@ -626,7 +626,9 @@ using InterIntraMaskBlendFuncs8bpp = InterIntraMaskBlendFunc8bpp[3];
 // clipped. Therefore obmc blending process doesn't need to clip the output.
 // |prediction| is the first input block, which will be overwritten.
 // |prediction_stride| is the stride, given in bytes.
-// |width|, |height| are the same for both input blocks.
+// |width|, |height| are the same for both input blocks. The range is [4x2,
+// 32x32] for kObmcDirectionVertical and [2x4, 32x32] for
+// kObmcDirectionHorizontal, see Section 7.11.3.9.
 // |obmc_prediction| is the second input block.
 // |obmc_prediction_stride| is its stride, given in bytes.
 // The pointer arguments do not alias one another.
