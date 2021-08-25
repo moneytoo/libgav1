@@ -84,6 +84,8 @@ list(APPEND libgav1_distance_weighted_blend_test_sources
 list(APPEND libgav1_dsp_test_sources "${libgav1_source}/dsp/dsp_test.cc")
 list(APPEND libgav1_film_grain_test_sources
             "${libgav1_source}/film_grain_test.cc")
+list(APPEND libgav1_internal_frame_buffer_list_test_sources
+            "${libgav1_source}/internal_frame_buffer_list_test.cc")
 list(APPEND libgav1_intra_edge_test_sources
             "${libgav1_source}/dsp/intra_edge_test.cc")
 list(APPEND libgav1_intrapred_cfl_test_sources
@@ -507,6 +509,24 @@ macro(libgav1_add_tests_targets)
                          LIB_DEPS
                          absl::strings
                          absl::time
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_executable(TEST
+                         NAME
+                         internal_frame_buffer_list_test
+                         SOURCES
+                         ${libgav1_internal_frame_buffer_list_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         OBJLIB_DEPS
+                         libgav1_decoder
+                         libgav1_dsp
+                         libgav1_utils
+                         LIB_DEPS
                          ${libgav1_common_test_absl_deps}
                          libgav1_gtest
                          libgav1_gtest_main)
