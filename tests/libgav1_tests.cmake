@@ -117,6 +117,8 @@ list(APPEND libgav1_obu_parser_test_sources
             "${libgav1_source}/obu_parser_test.cc")
 list(APPEND libgav1_post_filter_test_sources
             "${libgav1_source}/post_filter_test.cc")
+list(APPEND libgav1_prediction_mask_test_sources
+            "${libgav1_source}/prediction_mask_test.cc")
 list(APPEND libgav1_warp_test_sources "${libgav1_source}/dsp/warp_test.cc")
 
 macro(libgav1_add_tests_targets)
@@ -691,6 +693,26 @@ macro(libgav1_add_tests_targets)
                          libgav1_decoder
                          libgav1_dsp
                          libgav1_tests_block_utils
+                         libgav1_tests_utils
+                         libgav1_utils
+                         LIB_DEPS
+                         absl::time
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_executable(TEST
+                         NAME
+                         prediction_mask_test
+                         SOURCES
+                         ${libgav1_prediction_mask_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         OBJLIB_DEPS
+                         libgav1_decoder
+                         libgav1_dsp
                          libgav1_tests_utils
                          libgav1_utils
                          LIB_DEPS
