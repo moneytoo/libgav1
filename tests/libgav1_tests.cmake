@@ -76,6 +76,8 @@ list(APPEND libgav1_buffer_pool_test_sources
 list(APPEND libgav1_cdef_test_sources "${libgav1_source}/dsp/cdef_test.cc")
 list(APPEND libgav1_convolve_test_sources
             "${libgav1_source}/dsp/convolve_test.cc")
+list(APPEND libgav1_decoder_buffer_test_sources
+            "${libgav1_source}/decoder_buffer_test.cc")
 list(APPEND libgav1_distance_weighted_blend_test_sources
             "${libgav1_source}/dsp/distance_weighted_blend_test.cc")
 list(APPEND libgav1_dsp_test_sources "${libgav1_source}/dsp/dsp_test.cc")
@@ -281,6 +283,21 @@ macro(libgav1_add_tests_targets)
                          LIB_DEPS
                          absl::str_format_internal
                          absl::time
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_executable(TEST
+                         NAME
+                         decoder_buffer_test
+                         SOURCES
+                         ${libgav1_decoder_buffer_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         LIB_DEPS
+                         ${libgav1_dependency}
                          ${libgav1_common_test_absl_deps}
                          libgav1_gtest
                          libgav1_gtest_main)
