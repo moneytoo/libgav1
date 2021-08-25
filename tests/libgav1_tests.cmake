@@ -113,6 +113,8 @@ list(APPEND libgav1_super_res_test_sources
 list(APPEND libgav1_weight_mask_test_sources
             "${libgav1_source}/dsp/weight_mask_test.cc")
 list(APPEND libgav1_obmc_test_sources "${libgav1_source}/dsp/obmc_test.cc")
+list(APPEND libgav1_obu_parser_test_sources
+            "${libgav1_source}/obu_parser_test.cc")
 list(APPEND libgav1_post_filter_test_sources
             "${libgav1_source}/post_filter_test.cc")
 list(APPEND libgav1_warp_test_sources "${libgav1_source}/dsp/warp_test.cc")
@@ -654,6 +656,24 @@ macro(libgav1_add_tests_targets)
                          LIB_DEPS
                          absl::str_format_internal
                          absl::time
+                         ${libgav1_common_test_absl_deps}
+                         libgav1_gtest
+                         libgav1_gtest_main)
+
+  libgav1_add_executable(TEST
+                         NAME
+                         obu_parser_test
+                         SOURCES
+                         ${libgav1_obu_parser_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_test_include_paths}
+                         OBJLIB_DEPS
+                         libgav1_decoder
+                         libgav1_dsp
+                         libgav1_utils
+                         LIB_DEPS
                          ${libgav1_common_test_absl_deps}
                          libgav1_gtest
                          libgav1_gtest_main)
