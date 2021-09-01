@@ -86,6 +86,7 @@ list(APPEND libgav1_convolve_test_sources
             "${libgav1_source}/dsp/convolve_test.cc")
 list(APPEND libgav1_cpu_test_sources "${libgav1_source}/utils/cpu_test.cc")
 list(APPEND libgav1_c_decoder_test_sources "${libgav1_source}/c_decoder_test.c")
+list(APPEND libgav1_c_version_test_sources "${libgav1_source}/c_version_test.c")
 list(APPEND libgav1_decoder_test_sources "${libgav1_source}/decoder_test.cc")
 list(APPEND libgav1_decoder_buffer_test_sources
             "${libgav1_source}/decoder_buffer_test.cc")
@@ -623,6 +624,18 @@ macro(libgav1_add_tests_targets)
                          c_decoder_test
                          SOURCES
                          ${libgav1_c_decoder_test_sources}
+                         DEFINES
+                         ${libgav1_defines}
+                         INCLUDES
+                         ${libgav1_include_paths}
+                         LIB_DEPS
+                         ${libgav1_dependency})
+
+  libgav1_add_executable(TEST
+                         NAME
+                         c_version_test
+                         SOURCES
+                         ${libgav1_c_version_test_sources}
                          DEFINES
                          ${libgav1_defines}
                          INCLUDES
