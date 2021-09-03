@@ -82,6 +82,17 @@ list(APPEND libgav1_buffer_pool_test_sources
 list(APPEND libgav1_cdef_test_sources "${libgav1_source}/dsp/cdef_test.cc")
 list(
   APPEND libgav1_common_test_sources "${libgav1_source}/utils/common_test.cc")
+list(APPEND libgav1_common_avx2_test_sources
+            "${libgav1_source}/dsp/x86/common_avx2.h"
+            "${libgav1_source}/dsp/x86/common_avx2.inc"
+            "${libgav1_source}/dsp/x86/common_avx2_test.cc"
+            "${libgav1_source}/dsp/x86/common_sse4.inc")
+list(APPEND libgav1_common_neon_test_sources
+            "${libgav1_source}/dsp/arm/common_neon_test.cc")
+list(APPEND libgav1_common_sse4_test_sources
+            "${libgav1_source}/dsp/x86/common_sse4.h"
+            "${libgav1_source}/dsp/x86/common_sse4.inc"
+            "${libgav1_source}/dsp/x86/common_sse4_test.cc")
 list(APPEND libgav1_convolve_test_sources
             "${libgav1_source}/dsp/convolve_test.cc")
 list(APPEND libgav1_cpu_test_sources "${libgav1_source}/utils/cpu_test.cc")
@@ -264,6 +275,56 @@ macro(libgav1_add_tests_targets)
                          ${libgav1_common_test_absl_deps}
                          libgav1_gtest
                          libgav1_gtest_main)
+
+  if(libgav1_have_avx2)
+    libgav1_add_executable(TEST
+                           NAME
+                           common_avx2_test
+                           SOURCES
+                           ${libgav1_common_avx2_test_sources}
+                           DEFINES
+                           ${libgav1_defines}
+                           INCLUDES
+                           ${libgav1_test_include_paths}
+                           LIB_DEPS
+                           ${libgav1_common_test_absl_deps}
+                           libgav1_gtest
+                           libgav1_gtest_main)
+  endif()
+
+  if(libgav1_have_neon)
+    libgav1_add_executable(TEST
+                           NAME
+                           common_neon_test
+                           SOURCES
+                           ${libgav1_common_neon_test_sources}
+                           DEFINES
+                           ${libgav1_defines}
+                           INCLUDES
+                           ${libgav1_test_include_paths}
+                           OBJLIB_DEPS
+                           libgav1_tests_block_utils
+                           LIB_DEPS
+                           ${libgav1_common_test_absl_deps}
+                           libgav1_gtest
+                           libgav1_gtest_main)
+  endif()
+
+  if(libgav1_have_sse4)
+    libgav1_add_executable(TEST
+                           NAME
+                           common_sse4_test
+                           SOURCES
+                           ${libgav1_common_sse4_test_sources}
+                           DEFINES
+                           ${libgav1_defines}
+                           INCLUDES
+                           ${libgav1_test_include_paths}
+                           LIB_DEPS
+                           ${libgav1_common_test_absl_deps}
+                           libgav1_gtest
+                           libgav1_gtest_main)
+  endif()
 
   libgav1_add_executable(TEST
                          NAME
