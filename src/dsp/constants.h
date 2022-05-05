@@ -26,27 +26,26 @@
 
 namespace libgav1 {
 
-enum {
-  // Documentation variables.
-  kBitdepth8 = 8,
-  kBitdepth10 = 10,
-  kBitdepth12 = 12,
-  // Weights are quadratic from '1' to '1 / block_size', scaled by
-  // 2^kSmoothWeightScale.
-  kSmoothWeightScale = 8,
-  kCflLumaBufferStride = 32,
-  // InterRound0, Section 7.11.3.2.
-  kInterRoundBitsHorizontal = 3,  // 8 & 10-bit.
-  kInterRoundBitsHorizontal12bpp = 5,
-  kInterRoundBitsCompoundVertical = 7,  // 8, 10 & 12-bit compound prediction.
-  kInterRoundBitsVertical = 11,         // 8 & 10-bit, single prediction.
-  kInterRoundBitsVertical12bpp = 9,
-  // Offset applied to 10bpp and 12bpp predictors to allow storing them in
-  // uint16_t. Removed before blending.
-  kCompoundOffset = (1 << 14) + (1 << 13),
-  kCdefSecondaryTap0 = 2,
-  kCdefSecondaryTap1 = 1,
-};  // anonymous enum
+// Documentation variables.
+constexpr int kBitdepth8 = 8;
+constexpr int kBitdepth10 = 10;
+constexpr int kBitdepth12 = 12;
+// Weights are quadratic from '1' to '1 / block_size', scaled by
+// 2^kSmoothWeightScale.
+constexpr int kSmoothWeightScale = 8;
+constexpr int kCflLumaBufferStride = 32;
+// InterRound0, Section 7.11.3.2.
+constexpr int kInterRoundBitsHorizontal = 3;  // 8 & 10-bit.
+constexpr int kInterRoundBitsHorizontal12bpp = 5;
+// 8, 10 & 12-bit compound prediction.
+constexpr int kInterRoundBitsCompoundVertical = 7;
+constexpr int kInterRoundBitsVertical = 11;  // 8 & 10-bit, single prediction.
+constexpr int kInterRoundBitsVertical12bpp = 9;
+// Offset applied to 10bpp and 12bpp predictors to allow storing them in
+// uint16_t. Removed before blending.
+constexpr int kCompoundOffset = (1 << 14) + (1 << 13);
+constexpr int kCdefSecondaryTap0 = 2;
+constexpr int kCdefSecondaryTap1 = 1;
 
 extern const int8_t kFilterIntraTaps[kNumFilterIntraPredictors][8][8];
 
