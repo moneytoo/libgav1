@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "118a3276_36a1a534",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000805
+      },
+      "writtenOn": "2022-05-05T14:43:09Z",
+      "side": 1,
+      "message": "The build failures don\u0027t look to be my fault?",
+      "revId": "210c22a2104ea331ccbe3e1911c2b0dc489e2705",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
