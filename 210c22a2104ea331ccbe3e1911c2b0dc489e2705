@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d73f4815_0600710f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2022-05-05T23:50:06Z",
+      "side": 1,
+      "message": "So I think this is the item in the bug that\u0027s affecting things here:\n* arithmetic between two different enums is deprecated.  These two points together make lots of code that used the \"enum hack\" to declare constants broken.\n\nWe went with this to avoid ODR issues as we don\u0027t have inline constexpr in C++11. Let me take a closer look.",
+      "revId": "210c22a2104ea331ccbe3e1911c2b0dc489e2705",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "118a3276_36a1a534",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-05-05T14:43:09Z",
       "side": 1,
       "message": "The build failures don\u0027t look to be my fault?",
+      "revId": "210c22a2104ea331ccbe3e1911c2b0dc489e2705",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f36538_ffb7252d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2022-05-05T23:50:06Z",
+      "side": 1,
+      "message": "\u003e The build failures don\u0027t look to be my fault?\n\nInfra is fun. I\u0027ll take a look.",
+      "parentUuid": "118a3276_36a1a534",
       "revId": "210c22a2104ea331ccbe3e1911c2b0dc489e2705",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
