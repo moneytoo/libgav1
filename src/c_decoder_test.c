@@ -75,6 +75,13 @@ static const uint8_t kFrame1[] = {OBU_TEMPORAL_DELIMITER, OBU_SEQUENCE_HEADER,
 
 static const uint8_t kFrame2[] = {OBU_TEMPORAL_DELIMITER, OBU_FRAME_2};
 
+static const uint8_t kFrame1WithHdrCllAndHdrMdcv[] = {
+    OBU_TEMPORAL_DELIMITER, OBU_SEQUENCE_HEADER, OBU_METADATA_HDR_CLL,
+    OBU_METADATA_HDR_MDCV, OBU_FRAME_1};
+
+static const uint8_t kFrame2WithItutT35[] = {
+    OBU_TEMPORAL_DELIMITER, OBU_METADATA_ITUT_T35, OBU_FRAME_2};
+
 typedef struct DecoderTest {
   Libgav1Decoder* decoder;
   int frames_in_use;
@@ -402,12 +409,66 @@ static void DecoderTestNonFrameParallelModeInvalidFrameAfterEOS(void) {
   test.decoder = NULL;
 }
 
+static void DecoderTestMetadataObu(void) {
+  DecoderTest test;
+  DecoderTestInit(&test);
+  DecoderTestSetUp(&test);
+
+  Libgav1StatusCode status;
+  const Libgav1DecoderBuffer* buffer;
+
+  // Enqueue frame1 for decoding.
+  status = Libgav1DecoderEnqueueFrame(test.decoder, kFrame1WithHdrCllAndHdrMdcv,
+                                      sizeof(kFrame1WithHdrCllAndHdrMdcv), 0,
+                                      (uint8_t*)&kFrame1WithHdrCllAndHdrMdcv);
+  ASSERT_EQ(status, kLibgav1StatusOk);
+  ASSERT_EQ(test.frames_in_use, 0);
+
+  // Dequeue the output of frame1.
+  status = Libgav1DecoderDequeueFrame(test.decoder, &buffer);
+  ASSERT_EQ(status, kLibgav1StatusOk);
+  ASSERT_NE(buffer, NULL);
+  ASSERT_EQ(buffer->has_hdr_cll, 1);
+  ASSERT_EQ(buffer->has_hdr_mdcv, 1);
+  ASSERT_EQ(buffer->has_itut_t35, 0);
+  ASSERT_EQ(test.released_input_buffer, &kFrame1WithHdrCllAndHdrMdcv);
+
+  ASSERT_EQ(test.frames_in_use, 1);
+  ASSERT_EQ(test.buffer_private_data, buffer->buffer_private_data);
+
+  // Enqueue frame2 for decoding.
+  status = Libgav1DecoderEnqueueFrame(test.decoder, kFrame2WithItutT35,
+                                      sizeof(kFrame2WithItutT35), 0,
+                                      (uint8_t*)&kFrame2WithItutT35);
+  ASSERT_EQ(status, kLibgav1StatusOk);
+
+  ASSERT_EQ(test.frames_in_use, 1);
+
+  // Dequeue the output of frame2.
+  status = Libgav1DecoderDequeueFrame(test.decoder, &buffer);
+  ASSERT_EQ(status, kLibgav1StatusOk);
+  ASSERT_NE(buffer, NULL);
+  ASSERT_EQ(buffer->has_hdr_cll, 0);
+  ASSERT_EQ(buffer->has_hdr_mdcv, 0);
+  ASSERT_EQ(buffer->has_itut_t35, 1);
+  ASSERT_NE(buffer->itut_t35.payload_bytes, NULL);
+  ASSERT_NE(buffer->itut_t35.payload_size, 0);
+  ASSERT_EQ(test.released_input_buffer, &kFrame2WithItutT35);
+
+  ASSERT_EQ(test.frames_in_use, 2);
+  ASSERT_EQ(test.buffer_private_data, buffer->buffer_private_data);
+
+  status = Libgav1DecoderSignalEOS(test.decoder);
+  ASSERT_EQ(test.frames_in_use, 0);
+}
+
 int main(void) {
   fprintf(stderr, "C DecoderTest started\n");
   DecoderTestAPIFlowForNonFrameParallelMode();
   DecoderTestNonFrameParallelModeEnqueueMultipleFramesWithoutDequeuing();
   DecoderTestNonFrameParallelModeEOSBeforeDequeuingLastFrame();
   DecoderTestNonFrameParallelModeInvalidFrameAfterEOS();
+  DecoderTestMetadataObu();
   fprintf(stderr, "C DecoderTest passed\n");
   return 0;
 }

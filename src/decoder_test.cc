@@ -30,6 +30,13 @@ constexpr uint8_t kFrame1[] = {OBU_TEMPORAL_DELIMITER, OBU_SEQUENCE_HEADER,
 
 constexpr uint8_t kFrame2[] = {OBU_TEMPORAL_DELIMITER, OBU_FRAME_2};
 
+constexpr uint8_t kFrame1WithHdrCllAndHdrMdcv[] = {
+    OBU_TEMPORAL_DELIMITER, OBU_SEQUENCE_HEADER, OBU_METADATA_HDR_CLL,
+    OBU_METADATA_HDR_MDCV, OBU_FRAME_1};
+
+constexpr uint8_t kFrame2WithItutT35[] = {OBU_TEMPORAL_DELIMITER,
+                                          OBU_METADATA_ITUT_T35, OBU_FRAME_2};
+
 class DecoderTest : public testing::Test {
  public:
   void SetUp() override;
@@ -316,6 +323,55 @@ TEST_F(DecoderTest, NonFrameParallelModeInvalidFrameAfterEOS) {
   ASSERT_EQ(status, kStatusBitstreamError);
   EXPECT_EQ(released_input_buffer_, &kFrame2);
 
+  EXPECT_EQ(frames_in_use_, 0);
+}
+
+TEST_F(DecoderTest, MetadataObu) {
+  StatusCode status;
+  const DecoderBuffer* buffer;
+
+  // Enqueue frame1 for decoding.
+  status = decoder_->EnqueueFrame(
+      kFrame1WithHdrCllAndHdrMdcv, sizeof(kFrame1WithHdrCllAndHdrMdcv), 0,
+      const_cast<uint8_t*>(kFrame1WithHdrCllAndHdrMdcv));
+  ASSERT_EQ(status, kStatusOk);
+
+  // Dequeue the output of frame1.
+  status = decoder_->DequeueFrame(&buffer);
+  ASSERT_EQ(status, kStatusOk);
+  ASSERT_NE(buffer, nullptr);
+  EXPECT_EQ(buffer->has_hdr_cll, 1);
+  EXPECT_EQ(buffer->has_hdr_mdcv, 1);
+  EXPECT_EQ(buffer->has_itut_t35, 0);
+  EXPECT_EQ(released_input_buffer_, &kFrame1WithHdrCllAndHdrMdcv);
+
+  // libgav1 has decoded frame1 and is holding a reference to it.
+  EXPECT_EQ(frames_in_use_, 1);
+  EXPECT_EQ(buffer_private_data_, buffer->buffer_private_data);
+
+  // Enqueue frame2 for decoding.
+  status =
+      decoder_->EnqueueFrame(kFrame2WithItutT35, sizeof(kFrame2WithItutT35), 0,
+                             const_cast<uint8_t*>(kFrame2WithItutT35));
+  ASSERT_EQ(status, kStatusOk);
+
+  EXPECT_EQ(frames_in_use_, 1);
+
+  // Dequeue the output of frame2.
+  status = decoder_->DequeueFrame(&buffer);
+  ASSERT_EQ(status, kStatusOk);
+  ASSERT_NE(buffer, nullptr);
+  EXPECT_EQ(buffer->has_hdr_cll, 0);
+  EXPECT_EQ(buffer->has_hdr_mdcv, 0);
+  EXPECT_EQ(buffer->has_itut_t35, 1);
+  EXPECT_NE(buffer->itut_t35.payload_bytes, nullptr);
+  EXPECT_GT(buffer->itut_t35.payload_size, 0);
+  EXPECT_EQ(released_input_buffer_, &kFrame2WithItutT35);
+
+  EXPECT_EQ(frames_in_use_, 2);
+  EXPECT_EQ(buffer_private_data_, buffer->buffer_private_data);
+
+  status = decoder_->SignalEOS();
   EXPECT_EQ(frames_in_use_, 0);
 }
 
