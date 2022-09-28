@@ -19,6 +19,7 @@
 #include <cstdio>
 #include <new>
 #include <string>
+#include <utility>
 #include <vector>
 
 #if defined(_WIN32)
@@ -82,7 +83,10 @@ std::unique_ptr<FileReaderInterface> FileReader::Open(
     return nullptr;
   }
 
-  return file;
+  // Note with C++11 an explicit move is required as the return type differs
+  // from the local variable. Overload resolution isn't guaranteed in this
+  // case, though some compilers may adopt the C++14 behavior.
+  return std::move(file);
 }
 
 // IVF Frame Header format, from https://wiki.multimedia.cx/index.php/IVF
