@@ -25,12 +25,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _WIN32
+#include <io.h>
+#include <windows.h>
+
+#define strdup _strdup
+#define unlink _unlink
+#else
 #include <unistd.h>
+#endif  // _WIN32
 
 // Pure-C interface for creating and cleaning up temporary files.
 
 static char* fuzzer_get_tmpfile_with_suffix(const uint8_t* data, size_t size,
                                             const char* suffix) {
+#ifdef _WIN32
+  // GetTempPathA generates '<path>\<pre><uuuu>.TMP'.
+  (void)suffix;  // NOLINT (this could be a C compilation unit)
+  char temp_path[MAX_PATH];
+  const DWORD ret = GetTempPathA(MAX_PATH, temp_path);
+  if (ret == 0 || ret > MAX_PATH) {
+    fprintf(stderr, "Error getting temporary directory name: %lu\n",
+            GetLastError());
+    abort();
+  }
+  char* filename_buffer =
+      (char*)malloc(MAX_PATH);  // NOLINT (this could be a C compilation unit)
+  if (!filename_buffer) {
+    perror("Failed to allocate file name buffer.");
+    abort();
+  }
+  if (GetTempFileNameA(temp_path, "ftf", /*uUnique=*/0, filename_buffer) == 0) {
+    fprintf(stderr, "Error getting temporary file name: %lu\n", GetLastError());
+    abort();
+  }
+#if defined(_MSC_VER) || defined(MINGW_HAS_SECURE_API)
+  FILE* file;
+  const errno_t err = fopen_s(&file, filename_buffer, "wb");
+  if (err != 0) file = NULL;  // NOLINT (this could be a C compilation unit)
+#else
+  FILE* file = fopen(filename_buffer, "wb");
+#endif
+  if (!file) {
+    perror("Failed to open file.");
+    abort();
+  }
+#else  // !_WIN32
   if (suffix == NULL) {  // NOLINT (this could be a C compilation unit)
     suffix = "";
   }
@@ -71,9 +111,10 @@ static char* fuzzer_get_tmpfile_with_suffix(const uint8_t* data, size_t size,
     close(file_descriptor);
     abort();
   }
+#endif  // _WIN32
   const size_t bytes_written = fwrite(data, sizeof(uint8_t), size, file);
   if (bytes_written < size) {
-    close(file_descriptor);
+    fclose(file);
     fprintf(stderr, "Failed to write all bytes to file (%zu out of %zu)",
             bytes_written, size);
     abort();
