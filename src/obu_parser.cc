@@ -2998,7 +2998,7 @@ StatusCode ObuParser::ParseBasicStreamInfo(const uint8_t* data, size_t size,
       LIBGAV1_DLOG(
           ERROR,
           "Parsed OBU size (%zu bits) is greater than expected OBU size "
-          "(%zu bytes)..",
+          "(%zu bytes).",
           parsed_obu_size_in_bits, obu_size);
       return kStatusBitstreamError;
     }
@@ -3014,7 +3014,8 @@ StatusCode ObuParser::ParseBasicStreamInfo(const uint8_t* data, size_t size,
         parser.bit_reader_->byte_offset() - obu_start_offset;
     return kStatusOk;
   }
-  // Sequence header was never found.
+
+  LIBGAV1_DLOG(ERROR, "Sequence header was never found.");
   return kStatusBitstreamError;
 }
 
