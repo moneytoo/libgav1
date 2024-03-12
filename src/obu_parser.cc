@@ -2603,9 +2603,8 @@ bool ObuParser::ParseHeader() {
   obu_header.has_extension = extension_flag;
   if (extension_flag) {
     if (extension_disallowed_) {
-      LIBGAV1_DLOG(ERROR,
+      LIBGAV1_DLOG(WARNING,
                    "OperatingPointIdc is 0, but obu_extension_flag is 1.");
-      return false;
     }
     OBU_READ_LITERAL_OR_FAIL(3);
     obu_header.temporal_id = scratch;
