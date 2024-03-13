@@ -16,6 +16,23 @@
       "message": "This is about correctness, however. If something is writing invalid OBUs we\u0027d prefer it to fail. I\u0027ll need to check the spec documentation around this.",
       "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a8eef3_7ff33597",
+        "filename": "src/obu_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2024-03-13T19:04:35Z",
+      "side": 1,
+      "message": "This is the requirement from the spec.",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
