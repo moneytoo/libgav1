@@ -18,6 +18,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "165ac594_d9e40153",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1253028
+      },
+      "writtenOn": "2024-03-14T01:19:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8ef8bed_bc115a1c",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b1462dd_2d391e9b",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "645cc2df_6341a4a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1253028
+      },
+      "writtenOn": "2024-03-14T01:19:40Z",
+      "side": 1,
+      "message": "Zoom reported that their AV1 decoding is blocked by the new libgav1 usage, and they argued that the obu extension flag should not be an error violation to the decode job to be stopped. What they\u0027d used before was libaom which is OK to continue decoding, and other video players are OK to go on with their playback. I made this CL because we should provide more fault tolerance and compatibility, and provide spec violation info to the log.",
+      "parentUuid": "5b1462dd_2d391e9b",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1a8eef3_7ff33597",
         "filename": "src/obu_parser.cc",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2024-03-13T19:04:35Z",
       "side": 1,
       "message": "This is the requirement from the spec.",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f4a7b6c_736e8faa",
+        "filename": "src/obu_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1253028
+      },
+      "writtenOn": "2024-03-14T01:19:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f1a8eef3_7ff33597",
       "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
