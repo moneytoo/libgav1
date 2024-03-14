@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "780de11f_4bc81781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2024-03-14T22:14:51Z",
+      "side": 1,
+      "message": "\u003e \u003e Zoom reported that their AV1 decoding is blocked by the new libgav1 usage, and they argued that the obu extension flag should not be an error violation to the decode job to be stopped. What they\u0027d used before was libaom which is OK to continue decoding, and other video players are OK to go on with their playback. I made this CL because we should provide more fault tolerance and compatibility, and provide spec violation info to the log.\n\u003e \n\u003e What is generating the Zoom streams? Compatibility is fine for Chrome integration as support has already been deployed. Having failures is helpful, because it would be good to correct the encoders.\n\nIn addition to the question about what\u0027s generating the streams, is there a corresponding Chrome bug from Zoom engineers?",
+      "parentUuid": "6886455e_c1b6f2ba",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1a8eef3_7ff33597",
         "filename": "src/obu_parser.cc",
         "patchSetId": 2
