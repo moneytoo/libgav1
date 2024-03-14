@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9041cb_74d5ab4d",
+        "filename": "src/obu_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2024-03-14T22:14:06Z",
+      "side": 0,
+      "message": "Let\u0027s make this change Chromium specific wrap the new code in `#ifdef CHROMIUM`. I\u0027d like the default behavior of libgav1 to remain strict.",
+      "revId": "8b2141ef0b8bd2bf5ad19b70b0c5ea0831367ee5",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    }
+  ]
+}
