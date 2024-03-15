@@ -107,6 +107,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f3741b4_1552b524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1253028
+      },
+      "writtenOn": "2024-03-15T15:43:02Z",
+      "side": 1,
+      "message": "Zoom uses proprietary encoder to generate AV1 bitstream and they do not file upstream bug for this combability request. They used to use software decoder successfully to do decoding and playback.",
+      "parentUuid": "780de11f_4bc81781",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1a8eef3_7ff33597",
