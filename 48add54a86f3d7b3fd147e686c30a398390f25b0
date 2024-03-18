@@ -125,6 +125,24 @@
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b7024b_fdfd1518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2024-03-18T22:28:22Z",
+      "side": 1,
+      "message": "\u003e Zoom uses proprietary encoder to generate AV1 bitstream and they do not file upstream bug for this combability request. They used to use software decoder successfully to do decoding and playback.\n\nIt would be good to coach them to file bugs so they can be tracked and the information shared a little more easily in cases like this.",
+      "parentUuid": "3f3741b4_1552b524",
+      "revId": "48add54a86f3d7b3fd147e686c30a398390f25b0",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1a8eef3_7ff33597",

@@ -52,6 +52,24 @@
       "parentUuid": "6cdef4ad_2244e84a",
       "revId": "8b2141ef0b8bd2bf5ad19b70b0c5ea0831367ee5",
       "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "747593fe_9d55c733",
+        "filename": "src/obu_parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 1002219
+      },
+      "writtenOn": "2024-03-18T22:28:22Z",
+      "side": 0,
+      "message": "\u003e Let\u0027s keep the Chromium specific changes inside libgav1, and use the macro directive from Chromium BUILD.gn to control the code path.\n\nYes, this is what I was suggesting. Please fix the formatting so the tests can run. See the end of the log: https://build.webmproject.org/jenkins/job/libgav1__patch_check/2366/consoleText",
+      "parentUuid": "8a5acdc2_433e9ba4",
+      "revId": "8b2141ef0b8bd2bf5ad19b70b0c5ea0831367ee5",
+      "serverId": "3ce6091f-6c88-37e8-8c75-72f92ae8dfba"
     }
   ]
 }
